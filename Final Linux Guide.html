@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux — The OS You Never Asked For (But Will Never Leave)</title>
+<meta name="description" content="A complete guide for anyone forced to learn Linux. Why it matters, how to start, career stats, real salaries, and the best free resources to get going today.">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0C0C0C;
+  --paper:#F4F0E8;
+  --amber:#E8B84B;
+  --amber-dim:#C49832;
+  --surface:#141414;
+  --surface2:#1C1C1C;
+  --surface3:#242424;
+  --muted:#777;
+  --muted2:#555;
+  --mono:'Courier Prime',monospace;
+  --serif:'Playfair Display',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);overflow-x:hidden;font-size:16px;line-height:1.6}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+.amber{color:var(--amber)}
+.mono{font-family:var(--mono)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;border-bottom:1px solid rgba(244,240,232,0.07);background:rgba(12,12,12,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:0.82rem;letter-spacing:0.04em;color:var(--paper);text-decoration:none}
+.nav-logo:hover{text-decoration:none}
+.nav-logo svg{width:26px;height:26px;flex-shrink:0}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-cta{background:var(--amber);color:var(--ink);padding:0.45rem 1.1rem;border-radius:2px;font-size:0.78rem;font-weight:500;text-decoration:none;transition:background 0.2s;white-space:nowrap}
+.nav-cta:hover{background:#f0c860;text-decoration:none}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:7rem 3rem 4rem;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;width:100%}
+.hero-tag{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';display:block;width:20px;height:1px;background:var(--amber)}
+h1{font-family:var(--serif);font-size:clamp(2.6rem,4.5vw,4rem);line-height:1.1;font-weight:700;margin-bottom:1.4rem;letter-spacing:-0.02em}
+h1 em{font-style:italic;color:var(--amber)}
+.hero-sub{font-size:1rem;color:rgba(244,240,232,0.62);line-height:1.78;max-width:480px;margin-bottom:2.2rem}
+.hero-actions{display:flex;gap:0.8rem;flex-wrap:wrap}
+.btn-primary{background:var(--amber);color:var(--ink);padding:0.8rem 1.8rem;border:none;border-radius:2px;font-family:var(--sans);font-size:0.88rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:0.02em;transition:background 0.2s,transform 0.1s}
+.btn-primary:hover{background:#f0c860;transform:translateY(-1px);text-decoration:none}
+.btn-ghost{background:transparent;color:var(--paper);padding:0.8rem 1.8rem;border:1px solid rgba(244,240,232,0.18);border-radius:2px;font-family:var(--sans);font-size:0.88rem;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s}
+.btn-ghost:hover{border-color:rgba(244,240,232,0.45);text-decoration:none}
+.hero-bg{position:absolute;inset:0;pointer-events:none;opacity:0.035}
+.tux-wrap{display:flex;justify-content:center;align-items:center;position:relative}
+.tux-wrap svg{width:100%;max-width:360px;animation:float 6s ease-in-out infinite}
+.tux-ring{position:absolute;border-radius:50%;border:1px solid rgba(232,184,75,0.1);animation:pulse-ring 4s ease-in-out infinite}
+.tux-ring:nth-child(1){width:300px;height:300px}
+.tux-ring:nth-child(2){width:420px;height:420px;animation-delay:1.5s;opacity:0.4}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes pulse-ring{0%,100%{opacity:0.25;transform:scale(1)}50%{opacity:0.55;transform:scale(1.04)}}
+
+/* ── STATS BAR ── */
+#stats{padding:2.8rem 3rem;border-top:1px solid rgba(244,240,232,0.07);border-bottom:1px solid rgba(244,240,232,0.07);background:var(--surface)}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;max-width:1200px;margin:0 auto;text-align:center}
+.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--amber);line-height:1}
+.stat-suffix{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--amber)}
+.stat-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.09em;text-transform:uppercase;margin-top:0.35rem;line-height:1.4}
+
+/* ── LAYOUT ── */
+section{padding:5.5rem 3rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:0.73rem;letter-spacing:0.18em;color:var(--amber);text-transform:uppercase;margin-bottom:0.7rem;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';display:block;width:16px;height:1px;background:var(--amber)}
+h2{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:0.8rem;letter-spacing:-0.02em}
+h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
+.lead{font-size:1rem;color:rgba(244,240,232,0.6);line-height:1.75;max-width:640px;margin-bottom:0}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:rgba(244,240,232,0.07);margin:0}
+
+/* ── MYTH CARDS ── */
+.myths-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem}
+.myth-card{border-radius:3px;overflow:hidden;cursor:pointer;position:relative;min-height:200px}
+.myth-face{padding:1.8rem;height:100%;position:absolute;top:0;left:0;right:0;bottom:0;transition:opacity 0.4s,transform 0.4s;backface-visibility:hidden}
+.myth-front{background:var(--surface2);border:1px solid rgba(244,240,232,0.06)}
+.myth-back{background:rgba(232,184,75,0.07);border:1px solid rgba(232,184,75,0.18);opacity:0;transform:rotateY(8deg) scale(0.98)}
+.myth-card.flipped .myth-front{opacity:0;transform:rotateY(-8deg) scale(0.98)}
+.myth-card.flipped .myth-back{opacity:1;transform:none}
+.myth-label{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.14em;margin-bottom:0.7rem}
+.myth-label.wrong{color:#e06060}
+.myth-label.right{color:#6cb86c}
+.myth-card p{color:rgba(244,240,232,0.76);font-size:0.9rem;line-height:1.65}
+.flip-hint{font-family:var(--mono);font-size:0.68rem;color:var(--muted2);margin-top:1rem}
+
+/* ── SALARY ── */
+#salary{background:var(--ink)}
+.salary-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3.5rem}
+.big-stat-block{background:var(--surface);border:1px solid rgba(232,184,75,0.15);border-radius:4px;padding:2rem;text-align:center}
+.big-num{font-family:var(--serif);font-size:3.5rem;font-weight:700;color:var(--amber);line-height:1}
+.big-label{font-size:0.78rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.5rem}
+.big-sub{font-size:0.82rem;color:rgba(244,240,232,0.5);margin-top:0.4rem;font-style:italic}
+.salary-roles{margin-top:2.5rem}
+.role-bar-row{display:grid;grid-template-columns:200px 1fr 120px;align-items:center;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(244,240,232,0.06)}
+.role-bar-row:last-child{border-bottom:none}
+.role-name{font-size:0.85rem;color:rgba(244,240,232,0.8)}
+.role-bar-track{height:6px;background:rgba(244,240,232,0.08);border-radius:3px;overflow:hidden}
+.role-bar-fill{height:100%;background:var(--amber);border-radius:3px;width:0;transition:width 1.4s cubic-bezier(0.16,1,0.3,1)}
+.role-sal{font-family:var(--mono);font-size:0.78rem;color:var(--amber);text-align:right}
+.salary-footnote{font-family:var(--mono);font-size:0.7rem;color:var(--muted2);margin-top:1.5rem;line-height:1.6}
+
+/* ── LINUX HIRING STATS ── */
+.hiring-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.hiring-card{background:var(--surface2);border:1px solid rgba(244,240,232,0.06);border-radius:3px;padding:1.6rem;text-align:center}
+.hiring-pct{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--amber);line-height:1}
+.hiring-desc{font-size:0.82rem;color:rgba(244,240,232,0.6);margin-top:0.5rem;line-height:1.55}
+.source-tag{font-family:var(--mono);font-size:0.62rem;color:var(--muted2);margin-top:0.6rem;letter-spacing:0.06em}
+
+/* ── ROLES DEEP DIVE ── */
+#roles{background:var(--surface)}
+.roles-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2.5rem;margin-bottom:0}
+.role-tab{font-family:var(--mono);font-size:0.72rem;padding:0.5rem 1rem;border:1px solid rgba(244,240,232,0.12);border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
+.role-tab:hover{border-color:rgba(244,240,232,0.3);color:var(--paper)}
+.role-tab.active{border-color:var(--amber);color:var(--amber);background:rgba(232,184,75,0.06)}
+.role-panel{display:none;padding:2.2rem 0 0}
+.role-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.role-left h3{font-size:1.5rem;margin-bottom:0.4rem}
+.role-badge{display:inline-block;font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0.6rem;border-radius:2px;margin-bottom:1rem;letter-spacing:0.08em}
+.badge-senior{background:rgba(232,184,75,0.12);color:var(--amber)}
+.badge-entry{background:rgba(92,184,92,0.12);color:#6cb86c}
+.badge-mid{background:rgba(92,150,220,0.12);color:#70aaee}
+.role-desc{font-size:0.92rem;color:rgba(244,240,232,0.68);line-height:1.75;margin-bottom:1.5rem}
+.role-uses h4{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.8rem}
+.use-item{display:flex;align-items:flex-start;gap:0.7rem;padding:0.6rem 0;border-bottom:1px solid rgba(244,240,232,0.05);font-size:0.86rem;color:rgba(244,240,232,0.7)}
+.use-item:last-child{border-bottom:none}
+.use-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:6px}
+.role-right{}
+.role-salary-card{background:var(--surface3);border:1px solid rgba(244,240,232,0.07);border-radius:3px;padding:1.5rem;margin-bottom:1.2rem}
+.rsc-label{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+.rsc-val{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--amber)}
+.rsc-note{font-size:0.78rem;color:rgba(244,240,232,0.45);margin-top:0.3rem;font-style:italic}
+.role-tools h4{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem}
+.tools-wrap{display:flex;flex-wrap:wrap;gap:0.45rem}
+.tool-tag{font-family:var(--mono);font-size:0.7rem;padding:0.28rem 0.65rem;background:rgba(244,240,232,0.06);border:1px solid rgba(244,240,232,0.1);border-radius:2px;color:rgba(244,240,232,0.65)}
+.role-linux-note{background:rgba(232,184,75,0.06);border:1px solid rgba(232,184,75,0.15);border-radius:3px;padding:1rem 1.2rem;margin-top:1.2rem;font-size:0.84rem;color:rgba(244,240,232,0.72);line-height:1.6}
+.role-linux-note strong{color:var(--amber)}
+
+/* ── TERMINAL ── */
+#terminal-section{background:var(--ink)}
+.terminal{background:#0D1117;border:1px solid rgba(244,240,232,0.1);border-radius:6px;overflow:hidden;max-width:800px;margin:2.5rem auto 0}
+.terminal-bar{background:#1C1C1E;padding:0.65rem 1rem;display:flex;align-items:center;gap:7px}
+.t-dot{width:11px;height:11px;border-radius:50%}
+.t-dot.r{background:#FF5F57}.t-dot.y{background:#FEBC2E}.t-dot.g{background:#28C840}
+.terminal-title{flex:1;text-align:center;font-family:var(--mono);font-size:0.72rem;color:var(--muted)}
+.terminal-body{padding:1.4rem;font-family:var(--mono);font-size:0.85rem;line-height:1.85;min-height:340px;max-height:400px;overflow-y:auto}
+.t-prompt{color:var(--amber)}
+.t-cmd{color:var(--paper)}
+.t-out{color:var(--muted)}
+.t-green{color:#58d68d}
+.t-blue{color:#5dade2}
+.t-red{color:#e06060}
+.t-purple{color:#c39bd3}
+.t-cursor{display:inline-block;width:8px;height:1em;background:var(--amber);animation:blink 1s step-end infinite;vertical-align:text-bottom}
+.terminal-buttons{display:flex;gap:0.7rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
+.term-btn{font-family:var(--mono);font-size:0.72rem;padding:0.45rem 1rem;border:1px solid rgba(244,240,232,0.12);border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
+.term-btn:hover{border-color:rgba(244,240,232,0.3);color:var(--paper)}
+.term-btn.active{border-color:var(--amber);color:var(--amber);background:rgba(232,184,75,0.06)}
+
+/* ── FUN SECTION ── */
+#fun{background:var(--surface)}
+.fun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.fun-card{background:var(--surface2);border:1px solid rgba(244,240,232,0.07);border-radius:3px;overflow:hidden;transition:border-color 0.25s,transform 0.2s;cursor:default}
+.fun-card:hover{border-color:rgba(232,184,75,0.25);transform:translateY(-2px)}
+.fun-card-top{padding:1.4rem 1.4rem 0}
+.fun-cmd{font-family:var(--mono);font-size:0.78rem;color:var(--amber);margin-bottom:0.3rem;display:flex;align-items:center;gap:6px}
+.fun-cmd::before{content:'$';color:var(--muted2)}
+.fun-title{font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:0.4rem}
+.fun-desc{font-size:0.82rem;color:rgba(244,240,232,0.58);line-height:1.55;margin-bottom:1rem}
+.fun-install{font-family:var(--mono);font-size:0.68rem;color:var(--muted2);margin-bottom:1rem}
+.fun-install span{color:rgba(244,240,232,0.4)}
+.fun-ascii{background:#0D1117;border-top:1px solid rgba(244,240,232,0.06);padding:1rem 1.2rem;font-family:var(--mono);font-size:0.7rem;line-height:1.4;min-height:90px;overflow:hidden;white-space:pre}
+.fun-easter{background:var(--surface3);border:1px solid rgba(232,184,75,0.15);border-radius:3px;padding:1.5rem 1.8rem;margin-top:2rem}
+.fun-easter h3{font-size:1rem;margin-bottom:0.6rem;font-family:var(--sans);font-weight:500;color:var(--amber)}
+.fun-easter p{font-size:0.85rem;color:rgba(244,240,232,0.6);line-height:1.65}
+.neofetch-block{background:#0D1117;border-radius:3px;padding:1.4rem;margin-top:2rem;font-family:var(--mono);font-size:0.75rem;line-height:1.6;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.neo-tux{color:var(--amber);white-space:pre;line-height:1.3}
+.neo-info{}
+.neo-row{display:flex;gap:0.5rem;margin-bottom:0.15rem}
+.neo-key{color:var(--amber);min-width:90px}
+.neo-val{color:rgba(244,240,232,0.7)}
+.neo-sep{color:rgba(244,240,232,0.15);margin-bottom:0.4rem}
+.neo-colors{display:flex;gap:4px;margin-top:0.5rem}
+.neo-dot{width:14px;height:14px;border-radius:50%}
+
+/* ── ROADMAP ── */
+#roadmap{background:var(--surface)}
+.roadmap-steps{margin-top:2.8rem;display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:72px 1fr;gap:1.8rem;padding:2rem 0;border-bottom:1px solid rgba(244,240,232,0.07);cursor:pointer;transition:all 0.25s}
+.step:last-child{border-bottom:none}
+.step-num{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:rgba(244,240,232,0.1);line-height:1;transition:color 0.25s;text-align:right;padding-top:0.2rem}
+.step:hover .step-num,.step.active .step-num{color:var(--amber)}
+.step-content h3{font-size:1.12rem;margin-bottom:0.35rem;transition:color 0.2s}
+.step-meta{font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:0.06em;margin-bottom:0.5rem}
+.step-body{display:none;margin-top:0.8rem}
+.step.active .step-body{display:block}
+.step-body p{font-size:0.9rem;color:rgba(244,240,232,0.65);line-height:1.75;margin-bottom:1rem}
+.step-commands{background:var(--surface3);border-radius:3px;padding:1.2rem;margin-bottom:1rem;font-family:var(--mono);font-size:0.8rem}
+.cmd-row{display:grid;grid-template-columns:140px 1fr;gap:1rem;padding:0.35rem 0;border-bottom:1px solid rgba(244,240,232,0.05)}
+.cmd-row:last-child{border-bottom:none}
+.cmd-name{color:var(--amber)}
+.cmd-desc{color:rgba(244,240,232,0.55)}
+.step-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.8rem}
+.tag{font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0.6rem;background:rgba(232,184,75,0.08);border:1px solid rgba(232,184,75,0.18);border-radius:2px;color:var(--amber);letter-spacing:0.05em}
+.step-tip{background:rgba(232,184,75,0.05);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.84rem;color:rgba(244,240,232,0.6);line-height:1.6;margin-top:0.8rem}
+.step-tip strong{color:var(--paper)}
+
+/* ── CERTS ── */
+#certs{background:var(--ink)}
+.certs-path{display:flex;align-items:flex-start;gap:0;margin-top:3rem;position:relative}
+.certs-path::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:1px;background:rgba(244,240,232,0.1)}
+.cert-entry{display:grid;grid-template-columns:48px 1fr;gap:1.5rem;width:100%;margin-bottom:1.2rem}
+.cert-dot-col{display:flex;flex-direction:column;align-items:center;position:relative;z-index:1}
+.cert-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--amber);background:var(--ink);margin-top:8px;flex-shrink:0}
+.cert-dot.filled{background:var(--amber)}
+.cert-card{background:var(--surface2);border:1px solid rgba(244,240,232,0.07);border-radius:3px;padding:1.5rem;flex:1;position:relative;overflow:hidden;transition:border-color 0.25s,transform 0.2s}
+.cert-card:hover{border-color:rgba(232,184,75,0.25);transform:translateX(4px)}
+.cert-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);transform:scaleY(0);transform-origin:bottom;transition:transform 0.3s}
+.cert-card:hover::before{transform:scaleY(1)}
+.cert-header{display:flex;align-items:center;gap:1rem;margin-bottom:0.6rem;flex-wrap:wrap}
+.cert-org{font-family:var(--mono);font-size:0.67rem;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase}
+.cert-level{display:inline-block;font-family:var(--mono);font-size:0.62rem;padding:0.18rem 0.5rem;border-radius:1px;letter-spacing:0.06em}
+.cl-beg{background:rgba(92,184,92,0.14);color:#6cb86c}
+.cl-mid{background:rgba(232,184,75,0.14);color:var(--amber)}
+.cl-adv{background:rgba(224,92,92,0.14);color:#e06060}
+.cl-exp{background:rgba(180,100,220,0.14);color:#c39bd3}
+.cert-price{font-family:var(--mono);font-size:0.67rem;color:var(--muted);margin-left:auto}
+.cert-card h3{font-size:1.05rem;margin-bottom:0.4rem}
+.cert-card p{font-size:0.85rem;color:rgba(244,240,232,0.6);line-height:1.62}
+.cert-exam-note{font-family:var(--mono);font-size:0.7rem;color:var(--muted2);margin-top:0.6rem;display:flex;align-items:center;gap:5px}
+.cert-exam-note::before{content:'';display:block;width:12px;height:1px;background:var(--muted2)}
+
+/* ── RESOURCES ── */
+#resources{background:var(--surface)}
+.resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.res-card{background:var(--surface2);border:1px solid rgba(244,240,232,0.07);border-radius:3px;padding:1.5rem;transition:border-color 0.25s,transform 0.2s;position:relative}
+.res-card:hover{border-color:rgba(232,184,75,0.2);transform:translateY(-2px)}
+.res-type{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:0.7rem;display:flex;align-items:center;gap:6px}
+.res-type-dot{width:5px;height:5px;border-radius:50%}
+.res-type-dot.free{background:#6cb86c}
+.res-type-dot.paid{background:var(--amber)}
+.res-type-dot.mix{background:#70aaee}
+.res-card h3{font-size:1rem;margin-bottom:0.4rem}
+.res-card p{font-size:0.84rem;color:rgba(244,240,232,0.58);line-height:1.62;margin-bottom:1rem}
+.res-link{display:inline-block;font-family:var(--mono);font-size:0.72rem;color:var(--amber);border:1px solid rgba(232,184,75,0.25);border-radius:2px;padding:0.3rem 0.7rem;transition:background 0.2s}
+.res-link:hover{background:rgba(232,184,75,0.1);text-decoration:none}
+.res-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.8rem}
+.res-tag{font-family:var(--mono);font-size:0.6rem;padding:0.18rem 0.45rem;background:rgba(244,240,232,0.06);border-radius:2px;color:var(--muted);border:1px solid rgba(244,240,232,0.08)}
+
+/* ── LEARNING MAP SVG ── */
+#learning-map{background:var(--ink);padding:5rem 3rem}
+
+/* ── DISTRO GUIDE ── */
+#distros{background:var(--surface)}
+.distro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.distro-card{background:var(--surface2);border:1px solid rgba(244,240,232,0.07);border-radius:3px;padding:1.5rem;cursor:pointer;transition:border-color 0.25s}
+.distro-card:hover{border-color:rgba(232,184,75,0.2)}
+.distro-name{font-family:var(--mono);font-size:0.82rem;font-weight:700;color:var(--paper);margin-bottom:0.3rem}
+.distro-for{font-size:0.78rem;color:var(--amber);margin-bottom:0.7rem;font-style:italic}
+.distro-desc{font-size:0.83rem;color:rgba(244,240,232,0.58);line-height:1.6;margin-bottom:0.8rem}
+.distro-based{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.06em}
+
+/* ── CALLOUT BOX ── */
+.callout{background:rgba(232,184,75,0.05);border:1px solid rgba(232,184,75,0.18);border-radius:3px;padding:1.5rem 1.8rem}
+.callout p{color:rgba(244,240,232,0.72);font-size:0.92rem;line-height:1.75}
+.callout strong{color:var(--paper)}
+
+/* ── FOOTER CTA ── */
+#cta{padding:7rem 3rem;text-align:center;position:relative;overflow:hidden;background:var(--ink)}
+#cta h2{font-size:clamp(1.9rem,4vw,3.2rem);margin-bottom:1.4rem;max-width:680px;margin-left:auto;margin-right:auto}
+#cta p{color:rgba(244,240,232,0.58);font-size:0.95rem;max-width:480px;margin:0 auto 2.2rem}
+.footer-actions{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.footer-line{border:none;border-top:1px solid rgba(244,240,232,0.07);margin-top:5rem}
+.footer-bottom{max-width:1200px;margin:2rem auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
+.footer-bottom p{font-family:var(--mono);font-size:0.68rem;color:var(--muted2);line-height:1.6}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-family:var(--mono);font-size:0.68rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--amber)}
+
+/* ── ANIMS ── */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-grid,.salary-intro,.role-panel.active,.myths-grid{grid-template-columns:1fr}
+  .tux-wrap{order:-1}
+  .tux-wrap svg{max-width:200px}
+  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .hiring-grid,.certs-grid,.resources-grid,.distro-grid{grid-template-columns:1fr 1fr}
+  nav{padding:0.9rem 1.5rem}
+  .nav-links{display:none}
+  section,#hero,#salary,#learning-map{padding:3.5rem 1.5rem}
+  .role-bar-row{grid-template-columns:150px 1fr 100px}
+}
+@media(max-width:640px){
+  .hiring-grid,.certs-grid,.resources-grid,.distro-grid,.stats-row{grid-template-columns:1fr}
+  .step{grid-template-columns:46px 1fr;gap:1rem}
+  .salary-roles .role-bar-row{grid-template-columns:120px 1fr 80px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 100 100" fill="none"><ellipse cx="50" cy="62" rx="26" ry="32" fill="#1a1a1a"/><ellipse cx="50" cy="68" rx="17" ry="24" fill="#F4F0E8"/><ellipse cx="50" cy="26" rx="20" ry="22" fill="#1a1a1a"/><ellipse cx="50" cy="28" rx="12" ry="10" fill="#F4F0E8"/><ellipse cx="42" cy="22" rx="5" ry="6" fill="#1a1a1a"/><ellipse cx="58" cy="22" rx="5" ry="6" fill="#1a1a1a"/><circle cx="42" cy="22" r="2.5" fill="#F4F0E8"/><circle cx="58" cy="22" r="2.5" fill="#F4F0E8"/><path d="M44 34 Q50 40 56 34" stroke="#E8B84B" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="50" cy="37" rx="4" ry="3" fill="#E8B84B"/><path d="M24 72 Q18 80 22 88 Q28 84 30 74" fill="#E8B84B"/><path d="M76 72 Q82 80 78 88 Q72 84 70 74" fill="#E8B84B"/></svg>
+    linux.guide
+  </a>
+  <div class="nav-links">
+    <a href="#salary">Salaries</a>
+    <a href="#roles">IT Roles</a>
+    <a href="#roadmap">Learn</a>
+    <a href="#certs">Certify</a>
+    <a href="#resources">Resources</a>
+    <a href="#terminal-section">Demo</a>
+    <a href="#fun">Fun stuff</a>
+  </div>
+  <a href="#roadmap" class="nav-cta">Start learning</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <svg class="hero-bg" style="position:absolute;inset:0;width:100%;height:100%">
+    <defs><pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M 56 0 L 0 0 0 56" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#grid)"/>
+  </svg>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag reveal">The Linux guide</div>
+      <h1 class="reveal" style="transition-delay:0.08s">You didn't choose <em>Linux.</em><br>Linux chose you.</h1>
+      <p class="hero-sub reveal" style="transition-delay:0.16s">Your boss said learn it. Your professor assigned it. Your new job requires it. Fine. Because Linux already runs the internet, your phone, your cloud, and every serious server on earth. Time to understand what you have been using without knowing it.</p>
+      <div class="hero-actions reveal" style="transition-delay:0.24s">
+        <a href="#roadmap" class="btn-primary">Show me the path</a>
+        <a href="#salary" class="btn-ghost">See the career data</a>
+      </div>
+    </div>
+    <div class="tux-wrap reveal" style="transition-delay:0.16s">
+      <div class="tux-ring"></div><div class="tux-ring"></div>
+      <svg viewBox="0 0 340 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shadow -->
+        <ellipse cx="170" cy="430" rx="80" ry="8" fill="#1a1a1a" opacity="0.5"/>
+        <!-- Feet -->
+        <ellipse cx="118" cy="405" rx="38" ry="11" fill="#C49832" transform="rotate(-10 118 405)"/>
+        <ellipse cx="222" cy="405" rx="38" ry="11" fill="#C49832" transform="rotate(10 222 405)"/>
+        <ellipse cx="118" cy="399" rx="30" ry="9" fill="#E8B84B" transform="rotate(-10 118 399)"/>
+        <ellipse cx="222" cy="399" rx="30" ry="9" fill="#E8B84B" transform="rotate(10 222 399)"/>
+        <ellipse cx="90" cy="404" rx="13" ry="8" fill="#E8B84B" transform="rotate(-18 90 404)"/>
+        <ellipse cx="112" cy="411" rx="13" ry="8" fill="#E8B84B"/>
+        <ellipse cx="135" cy="407" rx="13" ry="8" fill="#E8B84B" transform="rotate(14 135 407)"/>
+        <ellipse cx="193" cy="407" rx="13" ry="8" fill="#E8B84B" transform="rotate(-14 193 407)"/>
+        <ellipse cx="216" cy="411" rx="13" ry="8" fill="#E8B84B"/>
+        <ellipse cx="238" cy="404" rx="13" ry="8" fill="#E8B84B" transform="rotate(18 238 404)"/>
+        <!-- Body -->
+        <ellipse cx="170" cy="275" rx="102" ry="118" fill="#1A1A1A"/>
+        <!-- Belly -->
+        <ellipse cx="170" cy="290" rx="64" ry="88" fill="#F0EDE4"/>
+        <!-- Wing left -->
+        <path d="M68 200 Q26 248 40 310 Q56 348 76 338 Q64 298 76 252 Z" fill="#111"/>
+        <!-- Wing left highlight -->
+        <path d="M72 212 Q44 256 52 304" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+        <!-- Wing right -->
+        <path d="M272 200 Q314 248 300 310 Q284 348 264 338 Q276 298 264 252 Z" fill="#111"/>
+        <path d="M268 212 Q296 256 288 304" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+        <!-- Head -->
+        <ellipse cx="170" cy="142" rx="82" ry="84" fill="#1A1A1A"/>
+        <!-- Head sheen -->
+        <ellipse cx="144" cy="108" rx="24" ry="20" fill="#1e1e1e" transform="rotate(-20 144 108)"/>
+        <!-- Face -->
+        <ellipse cx="170" cy="155" rx="48" ry="37" fill="#F0EDE4"/>
+        <!-- Eye whites -->
+        <ellipse cx="144" cy="128" rx="21" ry="23" fill="#F0EDE4"/>
+        <ellipse cx="196" cy="128" rx="21" ry="23" fill="#F0EDE4"/>
+        <!-- Pupils -->
+        <circle cx="148" cy="130" r="13" fill="#111"/>
+        <circle cx="192" cy="130" r="13" fill="#111"/>
+        <!-- Eye shine -->
+        <circle cx="154" cy="125" r="4.5" fill="#F0EDE4"/>
+        <circle cx="198" cy="125" r="4.5" fill="#F0EDE4"/>
+        <circle cx="144" cy="134" r="2" fill="#F0EDE4"/>
+        <circle cx="188" cy="134" r="2" fill="#F0EDE4"/>
+        <!-- Beak -->
+        <path d="M153 162 Q170 180 187 162 Q180 172 170 177 Q160 172 153 162Z" fill="#E8B84B"/>
+        <path d="M157 166 Q170 170 183 166" stroke="#C49832" stroke-width="1.5"/>
+        <!-- Amber terminal glow line -->
+        <line x1="170" y1="320" x2="170" y2="395" stroke="#E8B84B" stroke-width="1" stroke-dasharray="4 7" opacity="0.3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div id="stats" class="reveal">
+  <div class="stats-row">
+    <div><div class="stat-num" data-target="96"><span class="counter">0</span><span class="stat-suffix">%</span></div><div class="stat-label">of top web servers run Linux</div></div>
+    <div><div class="stat-num" data-target="500"><span class="counter">0</span></div><div class="stat-label">top supercomputers all are Linux</div></div>
+    <div><div class="stat-num" data-target="91"><span class="counter">0</span><span class="stat-suffix">%</span></div><div class="stat-label">of hiring managers prioritise Linux skills</div></div>
+    <div><div class="stat-num" data-target="3"><span class="counter">0</span><span class="stat-suffix">B+</span></div><div class="stat-label">Android devices (built on Linux)</div></div>
+    <div><div class="stat-num" data-target="33"><span class="counter">0</span><span class="stat-suffix">+%</span></div><div class="stat-label">average salary premium with Linux skills</div></div>
+  </div>
+</div>
+
+<!-- ── MYTHS ── -->
+<section id="myths" style="background:var(--surface)">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Common misconceptions</div>
+      <h2>What you think Linux is.<br>What it <em style="font-style:italic;color:var(--amber)">actually</em> is.</h2>
+      <p class="lead" style="margin-top:0.6rem">Click each card to flip the myth.</p>
+    </div>
+    <div class="myths-grid" style="margin-top:2.5rem">
+
+      <div class="myth-card reveal" style="min-height:220px" onclick="this.classList.toggle('flipped')">
+        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">Linux is only for hackers and programmers</h3><p>It is some underground system used by people in dark rooms. Totally irrelevant for regular IT work and has no graphical interface.</p><p class="flip-hint">Click to reveal the reality</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Linux is the infrastructure of the modern world</h3><p>Google, Netflix, Facebook, Amazon all are Linux. Your router likely runs Linux. Android (3 billion devices) is built on Linux. It has full graphical desktops. This is not exotic, it is the foundation.</p></div>
+      </div>
+
+      <div class="myth-card reveal" style="min-height:220px;transition-delay:0.08s" onclick="this.classList.toggle('flipped')">
+        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">You need to memorise hundreds of commands</h3><p>It is an endless sea of cryptic commands with no intuition. One typo and you have deleted everything. You will never remember any of it.</p><p class="flip-hint">Click to reveal the reality</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Ten commands get you through the first month</h3><p>pwd, ls, cd, cat, grep, cp, mv, rm, man, sudo. That is genuinely it to start. The rest you learn as you need it. The man command literally teaches you everything from inside the terminal.</p></div>
+      </div>
+
+      <div class="myth-card reveal" style="min-height:220px;transition-delay:0.08s" onclick="this.classList.toggle('flipped')">
+        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">Breaking things means starting over completely</h3><p>One wrong command and the whole system is gone forever. It is fragile, unstable, and nobody will help you when it dies.</p><p class="flip-hint">Click to reveal the reality</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Practice on a VM break it, snapshot, restore</h3><p>Linux servers routinely run for years without rebooting. Set up VirtualBox with snapshots and you can experiment freely. Break something? Restore the snapshot in 30 seconds. The community on Ask Ubuntu and Reddit answers every question.</p></div>
+      </div>
+
+      <div class="myth-card reveal" style="min-height:220px;transition-delay:0.16s" onclick="this.classList.toggle('flipped')">
+        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">This is just academic no real-world use</h3><p>My company uses managed services and cloud platforms with nice dashboards. Nobody actually types commands into servers anymore.</p><p class="flip-hint">Click to reveal the reality</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">The cloud is Linux with a dashboard over the top</h3><p>AWS, Azure, GCP are all built on Linux. Docker containers run on Linux. Kubernetes orchestrates Linux nodes. Every cloud VM you spin up is Linux. The dashboard is just a pretty face on the same OS you are learning right now.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── SALARY SECTION ── -->
+<section id="salary">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Career and salary data</div>
+      <h2>Linux skills pay significantly better.<br>Here are the actual numbers.</h2>
+      <p class="lead" style="margin-top:0.6rem">According to the Linux Foundation's 2023 Open Source Jobs Report and industry salary surveys, Linux proficiency correlates directly with higher compensation across every IT discipline.</p>
+    </div>
+
+    <div class="salary-intro" style="margin-top:2.8rem">
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+          <div class="big-stat-block reveal">
+            <div class="big-num">91%</div>
+            <div class="big-label">Hiring managers prioritise Linux</div>
+            <div class="big-sub">Linux Foundation 2023 Jobs Report</div>
+          </div>
+          <div class="big-stat-block reveal" style="transition-delay:0.08s">
+            <div class="big-num">+33%</div>
+            <div class="big-label">Avg salary premium vs non-Linux IT</div>
+            <div class="big-sub">Stack Overflow Dev Survey 2023</div>
+          </div>
+          <div class="big-stat-block reveal" style="transition-delay:0.1s">
+            <div class="big-num">74%</div>
+            <div class="big-label">Open source / Linux jobs went unfilled</div>
+            <div class="big-sub">Due to lack of skilled candidates, 2023</div>
+          </div>
+          <div class="big-stat-block reveal" style="transition-delay:0.16s">
+            <div class="big-num">47%</div>
+            <div class="big-label">Plan to increase Linux hiring in 2024</div>
+            <div class="big-sub">Linux Foundation Hiring Survey</div>
+          </div>
+        </div>
+        <div class="callout reveal">
+          <p><strong>The skills gap is real and works in your favour.</strong> Demand for Linux-skilled professionals is consistently outpacing supply. Companies are not just paying more they are struggling to fill roles at all. Learning Linux right now puts you in a strong position in a market that rewards this knowledge generously.</p>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <h3 style="margin-bottom:0.4rem;font-size:1.1rem">Salary by IT role with Linux skills</h3>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">Annual salary ranges (USD) mid to senior level, 2023 data</p>
+        <div class="salary-roles" id="salary-bars">
+          <div class="role-bar-row"><span class="role-name">Cloud Engineer</span><div class="role-bar-track"><div class="role-bar-fill" data-width="95"></div></div><span class="role-sal">$130K–$185K</span></div>
+          <div class="role-bar-row"><span class="role-name">DevOps / SRE</span><div class="role-bar-track"><div class="role-bar-fill" data-width="90"></div></div><span class="role-sal">$125K–$175K</span></div>
+          <div class="role-bar-row"><span class="role-name">Security Analyst</span><div class="role-bar-track"><div class="role-bar-fill" data-width="82"></div></div><span class="role-sal">$95K–$155K</span></div>
+          <div class="role-bar-row"><span class="role-name">Data Engineer</span><div class="role-bar-track"><div class="role-bar-fill" data-width="85"></div></div><span class="role-sal">$110K–$165K</span></div>
+          <div class="role-bar-row"><span class="role-name">Systems Admin</span><div class="role-bar-track"><div class="role-bar-fill" data-width="68"></div></div><span class="role-sal">$75K–$125K</span></div>
+          <div class="role-bar-row"><span class="role-name">Network Engineer</span><div class="role-bar-track"><div class="role-bar-fill" data-width="72"></div></div><span class="role-sal">$85K–$140K</span></div>
+          <div class="role-bar-row"><span class="role-name">Software Dev</span><div class="role-bar-track"><div class="role-bar-fill" data-width="88"></div></div><span class="role-sal">$105K–$180K</span></div>
+          <div class="role-bar-row"><span class="role-name">IT Support (L2+)</span><div class="role-bar-track"><div class="role-bar-fill" data-width="45"></div></div><span class="role-sal">$50K–$85K</span></div>
+        </div>
+        <p class="salary-footnote">Sources: Glassdoor, Levels.fyi, Bureau of Labor Statistics, Linux Foundation 2023 Open Source Jobs Report. Ranges reflect US market mid to senior individual contributor roles. Entry-level roles typically 30–40% below the lower bound shown.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:3.5rem" class="reveal">
+      <h3 style="margin-bottom:0.4rem">What the hiring data actually says</h3>
+      <p class="lead" style="margin-bottom:2rem">Numbers from the Linux Foundation 2023 Open Source Jobs Report, the most comprehensive survey of Linux and open source hiring trends.</p>
+      <div class="hiring-grid">
+        <div class="hiring-card reveal">
+          <div class="hiring-pct">91%</div>
+          <div class="hiring-desc">of hiring managers say Linux skills influence their decision to hire a candidate more than any other technical credential</div>
+          <div class="source-tag">Linux Foundation Jobs Report 2023</div>
+        </div>
+        <div class="hiring-card reveal" style="transition-delay:0.08s">
+          <div class="hiring-pct">74%</div>
+          <div class="hiring-desc">of open source and Linux roles went unfilled in 2023 due to a shortage of qualified applicants demand is far exceeding supply</div>
+          <div class="source-tag">Linux Foundation Jobs Report 2023</div>
+        </div>
+        <div class="hiring-card reveal" style="transition-delay:0.16s">
+          <div class="hiring-pct">85%</div>
+          <div class="hiring-desc">of professionals report that earning a Linux certification helped them advance their career or obtain a new role within 12 months</div>
+          <div class="source-tag">Linux Foundation Certification Survey</div>
+        </div>
+        <div class="hiring-card reveal" style="transition-delay:0.08s">
+          <div class="hiring-pct">47%</div>
+          <div class="hiring-desc">of companies planned to increase their Linux and open source hiring in 2024, despite broader tech industry slowdowns in other areas</div>
+          <div class="source-tag">Linux Foundation Jobs Report 2023</div>
+        </div>
+        <div class="hiring-card reveal" style="transition-delay:0.16s">
+          <div class="hiring-pct">$99K</div>
+          <div class="hiring-desc">is the median base salary for Linux-skilled IT professionals in the US across all roles and experience levels, including entry-level positions</div>
+          <div class="source-tag">Stack Overflow Dev Survey 2023</div>
+        </div>
+        <div class="hiring-card reveal" style="transition-delay:0.24s">
+          <div class="hiring-pct">25%</div>
+          <div class="hiring-desc">average salary increase reported by IT professionals who pursued Linux certification and changed roles or negotiated a raise within 2 years</div>
+          <div class="source-tag">Linux Foundation Certification Survey</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── IT ROLES ── -->
+<section id="roles">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Role breakdown</div>
+      <h2>What each IT role actually does with Linux</h2>
+      <p class="lead" style="margin-top:0.6rem">Not abstract theory, what you will spend your actual working day doing in each role, and how Linux is involved in every single one.</p>
+    </div>
+    <div class="roles-tabs reveal" style="transition-delay:0.08s" id="role-tabs">
+      <button class="role-tab active" onclick="switchRole('sysadmin',this)">Sysadmin</button>
+      <button class="role-tab" onclick="switchRole('devops',this)">DevOps / SRE</button>
+      <button class="role-tab" onclick="switchRole('cloud',this)">Cloud Engineer</button>
+      <button class="role-tab" onclick="switchRole('security',this)">Security Analyst</button>
+      <button class="role-tab" onclick="switchRole('network',this)">Network Engineer</button>
+      <button class="role-tab" onclick="switchRole('developer',this)">Software Developer</button>
+      <button class="role-tab" onclick="switchRole('data',this)">Data Engineer</button>
+      <button class="role-tab" onclick="switchRole('support',this)">IT Support</button>
+    </div>
+
+    <!-- SYSADMIN -->
+    <div class="role-panel active" id="panel-sysadmin">
+      <div class="role-left">
+        <span class="cert-level cl-mid role-badge">Most common Linux entry role</span>
+        <h3>Systems Administrator</h3>
+        <p class="role-desc">The sysadmin owns the infrastructure. You provision servers, keep services running, manage users and permissions, handle backups, apply patches, and troubleshoot failures at 2am. On Linux, this is entirely terminal-driven. You will know the filesystem intimately, manage services with systemctl, read logs with journalctl, and write scripts to automate everything you repeat more than twice.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Managing user accounts, groups, and sudo privileges across dozens of servers simultaneously using SSH and shell scripts</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Monitoring system health with tools like htop, sar, and iostat identifying bottlenecks before they become outages</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring and managing services Apache, Nginx, PostgreSQL, SSH all controlled via systemctl and config files in /etc</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing bash scripts to automate log rotation, disk cleanup, and scheduled backups with cron</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Applying security patches, configuring firewalls with iptables or ufw, and hardening server configurations</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Diagnosing failures by reading system logs in /var/log, tracing process errors, and reviewing kernel messages</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$65K – $125K</div><div class="rsc-note">Senior level with RHCSA/LFCS: $100K–$140K</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">systemctl</span><span class="tool-tag">journalctl</span><span class="tool-tag">cron</span><span class="tool-tag">rsync</span><span class="tool-tag">ssh</span><span class="tool-tag">htop</span><span class="tool-tag">iptables</span><span class="tool-tag">ufw</span><span class="tool-tag">logrotate</span><span class="tool-tag">chmod</span><span class="tool-tag">chown</span><span class="tool-tag">df</span><span class="tool-tag">du</span><span class="tool-tag">strace</span><span class="tool-tag">lsof</span><span class="tool-tag">sar</span></div></div>
+        <div class="role-linux-note"><strong>Why Linux knowledge is non-negotiable:</strong> The Linux kernel is the system you are managing. Understanding how processes, memory, storage, and networking work at the OS level is the entire job. There is no abstraction layer to hide behind.</div>
+      </div>
+    </div>
+
+    <!-- DEVOPS -->
+    <div class="role-panel" id="panel-devops">
+      <div class="role-left">
+        <span class="cert-level cl-adv role-badge">High demand, high salary</span>
+        <h3>DevOps Engineer / Site Reliability Engineer</h3>
+        <p class="role-desc">DevOps sits at the intersection of development and operations. You build the pipelines that take code from a developer's laptop to production automatically, safely, and reliably. Every CI/CD system, container, and deployment script runs on Linux. An SRE does the same but with a focus on system reliability, defining SLOs, writing runbooks, and building systems that heal themselves when things go wrong.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Building Docker containers that run on Linux writing Dockerfiles, building images, managing registries, debugging container failures</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing Kubernetes clusters every node is a Linux machine, every pod runs inside a Linux container, every log is a Linux process output</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing Ansible playbooks and Terraform configs to provision and configure Linux infrastructure across hundreds of servers at once</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring CI/CD pipelines in GitHub Actions, Jenkins, or GitLab CI all running on Linux build agents</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Debugging production incidents by SSH-ing into servers, reading logs, tracing network calls, and analysing memory dumps</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring monitoring and alerting with Prometheus, Grafana, and ELK Stack all Linux-native tooling</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$110K – $175K</div><div class="rsc-note">Staff SRE at major tech: $180K–$250K+</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">Docker</span><span class="tool-tag">Kubernetes</span><span class="tool-tag">Ansible</span><span class="tool-tag">Terraform</span><span class="tool-tag">bash</span><span class="tool-tag">systemd</span><span class="tool-tag">nginx</span><span class="tool-tag">Prometheus</span><span class="tool-tag">Grafana</span><span class="tool-tag">strace</span><span class="tool-tag">tcpdump</span><span class="tool-tag">perf</span><span class="tool-tag">git</span><span class="tool-tag">Jenkins</span></div></div>
+        <div class="role-linux-note"><strong>Linux is the entire stack:</strong> Containers are a Linux kernel feature (cgroups + namespaces). Kubernetes is an orchestrator for Linux containers. Understanding Linux at a low level processes, networking, storage makes you dramatically better at this role than someone who only knows the YAML.</div>
+      </div>
+    </div>
+
+    <!-- CLOUD -->
+    <div class="role-panel" id="panel-cloud">
+      <div class="role-left">
+        <span class="cert-level cl-adv role-badge">Fastest growing segment</span>
+        <h3>Cloud Engineer</h3>
+        <p class="role-desc">Cloud engineers design, build, and manage infrastructure on AWS, Azure, or GCP. The cloud is fundamentally Linux servers with API wrappers. When you spin up an EC2 instance, launch a GCP Compute VM, or deploy an Azure Virtual Machine you are almost always running Linux. Understanding the OS underneath the cloud platform transforms you from someone who clicks dashboards into someone who understands what is actually happening.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Connecting to cloud VMs via SSH and managing them just like any Linux server installing software, configuring services, managing users</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing cloud-init scripts and user data that run on Linux boot to configure new instances automatically at launch</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring Linux-based networking VPC routing, security groups, firewall rules, which map directly to iptables and kernel networking</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Deploying and managing containerised workloads on ECS, GKE, or AKS all Linux containers under the hood</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Troubleshooting cloud resource issues that always trace back to Linux-level problems disk I/O, memory pressure, process limits, network latency</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing AWS Lambda and serverless runtimes, which run on Amazon Linux containers behind the scenes</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$120K – $185K</div><div class="rsc-note">Principal Cloud Architect: $180K–$250K</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">AWS CLI</span><span class="tool-tag">gcloud</span><span class="tool-tag">az CLI</span><span class="tool-tag">Terraform</span><span class="tool-tag">bash</span><span class="tool-tag">cloud-init</span><span class="tool-tag">ssh</span><span class="tool-tag">Docker</span><span class="tool-tag">Kubernetes</span><span class="tool-tag">iptables</span><span class="tool-tag">nmap</span><span class="tool-tag">curl</span></div></div>
+        <div class="role-linux-note"><strong>The cloud is rented Linux:</strong> AWS offers 600+ services. Almost every service that involves compute runs on Linux. The Linux knowledge you build today applies identically whether the server is in your office rack, a VirtualBox VM on your laptop, or an EC2 instance in us-east-1.</div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="role-panel" id="panel-security">
+      <div class="role-left">
+        <span class="cert-level cl-adv role-badge">Linux knowledge is mandatory</span>
+        <h3>Cybersecurity Analyst / Penetration Tester</h3>
+        <p class="role-desc">Cybersecurity is built on Linux. The tools, the workflows, the certifications all assume Linux fluency. Whether you are on the defensive side (SOC analyst, incident responder, blue team) or the offensive side (penetration tester, red team), Linux is where you work. Kali Linux is the de facto standard for offensive security and contains over 600 pre-installed security tools.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Running penetration tests from Kali Linux using Metasploit, Burp Suite, Nmap, and Wireshark, all Linux-native tools</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Analysing malware in Linux sandboxes examining process behaviour, file system changes, and network connections of suspicious binaries</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Reading and parsing Linux system logs (/var/log) to trace security incidents, identify compromised accounts, and reconstruct attacker timelines</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Hardening Linux servers closing unnecessary ports, configuring SELinux or AppArmor, managing sudo policies, auditing file permissions</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing Python and bash scripts to automate threat hunting, log analysis, and vulnerability scanning across fleets of Linux servers</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Conducting forensic investigation of Linux file systems recovering deleted files, examining timestamps, analysing kernel logs</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$85K – $160K</div><div class="rsc-note">Lead Penetration Tester: $140K–$200K+</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">Kali Linux</span><span class="tool-tag">Metasploit</span><span class="tool-tag">Nmap</span><span class="tool-tag">Wireshark</span><span class="tool-tag">Burp Suite</span><span class="tool-tag">netcat</span><span class="tool-tag">tcpdump</span><span class="tool-tag">hashcat</span><span class="tool-tag">John</span><span class="tool-tag">SELinux</span><span class="tool-tag">auditd</span><span class="tool-tag">iptables</span><span class="tool-tag">ss</span></div></div>
+        <div class="role-linux-note"><strong>You cannot do this job without Linux:</strong> Kali Linux ships with 600+ security tools. Offensive security certifications like OSCP are entirely Linux-based. Blue team work involves Linux log analysis and hardening. There is no alternative Linux knowledge is the baseline, not an optional extra.</div>
+      </div>
+    </div>
+
+    <!-- NETWORK -->
+    <div class="role-panel" id="panel-network">
+      <div class="role-left">
+        <span class="cert-level cl-mid role-badge">Networking meets Linux</span>
+        <h3>Network Engineer</h3>
+        <p class="role-desc">Network engineers manage the infrastructure that connects systems routers, switches, firewalls, load balancers, VPNs. Increasingly, these devices run Linux or Linux-derived operating systems. Cisco IOS has Linux under the hood. Most modern firewalls are Linux-based. SD-WAN platforms are Linux. Understanding Linux networking at a low level the kernel's networking stack, routing tables, and iptables makes you a significantly better network engineer.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Using Linux networking tools to diagnose connectivity issues ip, ss, traceroute, tcpdump, nmap the same tools used on both Linux servers and many network devices</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing Linux-based firewalls pfSense, OPNsense, and UFW are all Linux under the hood with iptables doing the actual filtering</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring VPN tunnels (OpenVPN, WireGuard) which run as Linux daemons and require Linux administration knowledge to operate</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Using Python scripts running on Linux to automate network device configuration via SSH and NETCONF protocols</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Setting up network monitoring with tools like Nagios, Zabbix, or Prometheus all running on Linux servers</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$80K – $145K</div><div class="rsc-note">Network Architect / CCIE: $130K–$180K</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">ip route</span><span class="tool-tag">tcpdump</span><span class="tool-tag">nmap</span><span class="tool-tag">iptables</span><span class="tool-tag">traceroute</span><span class="tool-tag">netstat</span><span class="tool-tag">ss</span><span class="tool-tag">curl</span><span class="tool-tag">dig</span><span class="tool-tag">WireGuard</span><span class="tool-tag">OpenVPN</span><span class="tool-tag">Wireshark</span></div></div>
+        <div class="role-linux-note"><strong>The network IS Linux networking:</strong> TCP/IP is implemented in the Linux kernel. iptables/nftables are how Linux controls packet flow the same concepts as firewall ACLs, just exposed directly. Understanding Linux networking is understanding networking, full stop.</div>
+      </div>
+    </div>
+
+    <!-- DEVELOPER -->
+    <div class="role-panel" id="panel-developer">
+      <div class="role-left">
+        <span class="cert-level cl-mid role-badge">Production runs on Linux</span>
+        <h3>Software Developer / Backend Engineer</h3>
+        <p class="role-desc">Most software developers work on macOS or Windows but deploy their code to Linux servers. When something breaks in production, you need to SSH into a Linux server, read logs, check running processes, inspect the file system, and diagnose what went wrong. The developers who can do this who understand the environment their code runs in are considerably more effective and are treated as senior contributors regardless of their title.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Using WSL2 or a Linux VM as the local development environment running databases, message queues, and local Kubernetes clusters that mirror production</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Debugging production issues by reading application logs on Linux servers, checking process memory and CPU usage, and inspecting open file descriptors</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing Dockerfiles that build Linux-based container images understanding the base layer, layer caching, and runtime behaviour</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Understanding how your application's file permissions, environment variables, and network ports work on the Linux host avoiding the "works on my machine" problem</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring CI/CD pipelines that run tests and builds inside Linux containers on every git push</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$95K – $185K</div><div class="rsc-note">Staff / Principal Engineer: $180K–$300K+</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">bash</span><span class="tool-tag">git</span><span class="tool-tag">Docker</span><span class="tool-tag">ssh</span><span class="tool-tag">grep</span><span class="tool-tag">tail -f</span><span class="tool-tag">ps</span><span class="tool-tag">kill</span><span class="tool-tag">env</span><span class="tool-tag">curl</span><span class="tool-tag">vim</span><span class="tool-tag">tmux</span><span class="tool-tag">cron</span></div></div>
+        <div class="role-linux-note"><strong>Your code lives on Linux:</strong> AWS Lambda, Google Cloud Run, Heroku, Railway, Render virtually every hosting platform serves your application from a Linux container or VM. Understanding that environment at an OS level makes you a measurably better engineer.</div>
+      </div>
+    </div>
+
+    <!-- DATA -->
+    <div class="role-panel" id="panel-data">
+      <div class="role-left">
+        <span class="cert-level cl-mid role-badge">Big data is Linux</span>
+        <h3>Data Engineer</h3>
+        <p class="role-desc">Data engineers build the pipelines, warehouses, and infrastructure that power analytics and machine learning. Hadoop, Spark, Kafka, Airflow, dbt all run on Linux clusters. Data engineers SSH into nodes to debug Spark jobs, manage file permissions on HDFS, tune kernel parameters for high-throughput I/O, and write shell scripts to orchestrate data movement. The bigger the data, the more critical the Linux knowledge.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Managing distributed storage systems on Linux clusters Hadoop HDFS, object storage mounts, NFS shares  all controlled from the Linux command line</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Tuning Linux kernel parameters for high-throughput workloads adjusting tcp buffers, file descriptor limits, and I/O schedulers for Spark and Kafka performance</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing bash scripts and cron jobs to orchestrate data ingestion pipelines, file transfers between systems, and pre-processing steps</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Monitoring cluster health using Linux tools top, iostat, vmstat identifying which nodes have resource contention during large jobs</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing Python environments, dependencies, and virtual environments on Linux for data processing and ML model serving</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$105K – $170K</div><div class="rsc-note">Staff Data Engineer: $150K–$220K</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">bash</span><span class="tool-tag">cron</span><span class="tool-tag">hadoop</span><span class="tool-tag">spark-submit</span><span class="tool-tag">kafka</span><span class="tool-tag">airflow</span><span class="tool-tag">ssh</span><span class="tool-tag">rsync</span><span class="tool-tag">iostat</span><span class="tool-tag">vmstat</span><span class="tool-tag">python</span><span class="tool-tag">docker</span></div></div>
+        <div class="role-linux-note"><strong>Big data runs on Linux clusters:</strong> Hadoop, Spark, and Kafka were designed for Linux. The performance tuning that makes the difference between a 2-hour job and a 20-minute job involves Linux kernel parameters, filesystem choices, and network configuration.</div>
+      </div>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="role-panel" id="panel-support">
+      <div class="role-left">
+        <span class="cert-level cl-beg role-badge">Best entry point</span>
+        <h3>IT Support (L2 and above)</h3>
+        <p class="role-desc">IT support is where many Linux careers begin, and Linux knowledge separates L1 ticket closers from L2/L3 engineers who solve actual problems. At Level 2 and above, you are dealing with server-side issues, application logs, user management across Linux systems, and escalations that require actual OS-level investigation. Linux skills are the fastest way to get promoted out of the helpdesk.</p>
+        <div class="role-uses">
+          <h4>How Linux is used day to day</h4>
+          <div class="use-item"><div class="use-dot"></div><span>Managing user accounts on Linux servers creating users, resetting passwords, managing group memberships and sudo privileges</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Reading application and system logs to diagnose user-reported issues Apache error logs, auth logs in /var/log, application-specific log directories</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Handling escalated tickets that require server-level access disk space alerts, failed services, certificate expiry, permission errors</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Maintaining internal Linux systems updating packages, running backups, checking disk health, applying security patches</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Supporting developers with local Linux environment issues WSL2 configuration, Docker problems, permission conflicts</span></div>
+        </div>
+      </div>
+      <div class="role-right">
+        <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$45K – $85K</div><div class="rsc-note">L2/L3 with Linux skills: $65K–$100K</div></div>
+        <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">ssh</span><span class="tool-tag">useradd</span><span class="tool-tag">passwd</span><span class="tool-tag">tail</span><span class="tool-tag">grep</span><span class="tool-tag">df</span><span class="tool-tag">du</span><span class="tool-tag">systemctl</span><span class="tool-tag">journalctl</span><span class="tool-tag">chmod</span><span class="tool-tag">apt</span><span class="tool-tag">top</span></div></div>
+        <div class="role-linux-note"><strong>Linux skills accelerate promotion:</strong> Most L1 support involves resetting passwords and closing tickets. L2 and L3 requires OS-level investigation. Adding Linux fluency while in an L1 role is one of the fastest, most reliable paths to a significant salary increase in IT support.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── FUN SECTION ── -->
+<section id="fun">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Linux's secret personality</div>
+      <h2>Linux is serious software.<br>It also has a <em style="font-style:italic;color:var(--amber)">weird sense of humour.</em></h2>
+      <p class="lead" style="margin-top:0.6rem">Tucked away in every Linux system are dozens of completely useless, deeply beloved commands that have been maintained for 30 years purely because the community refuses to delete them. These are real commands you can install and run right now.</p>
+    </div>
+
+    <!-- neofetch mockup -->
+    <div class="neofetch-block reveal" style="transition-delay:0.08s">
+      <div class="neo-tux" id="neo-tux-art">   .--.
+  |o_o |
+  |:_/ |
+ //   \ \
+(|     | )
+/'\_   _/`\
+\___)=(___/</div>
+      <div class="neo-info">
+        <div class="neo-row"><span class="neo-key" style="color:#5dade2;font-weight:700">ubuntu</span><span class="neo-val" style="color:rgba(244,240,232,0.4)">@</span><span class="neo-key" style="color:#5dade2;font-weight:700">linux-guide</span></div>
+        <div class="neo-sep">-----------------------------</div>
+        <div class="neo-row"><span class="neo-key">OS</span><span class="neo-val">Ubuntu 24.04 LTS x86_64</span></div>
+        <div class="neo-row"><span class="neo-key">Host</span><span class="neo-val">VirtualBox 7.0</span></div>
+        <div class="neo-row"><span class="neo-key">Kernel</span><span class="neo-val">6.8.0-35-generic</span></div>
+        <div class="neo-row"><span class="neo-key">Uptime</span><span class="neo-val">47 days, 3 hours, 22 mins</span></div>
+        <div class="neo-row"><span class="neo-key">Packages</span><span class="neo-val">1842 (dpkg), 14 (snap)</span></div>
+        <div class="neo-row"><span class="neo-key">Shell</span><span class="neo-val">bash 5.2.21</span></div>
+        <div class="neo-row"><span class="neo-key">Terminal</span><span class="neo-val">linux-guide</span></div>
+        <div class="neo-row"><span class="neo-key">CPU</span><span class="neo-val">Intel Core i7-12700K (8) @ 4.900GHz</span></div>
+        <div class="neo-row"><span class="neo-key">Memory</span><span class="neo-val">3241MiB / 7842MiB</span></div>
+        <div class="neo-colors">
+          <div class="neo-dot" style="background:#2d2d2d"></div>
+          <div class="neo-dot" style="background:#e06060"></div>
+          <div class="neo-dot" style="background:#6cb86c"></div>
+          <div class="neo-dot" style="background:#E8B84B"></div>
+          <div class="neo-dot" style="background:#5dade2"></div>
+          <div class="neo-dot" style="background:#c39bd3"></div>
+          <div class="neo-dot" style="background:#5DCAA5"></div>
+          <div class="neo-dot" style="background:#F4F0E8"></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono);font-size:0.68rem;color:var(--muted2);margin-top:0.6rem;text-align:center">^ That is what <span style="color:var(--amber)">neofetch</span> looks like it prints a stylish system info summary with ASCII art every time you open a terminal. Completely pointless. Universally beloved.</p>
+
+    <div class="fun-grid" style="margin-top:3rem">
+
+      <div class="fun-card reveal">
+        <div class="fun-card-top">
+          <div class="fun-cmd">cowsay "Hello, world"</div>
+          <div class="fun-title">cowsay</div>
+          <div class="fun-desc">A cow (or any animal) says whatever you pipe into it. Invented in 1999. Still ships in the default repos of every major distro. Often chained with fortune for maximum uselessness.</div>
+          <div class="fun-install"><span>$</span> sudo apt install cowsay</div>
+        </div>
+        <div class="fun-ascii" style="color:#6cb86c"> _____________
+&lt; Hello world &gt;
+ -------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||</div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.06s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">sl</div>
+          <div class="fun-title">sl — Steam Locomotive</div>
+          <div class="fun-desc">Mistype <span style="color:var(--amber)">ls</span> as <span style="color:var(--amber)">sl</span> and a full ASCII steam train roars across your terminal. Created in 1993 to punish people who type too fast. You cannot stop it with Ctrl+C.</div>
+          <div class="fun-install"><span>$</span> sudo apt install sl</div>
+        </div>
+        <div class="fun-ascii" style="color:rgba(244,240,232,0.7);animation:scroll-train 8s linear infinite" id="sl-anim">      ====        ________  ___________
+  _D _|  |_______/        \__I_I_____===__|_________|
+   |(_)---  |   H\________/ |   |        =|___ ___|
+   /     |  |   H  |  |     |   |         ||_| |_||
+  |      |  |   H  |__--------------------| [___] |
+  | ________|___H__/__|_____/[][]~\_______|       |
+  |/ |   |-----------I_____I [][] []  D   |=======|
+__/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|
+ |/-=|___|=    ||    ||    ||    |_____/~\     |
+  \_/      \_O=====O=====O=====O_/      \_/</div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.12s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">fortune | cowsay -f tux</div>
+          <div class="fun-title">fortune + cowsay combo</div>
+          <div class="fun-desc">The <span style="color:var(--amber)">fortune</span> command prints a random quote, joke, or proverb. Pipe it into cowsay with the Tux penguin flag and you get Linux's mascot delivering Unix wisdom. Add this to your .bashrc to see it every time you open a terminal.</div>
+          <div class="fun-install"><span>$</span> sudo apt install fortune cowsay</div>
+        </div>
+        <div class="fun-ascii" style="color:#E8B84B"> ________________________________
+/ The unix time-sharing system: a  \
+\ case study in software modularity /
+ --------------------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/</div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.06s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">cmatrix</div>
+          <div class="fun-title">cmatrix</div>
+          <div class="fun-desc">Turns your terminal into the iconic falling green characters from The Matrix. Serves absolutely no practical purpose. Incredibly effective at making you look like a serious hacker to anyone standing nearby who does not know Linux.</div>
+          <div class="fun-install"><span>$</span> sudo apt install cmatrix</div>
+        </div>
+        <div class="fun-ascii" style="color:#00cc44;font-size:0.65rem" id="matrix-container">Loading matrix...</div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.12s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">figlet "LINUX"</div>
+          <div class="fun-title">figlet</div>
+          <div class="fun-desc">Renders any text as giant ASCII block letters. Beloved for making banner messages in scripts and README files. Supports dozens of fonts. Often used to make bash scripts feel more important than they are.</div>
+          <div class="fun-install"><span>$</span> sudo apt install figlet</div>
+        </div>
+        <div class="fun-ascii" style="color:#5dade2;font-size:0.58rem">
+ _     ___ _   _ _   ___  __
+| |   |_ _| \ | | | | \ \/ /
+| |    | ||  \| | | | |\  /
+| |___ | || |\  | |_| |/  \
+|_____|___|_| \_|\___//_/\_\</div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.18s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">asciiquarium</div>
+          <div class="fun-title">ASCIIquarium</div>
+          <div class="fun-desc">A fully animated aquarium that runs inside your terminal. Fish swim, bubbles rise, a shark occasionally devours them. Requires Perl. Has been maintained by the community since 2001. A genuine piece of terminal art history.</div>
+          <div class="fun-install"><span>$</span> sudo apt install libcurses-perl asciiquarium</div>
+        </div>
+        <div class="fun-ascii" style="color:#5dade2;font-size:0.65rem" id="aquarium">Loading aquarium...</div>
+      </div>
+
+      <div class="fun-card reveal">
+        <div class="fun-card-top">
+          <div class="fun-cmd">yes "I love Linux"</div>
+          <div class="fun-title">yes</div>
+          <div class="fun-desc">Prints whatever string you give it, forever, as fast as your CPU can manage. Can literally max out a CPU core. Actual legitimate use: pipe it into commands that keep asking for confirmation. Illegitimate use: confuse people.</div>
+          <div class="fun-install"><span>$</span> pre-installed on all systems</div>
+        </div>
+        <div class="fun-ascii" style="color:rgba(244,240,232,0.5)">I love Linux
+I love Linux
+I love Linux
+I love Linux
+I love Linux
+I love Linux
+I love Linux
+I love Linux
+<span style="color:var(--amber)">^C  (you have to actually stop it)</span></div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.06s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">cat /dev/urandom | hexdump</div>
+          <div class="fun-title">The infinite random stream</div>
+          <div class="fun-desc"><span style="color:var(--amber)">/dev/urandom</span> is a special file that generates cryptographically random bytes forever. It is not a real file on disk the kernel creates the data on demand. Read it and watch infinity scroll by. Useful for generating passwords and encryption keys.</div>
+          <div class="fun-install"><span>$</span> pre-installed it is part of the kernel</div>
+        </div>
+        <div class="fun-ascii" style="color:#c39bd3;font-size:0.62rem">0000000 3f8a 9c12 7b44 e201 f839 44ac 2b17 9f03
+0000010 a82c 3d91 0fe5 7712 8b4a c390 1d6e 5527
+0000020 f103 8844 2ca9 7b3f 9d12 e047 3318 c5a1
+0000030 4792 b8e3 0d56 9f21 a3c8 7e4b 12f9 88d0
+<span style="color:var(--amber)">... and this never stops</span></div>
+      </div>
+
+      <div class="fun-card reveal" style="transition-delay:0.12s">
+        <div class="fun-card-top">
+          <div class="fun-cmd">sudo rm -rf /</div>
+          <div class="fun-title">The command you must never run</div>
+          <div class="fun-desc">This deletes every single file on your system recursively, starting from root. It is the legendary forbidden command. Modern Linux actually stops you it requires a <span style="color:var(--amber)">--no-preserve-root</span> flag to proceed. The existence of that flag is its own form of comedy.</div>
+          <div class="fun-install"><span style="color:#e06060">warning:</span> do not run this. ever. on anything real.</div>
+        </div>
+        <div class="fun-ascii" style="color:#e06060">rm: it is dangerous to operate recursively on '/'
+rm: use --no-preserve-root to override this failsafe
+
+<span style="color:#6cb86c"># The system literally asks you to confirm
+# that you want to delete everything.
+# Someone thought that was necessary.
+# They were right.</span></div>
+      </div>
+
+    </div>
+
+    <div class="fun-easter reveal" style="margin-top:2rem">
+      <h3>More hidden gems worth knowing about</h3>
+      <p><span style="color:var(--amber)">toilet</span> like figlet but with colour and more fonts. <span style="color:var(--amber)">lolcat</span>  pipes any command output through a rainbow colour gradient. <span style="color:var(--amber)">oneko</span> a cat chases your cursor around the screen. <span style="color:var(--amber)">bb</span> a full ASCII art demo reel that is technically impressive and completely baffling. <span style="color:var(--amber)">aafire</span> an animated ASCII campfire. <span style="color:var(--amber)">rev</span> reverses every line of text you give it. <span style="color:var(--amber)">factor</span> gives you the prime factors of any number. <span style="color:var(--amber)">telnet towel.blinkenlights.nl</span> watch Star Wars Episode IV played entirely in ASCII art over the internet, a server that has been running continuously since 1997.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISTROS ── -->
+<section id="distros">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Choosing your distribution</div>
+      <h2>Which Linux should you start with?</h2>
+      <p class="lead" style="margin-top:0.6rem">Linux comes in many versions called distributions or distros. They all use the same Linux kernel but differ in tooling, package management, and intended use. Pick one and commit to it switching later is painless once you know the fundamentals.</p>
+    </div>
+    <div class="distro-grid" style="margin-top:2.5rem">
+      <div class="distro-card reveal">
+        <div class="distro-name">Ubuntu</div>
+        <div class="distro-for">Best for: Beginners, developers, servers</div>
+        <div class="distro-desc">The most popular Linux distribution by a wide margin. Huge community, excellent documentation, and supported by virtually every cloud platform and hosting provider. Ubuntu is the default choice for learning and is used extensively in production.</div>
+        <div class="distro-based">Package manager: apt &nbsp;|&nbsp; Based on: Debian</div>
+      </div>
+      <div class="distro-card reveal" style="transition-delay:0.08s">
+        <div class="distro-name">Debian</div>
+        <div class="distro-for">Best for: Stability-focused servers</div>
+        <div class="distro-desc">The grandfather of many distros including Ubuntu. Prioritises rock-solid stability over cutting-edge software versions. Servers running Debian are famous for uptimes measured in years. Learning Debian skills directly transfers to Ubuntu and vice versa.</div>
+        <div class="distro-based">Package manager: apt &nbsp;|&nbsp; Based on: Debian</div>
+      </div>
+      <div class="distro-card reveal" style="transition-delay:0.16s">
+        <div class="distro-name">Red Hat / RHEL</div>
+        <div class="distro-for">Best for: Enterprise corporate environments</div>
+        <div class="distro-desc">Red Hat Enterprise Linux is the standard in large corporate and government environments. Most RHCSA and RHCE certification study uses RHEL or its free clones. If your company is an enterprise, you will likely encounter RHEL or one of its derivatives.</div>
+        <div class="distro-based">Package manager: dnf &nbsp;|&nbsp; Family: Red Hat</div>
+      </div>
+      <div class="distro-card reveal" style="transition-delay:0.08s">
+        <div class="distro-name">AlmaLinux / Rocky Linux</div>
+        <div class="distro-for">Best for: Free RHEL alternative</div>
+        <div class="distro-desc">Free, community-maintained clones of RHEL that are binary compatible packages built for RHEL run unchanged. AlmaLinux and Rocky Linux emerged when CentOS was discontinued and are now the default free RHEL alternatives for learning and production use.</div>
+        <div class="distro-based">Package manager: dnf &nbsp;|&nbsp; Based on: RHEL source</div>
+      </div>
+      <div class="distro-card reveal" style="transition-delay:0.16s">
+        <div class="distro-name">Kali Linux</div>
+        <div class="distro-for">Best for: Cybersecurity, ethical hacking</div>
+        <div class="distro-desc">Purpose-built for penetration testing and security research. Ships with 600+ pre-installed security tools including Metasploit, Wireshark, Nmap, Burp Suite, and hashcat. Not recommended as a daily driver for beginners use it specifically for security practice after learning Linux basics.</div>
+        <div class="distro-based">Package manager: apt &nbsp;|&nbsp; Based on: Debian</div>
+      </div>
+      <div class="distro-card reveal" style="transition-delay:0.24s">
+        <div class="distro-name">Arch Linux</div>
+        <div class="distro-for">Best for: Advanced users who want full control</div>
+        <div class="distro-desc">A minimalist distro where you build everything from scratch. No installer that makes decisions for you you partition the disk, install the bootloader, configure the network, and choose every package. Technically demanding but produces deeply knowledgeable Linux users. Not for beginners.</div>
+        <div class="distro-based">Package manager: pacman &nbsp;|&nbsp; Based on: Independent</div>
+      </div>
+    </div>
+    <div class="callout reveal" style="margin-top:2rem">
+      <p><strong>Recommendation:</strong> Start with Ubuntu 22.04 LTS or 24.04 LTS. Install it in WSL2 on Windows or as a VirtualBox VM. It has the largest community, the best beginner documentation, and is used in most online tutorials. Once you are comfortable, try AlmaLinux or Rocky Linux to learn the Red Hat ecosystem before pursuing RHCSA certification.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── ROADMAP ── -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Learning path</div>
+      <h2>Eight steps from zero to confident</h2>
+      <p class="lead" style="margin-top:0.6rem">Each step builds directly on the one before it. Do not skip ahead the gaps will show up later. Click any step to expand it and see the specific commands to learn and why they matter.</p>
+    </div>
+    <div class="roadmap-steps">
+
+      <div class="step active reveal" onclick="toggleStep(this)">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-meta">Week 1–2 &nbsp;·&nbsp; Foundation</div>
+          <h3>Set up your Linux environment</h3>
+          <div class="step-body">
+            <p>Before anything else, you need a Linux environment you can freely experiment in. The best option for Windows users is WSL2 Windows Subsystem for Linux. Open PowerShell as administrator and run <span class="mono amber">wsl --install</span>, then restart. Ubuntu installs automatically. Mac users already have a Unix terminal open Terminal and you are 80% there. Alternatively, download VirtualBox for free and install an Ubuntu ISO as a VM. This is the safest learning environment because you can take snapshots and restore them when things go wrong.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">wsl --install</span><span class="cmd-desc">Install WSL2 with Ubuntu on Windows (run in PowerShell as Admin)</span></div>
+              <div class="cmd-row"><span class="cmd-name">wsl -l -v</span><span class="cmd-desc">List installed Linux distributions and their WSL version</span></div>
+              <div class="cmd-row"><span class="cmd-name">uname -a</span><span class="cmd-desc">Display Linux kernel version and system information</span></div>
+              <div class="cmd-row"><span class="cmd-name">whoami</span><span class="cmd-desc">Print the current logged-in username</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo apt update</span><span class="cmd-desc">Refresh the package list (first command to run on a fresh install)</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Set up VirtualBox with a snapshot immediately after installing Ubuntu and before doing anything else. Name it "Clean install." You now have a restore point for any experiment that goes wrong.</div>
+            <div class="step-tags"><span class="tag">WSL2</span><span class="tag">VirtualBox</span><span class="tag">Ubuntu 24.04</span><span class="tag">uname</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-meta">Week 2–4 &nbsp;·&nbsp; Navigation</div>
+          <h3>Master terminal navigation and basic commands</h3>
+          <div class="step-body">
+            <p>The terminal is the core skill. Every other thing you learn happens in here. Start by getting comfortable navigating the filesystem. Understand that in Linux, your current location (called the working directory) matters for every command you type. Learn to move around, list contents, and examine files. The man command is your teacher type man followed by any command name and get the full manual for that command, right inside the terminal.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">pwd</span><span class="cmd-desc">Print working directory shows where you currently are</span></div>
+              <div class="cmd-row"><span class="cmd-name">ls -la</span><span class="cmd-desc">List all files including hidden ones, with permissions and sizes</span></div>
+              <div class="cmd-row"><span class="cmd-name">cd /path/name</span><span class="cmd-desc">Change to a specific directory; cd ~ goes home; cd .. goes up one level</span></div>
+              <div class="cmd-row"><span class="cmd-name">cat filename</span><span class="cmd-desc">Display the full contents of a file in the terminal</span></div>
+              <div class="cmd-row"><span class="cmd-name">less filename</span><span class="cmd-desc">Page through a large file use space to advance, q to quit</span></div>
+              <div class="cmd-row"><span class="cmd-name">grep "word" file</span><span class="cmd-desc">Search for a pattern inside a file one of the most used commands ever</span></div>
+              <div class="cmd-row"><span class="cmd-name">man ls</span><span class="cmd-desc">Read the full manual for any command replace ls with any command name</span></div>
+              <div class="cmd-row"><span class="cmd-name">history</span><span class="cmd-desc">Show previously typed commands; use up arrow to cycle through them</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Press Tab to autocomplete file and directory names. Press Ctrl+R to search your command history. These two shortcuts alone will save you hundreds of keystrokes every day.</div>
+            <div class="step-tags"><span class="tag">pwd</span><span class="tag">ls</span><span class="tag">cd</span><span class="tag">cat</span><span class="tag">grep</span><span class="tag">man</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-meta">Week 3–5 &nbsp;·&nbsp; File system</div>
+          <h3>Understand the Linux file system hierarchy</h3>
+          <div class="step-body">
+            <p>Linux organises everything in a single directory tree that starts at / (pronounced "root"). Unlike Windows, which has separate drive letters (C:, D:), everything in Linux is under this one tree including physical drives, USB sticks, network shares, and even hardware devices. Knowing what lives where is essential for configuration, troubleshooting, and system administration. The phrase "everything is a file" in Linux is literally true even hardware devices like hard drives (/dev/sda) are represented as files.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">/etc</span><span class="cmd-desc">System-wide configuration files, every service stores its config here</span></div>
+              <div class="cmd-row"><span class="cmd-name">/home/username</span><span class="cmd-desc">Personal files for each user, equivalent to C:\Users\Name on Windows</span></div>
+              <div class="cmd-row"><span class="cmd-name">/var/log</span><span class="cmd-desc">System and application logs, first place to look when something breaks</span></div>
+              <div class="cmd-row"><span class="cmd-name">/tmp</span><span class="cmd-desc">Temporary files, automatically cleared on reboot</span></div>
+              <div class="cmd-row"><span class="cmd-name">/proc</span><span class="cmd-desc">Virtual filesystem showing live kernel and process information</span></div>
+              <div class="cmd-row"><span class="cmd-name">/dev</span><span class="cmd-desc">Device files, /dev/sda is your first hard disk, /dev/null discards everything</span></div>
+              <div class="cmd-row"><span class="cmd-name">df -h</span><span class="cmd-desc">Show disk space usage for all mounted filesystems in human-readable format</span></div>
+              <div class="cmd-row"><span class="cmd-name">find / -name "*.log"</span><span class="cmd-desc">Search for all files with .log extension starting from root directory</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Read the log files in /var/log regularly, even when nothing is broken. Understanding what normal looks like makes it much easier to spot what abnormal looks like when an incident occurs.</div>
+            <div class="step-tags"><span class="tag">/etc</span><span class="tag">/var/log</span><span class="tag">/home</span><span class="tag">/proc</span><span class="tag">df</span><span class="tag">find</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-meta">Week 4–6 &nbsp;·&nbsp; Security model</div>
+          <h3>Users, groups, and permissions</h3>
+          <div class="step-body">
+            <p>Linux was designed from the ground up as a multi-user system with security built into every file and directory. Every single file and directory has three permission groups the owner (u), the group (g), and everyone else (o) and each group can have read (r), write (w), and execute (x) permissions. This system is how Linux enforces security, and understanding it is fundamental to both administration and cybersecurity. The root user is the superuser with unrestricted access to everything do not run as root unless absolutely necessary.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">ls -l file</span><span class="cmd-desc">Show permissions — e.g. -rwxr-xr-- means owner can rwx, group can rx, others r only</span></div>
+              <div class="cmd-row"><span class="cmd-name">chmod 755 file</span><span class="cmd-desc">Set permissions numerically: 7=rwx, 5=rx, 4=r — 755 is common for executables</span></div>
+              <div class="cmd-row"><span class="cmd-name">chmod +x script.sh</span><span class="cmd-desc">Add execute permission to a file — makes it runnable as a program</span></div>
+              <div class="cmd-row"><span class="cmd-name">chown user:group file</span><span class="cmd-desc">Change the owner and group of a file</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo command</span><span class="cmd-desc">Run a single command as root the safe way to do admin tasks</span></div>
+              <div class="cmd-row"><span class="cmd-name">useradd -m username</span><span class="cmd-desc">Create a new user with a home directory (-m flag)</span></div>
+              <div class="cmd-row"><span class="cmd-name">passwd username</span><span class="cmd-desc">Set or change a user's password</span></div>
+              <div class="cmd-row"><span class="cmd-name">groups username</span><span class="cmd-desc">Show which groups a user belongs to</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Never run as root by default. The habit of using sudo only when needed is what separates cautious administrators from people who accidentally delete /etc one day. Use sudo, do the specific thing, then go back to being a normal user.</div>
+            <div class="step-tags"><span class="tag">chmod</span><span class="tag">chown</span><span class="tag">sudo</span><span class="tag">useradd</span><span class="tag">passwd</span><span class="tag">groups</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-meta">Week 5–7 &nbsp;·&nbsp; Software management</div>
+          <h3>Package management and software installation</h3>
+          <div class="step-body">
+            <p>Linux uses package managers to install, update, and remove software safely and cleanly, with no hunting for .exe files or fighting with installers. The package manager knows about dependencies software that other software needs and handles everything automatically. On Ubuntu and Debian, the tool is apt. On Red Hat, RHEL, AlmaLinux, and Rocky Linux, it is dnf. Snap and Flatpak are newer universal package formats that work across distributions.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">sudo apt update</span><span class="cmd-desc">Refresh the list of available packages and their versions</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo apt upgrade</span><span class="cmd-desc">Install all available updates for installed packages</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo apt install nginx</span><span class="cmd-desc">Install the nginx web server (replace nginx with any package name)</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo apt remove nginx</span><span class="cmd-desc">Uninstall a package, keeping its configuration files</span></div>
+              <div class="cmd-row"><span class="cmd-name">apt search python</span><span class="cmd-desc">Search for packages by name or description</span></div>
+              <div class="cmd-row"><span class="cmd-name">apt show nginx</span><span class="cmd-desc">Show detailed information about a package before installing</span></div>
+              <div class="cmd-row"><span class="cmd-name">dpkg -l</span><span class="cmd-desc">List all installed packages on a Debian/Ubuntu system</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo dnf install nginx</span><span class="cmd-desc">Install on Red Hat / RHEL / AlmaLinux / Rocky Linux (dnf replaces yum)</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Always run apt update before apt install. Packages are pulled from online repositories and the local list can go stale. Running update first ensures you get the latest version and that all dependencies resolve correctly.</div>
+            <div class="step-tags"><span class="tag">apt</span><span class="tag">dnf</span><span class="tag">snap</span><span class="tag">dpkg</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <div class="step-meta">Week 6–9 &nbsp;·&nbsp; System management</div>
+          <h3>Processes, services, and system monitoring</h3>
+          <div class="step-body">
+            <p>Every program running on Linux is a process with a unique process ID (PID). As an administrator you need to see what is running, how much CPU and memory it is consuming, and be able to start, stop, or kill processes as needed. Modern Linux systems use systemd to manage long-running services the daemon processes that start on boot and keep running in the background, like web servers, databases, and SSH. Understanding systemctl is essential for any server administration work.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">top</span><span class="cmd-desc">Interactive real-time view of running processes and resource usage press q to quit</span></div>
+              <div class="cmd-row"><span class="cmd-name">htop</span><span class="cmd-desc">Better version of top with colours and easier controls install with apt install htop</span></div>
+              <div class="cmd-row"><span class="cmd-name">ps aux</span><span class="cmd-desc">Snapshot list of all running processes with their PID, CPU, and memory usage</span></div>
+              <div class="cmd-row"><span class="cmd-name">kill 1234</span><span class="cmd-desc">Terminate process with PID 1234 (use ps or top to find the PID first)</span></div>
+              <div class="cmd-row"><span class="cmd-name">kill -9 1234</span><span class="cmd-desc">Force-kill a process that is not responding to the normal kill signal</span></div>
+              <div class="cmd-row"><span class="cmd-name">systemctl status nginx</span><span class="cmd-desc">Check if the nginx service is running and see recent log output</span></div>
+              <div class="cmd-row"><span class="cmd-name">systemctl start nginx</span><span class="cmd-desc">Start a service (also: stop, restart, reload)</span></div>
+              <div class="cmd-row"><span class="cmd-name">systemctl enable nginx</span><span class="cmd-desc">Make a service start automatically on every boot</span></div>
+              <div class="cmd-row"><span class="cmd-name">journalctl -u nginx</span><span class="cmd-desc">View all log output for the nginx service add -f to follow live</span></div>
+              <div class="cmd-row"><span class="cmd-name">free -h</span><span class="cmd-desc">Display available and used memory in human-readable format</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> When a service fails, the first command to run is always journalctl -u servicename --since "10 minutes ago". This shows you what the service was doing right before it failed, which is where the actual error message lives.</div>
+            <div class="step-tags"><span class="tag">systemctl</span><span class="tag">journalctl</span><span class="tag">htop</span><span class="tag">ps</span><span class="tag">kill</span><span class="tag">free</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <div class="step-meta">Week 8–12 &nbsp;·&nbsp; Networking</div>
+          <h3>Networking fundamentals from the command line</h3>
+          <div class="step-body">
+            <p>Linux provides a complete suite of networking tools that are used professionally to diagnose connectivity, inspect traffic, manage firewall rules, and connect to remote systems. These tools map directly to real networking concepts IP addresses, routing, ports, protocols making Linux networking practice one of the best ways to understand how networks actually work, not just in theory. SSH is the universal tool for connecting to remote Linux servers and is used by every IT professional who manages infrastructure.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">ip addr show</span><span class="cmd-desc">Display all network interfaces and their IP addresses (replaces ifconfig)</span></div>
+              <div class="cmd-row"><span class="cmd-name">ip route show</span><span class="cmd-desc">Show the routing table where network traffic is being directed</span></div>
+              <div class="cmd-row"><span class="cmd-name">ping -c 4 google.com</span><span class="cmd-desc">Test connectivity to a host sends 4 ICMP packets and reports response times</span></div>
+              <div class="cmd-row"><span class="cmd-name">traceroute google.com</span><span class="cmd-desc">Trace the network path and every hop between you and a destination</span></div>
+              <div class="cmd-row"><span class="cmd-name">ss -tuln</span><span class="cmd-desc">Show all listening ports and their services (TCP/UDP listening, numeric output)</span></div>
+              <div class="cmd-row"><span class="cmd-name">nmap -sV 192.168.1.1</span><span class="cmd-desc">Scan a host's open ports and identify which service is running on each</span></div>
+              <div class="cmd-row"><span class="cmd-name">curl -I https://site.com</span><span class="cmd-desc">Make an HTTP request and show only the response headers — great for testing</span></div>
+              <div class="cmd-row"><span class="cmd-name">ssh user@server</span><span class="cmd-desc">Connect securely to a remote server the fundamental tool of server administration</span></div>
+              <div class="cmd-row"><span class="cmd-name">ssh-keygen -t ed25519</span><span class="cmd-desc">Generate a cryptographic key pair for passwordless SSH authentication</span></div>
+              <div class="cmd-row"><span class="cmd-name">scp file.txt user@host:~</span><span class="cmd-desc">Securely copy a file to a remote server over SSH</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Set up SSH key-based authentication instead of passwords immediately. Run ssh-keygen, then ssh-copy-id user@server. You will never type a password to SSH again, and your connection will be more secure than any password login.</div>
+            <div class="step-tags"><span class="tag">ssh</span><span class="tag">ip</span><span class="tag">ss</span><span class="tag">nmap</span><span class="tag">curl</span><span class="tag">scp</span><span class="tag">ping</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step reveal" onclick="toggleStep(this)">
+        <div class="step-num">08</div>
+        <div class="step-content">
+          <div class="step-meta">Week 10–16 &nbsp;·&nbsp; Automation</div>
+          <h3>Shell scripting - automate everything</h3>
+          <div class="step-body">
+            <p>Shell scripting is where Linux fluency becomes a career superpower. If you do something manually more than twice, you should write a script. Scripts can run automatically on a schedule using cron, respond to system events, process log files, back up data, check server health, and deploy applications. Bash scripting is not programming in a traditional sense it is the art of combining the Linux commands you already know into automated workflows. The learning curve is gentle and the career return is extraordinary.</p>
+            <div class="step-commands">
+              <div class="cmd-row"><span class="cmd-name">#!/bin/bash</span><span class="cmd-desc">The shebang line always the first line of a bash script, tells Linux which interpreter to use</span></div>
+              <div class="cmd-row"><span class="cmd-name">chmod +x script.sh</span><span class="cmd-desc">Make the script executable before running it</span></div>
+              <div class="cmd-row"><span class="cmd-name">./script.sh</span><span class="cmd-desc">Run a script from the current directory</span></div>
+              <div class="cmd-row"><span class="cmd-name">name="Linux"</span><span class="cmd-desc">Declare a variable no spaces around the equals sign</span></div>
+              <div class="cmd-row"><span class="cmd-name">echo "Hello $name"</span><span class="cmd-desc">Print text use double quotes to allow variable expansion</span></div>
+              <div class="cmd-row"><span class="cmd-name">if [ condition ]</span><span class="cmd-desc">Conditional logic check if a file exists, a number is greater, a string matches</span></div>
+              <div class="cmd-row"><span class="cmd-name">for f in *.log</span><span class="cmd-desc">Loop over all .log files in the current directory</span></div>
+              <div class="cmd-row"><span class="cmd-name">crontab -e</span><span class="cmd-desc">Edit your cron schedule automate scripts to run at any time interval</span></div>
+              <div class="cmd-row"><span class="cmd-name">command | tee log.txt</span><span class="cmd-desc">Run a command and save its output to a file while also displaying it in the terminal</span></div>
+            </div>
+            <div class="step-tip"><strong>Tip:</strong> Your first real script project should solve an actual problem you have. Back up a directory you care about, check disk space and email you when it gets low, or rename 500 files according to a pattern. Solving a real problem is 10 times more memorable than running through exercises.</div>
+            <div class="step-tags"><span class="tag">bash</span><span class="tag">#!/bin/bash</span><span class="tag">cron</span><span class="tag">variables</span><span class="tag">loops</span><span class="tag">conditionals</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── CERTS ── -->
+<section id="certs" style="background:var(--surface)">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Formal credentials</div>
+      <h2>Certifications that employers recognise and respect</h2>
+      <p class="lead" style="margin-top:0.6rem">These are not participation trophies. Red Hat exams in particular are entirely hands-on performance tests no multiple choice, no memorising answers. You prove you can do the work. The salary data shows these credentials pay for themselves quickly.</p>
+    </div>
+    <div class="certs-path reveal" style="margin-top:2.5rem">
+
+      <div style="display:flex;flex-direction:column;gap:1.2rem;width:100%">
+
+        <div style="margin-bottom:0.5rem;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;padding-left:3.8rem">Recommended progression</div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot filled"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Linux Foundation</span><span class="cert-level cl-beg">Beginner</span><span class="cert-price">~$250 USD</span></div>
+            <h3>LFCA — Linux Foundation Certified IT Associate</h3>
+            <p>The best first certification for someone new to Linux and IT. Covers Linux essentials, cloud concepts, DevOps fundamentals, and cybersecurity basics. Entirely online, open book style, and well-respected as a starting credential. It validates your foundation before you invest time in harder certifications. Many people pass within 4–6 weeks of study.</p>
+            <div class="cert-exam-note">Online proctored exam · 2 hours · 60 questions · Pass score: 72%</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot filled"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">CompTIA</span><span class="cert-level cl-mid">Intermediate</span><span class="cert-price">~$350 USD</span></div>
+            <h3>CompTIA Linux+</h3>
+            <p>CompTIA is one of the most recognised vendor-neutral certification bodies globally. Linux+ covers system administration, security hardening, scripting, containerisation, and virtualisation. It is accepted by government agencies, defence contractors, and large enterprises as a baseline credential. Pairs well with CompTIA Security+ for a strong IT generalist profile.</p>
+            <div class="cert-exam-note">Online proctored · 90 minutes · Up to 90 questions · Pass score: 720/900</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot filled"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Linux Foundation</span><span class="cert-level cl-mid">Intermediate</span><span class="cert-price">~$395 USD</span></div>
+            <h3>LFCS — Linux Foundation Certified System Administrator</h3>
+            <p>A performance-based exam where you work in a real live Linux terminal for 2 hours. No multiple choice you are given tasks to complete and graded on the result. Covers essential sysadmin skills: user management, storage configuration, service management, networking, and security. The hands-on format means it genuinely tests whether you can do the job.</p>
+            <div class="cert-exam-note">Live performance exam · 2 hours · Real Linux terminal · Graded by task completion</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot filled"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Red Hat</span><span class="cert-level cl-mid">Intermediate</span><span class="cert-price">~$450 USD</span></div>
+            <h3>RHCSA — Red Hat Certified System Administrator</h3>
+            <p>One of the most respected Linux certifications in the enterprise world. 100% hands-on performance exam on a real Red Hat Enterprise Linux system 3.5 hours, no multiple choice, no notes, no internet. You receive a set of tasks and must complete them correctly. The rigour of the format means the credential carries significant weight. RHCSA holders consistently earn 20–30% more than uncertified peers in equivalent roles.</p>
+            <div class="cert-exam-note">Performance exam · 3.5 hours · Real RHEL system · Tasks must work on reboot</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Red Hat</span><span class="cert-level cl-adv">Advanced</span><span class="cert-price">~$450 USD</span></div>
+            <h3>RHCE — Red Hat Certified Engineer</h3>
+            <p>Extends RHCSA into large-scale automation with Red Hat Ansible. You write playbooks to configure multiple servers simultaneously, manage system roles, deploy applications across environments, and work with advanced security and network configuration. RHCE holders are in high demand and typically command senior-level salaries. Requires RHCSA first.</p>
+            <div class="cert-exam-note">Performance exam · 4 hours · Multi-system Ansible automation tasks</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Linux Foundation</span><span class="cert-level cl-adv">Advanced</span><span class="cert-price">~$395 USD</span></div>
+            <h3>CKA — Certified Kubernetes Administrator</h3>
+            <p>Not purely a Linux certification, but Kubernetes runs on Linux and CKA is one of the most in-demand credentials in cloud-native infrastructure. You manage real Kubernetes clusters, deploy workloads, configure networking and storage, troubleshoot node issues, and handle cluster upgrades. Highly valued at tech companies, startups, and cloud-focused organisations. Pairs excellently with AWS or GCP cloud certifications.</p>
+            <div class="cert-exam-note">Performance exam · 2 hours · Live Kubernetes clusters · Browser-based terminal</div>
+          </div>
+        </div>
+
+        <div class="cert-entry">
+          <div class="cert-dot-col"><div class="cert-dot"></div></div>
+          <div class="cert-card">
+            <div class="cert-header"><span class="cert-org">Red Hat</span><span class="cert-level cl-exp">Expert</span><span class="cert-price">Multiple exams</span></div>
+            <h3>RHCA — Red Hat Certified Architect</h3>
+            <p>The highest Red Hat credential. Requires passing 5 specialisation exams in areas such as OpenShift, Ansible Automation Platform, Linux Diagnostics, Security, and High Availability. RHCA holders are among the highest-paid Linux professionals globally. This is a multi-year credential that represents mastery of enterprise Linux at the deepest level.</p>
+            <div class="cert-exam-note">5 specialisation exams required · Each exam is performance-based</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── RESOURCES ── -->
+<section id="resources">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Learning resources</div>
+      <h2>Where to start? free and paid resources reviewed</h2>
+      <p class="lead" style="margin-top:0.6rem">Curated and organised by type. Start with the free resources they are genuinely excellent and enough to get you to an intermediate level before spending any money on paid material.</p>
+    </div>
+    <div class="resources-grid" style="margin-top:2.5rem">
+
+      <div class="res-card reveal">
+        <div class="res-type"><span class="res-type-dot free"></span>Free · Interactive</div>
+        <div class="res-tags"><span class="res-tag">Beginner</span><span class="res-tag">Structured</span></div>
+        <h3>Linux Journey</h3>
+        <p>The best free structured introduction to Linux available online. Covers everything from basic navigation to advanced topics with interactive exercises built in. Clean, modern, well-written, and works at exactly the right pace for a beginner. Start here if you are new to Linux.</p>
+        <a href="https://linuxjourney.com" target="_blank" rel="noopener" class="res-link">linuxjourney.com ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.06s">
+        <div class="res-type"><span class="res-type-dot free"></span>Free · Gamified</div>
+        <div class="res-tags"><span class="res-tag">Beginner</span><span class="res-tag">Security flavour</span></div>
+        <h3>OverTheWire: Bandit</h3>
+        <p>A series of security-themed Linux command line challenges. Each level requires using real Linux commands to solve a puzzle and unlock the next level. Bandit is the beginner wargame and teaches core terminal skills through gameplay. Deeply addictive and genuinely effective.</p>
+        <a href="https://overthewire.org/wargames/bandit" target="_blank" rel="noopener" class="res-link">overthewire.org ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.12s">
+        <div class="res-type"><span class="res-type-dot mix"></span>Free + Paid · Labs</div>
+        <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">Browser-based VMs</span></div>
+        <h3>TryHackMe</h3>
+        <p>Guided learning paths with browser-based Linux virtual machines no local setup required. The Pre-Security path and Linux Fundamentals rooms are outstanding for beginners. The free tier is generous. Excellent for learning Linux with a security and DevOps focus simultaneously.</p>
+        <a href="https://tryhackme.com" target="_blank" rel="noopener" class="res-link">tryhackme.com ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.06s">
+        <div class="res-type"><span class="res-type-dot free"></span>Free · Book</div>
+        <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">Comprehensive</span></div>
+        <h3>The Linux Command Line</h3>
+        <p>By William Shotts freely available in full online. Possibly the best written introduction to the Linux command line in existence. Covers navigation, text manipulation, shell scripting, and system administration with exceptional clarity and depth. The paid paperback version is a worthy purchase if you prefer reading from a book.</p>
+        <a href="https://linuxcommand.org/tlcl.php" target="_blank" rel="noopener" class="res-link">linuxcommand.org ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.12s">
+        <div class="res-type"><span class="res-type-dot mix"></span>Free · Reference</div>
+        <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Command explainer</span></div>
+        <h3>Explainshell</h3>
+        <p>Paste any Linux command and see a visual breakdown of exactly what each part does flags, arguments, pipes, everything. An invaluable tool when you encounter a complex command you do not understand. Particularly useful when following tutorials that use advanced command combinations.</p>
+        <a href="https://explainshell.com" target="_blank" rel="noopener" class="res-link">explainshell.com ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.18s">
+        <div class="res-type"><span class="res-type-dot free"></span>Free · Tutorials</div>
+        <div class="res-tags"><span class="res-tag">Beginner–Advanced</span><span class="res-tag">Server focused</span></div>
+        <h3>DigitalOcean Tutorials</h3>
+        <p>DigitalOcean publishes thousands of free, high-quality Linux tutorials covering everything from setting up a web server to configuring firewalls, SSL certificates, and databases. Written for server administration and cloud use cases. One of the most trusted free technical writing resources in the Linux community.</p>
+        <a href="https://digitalocean.com/community/tutorials" target="_blank" rel="noopener" class="res-link">digitalocean.com/community ↗</a>
+      </div>
+
+      <div class="res-card reveal">
+        <div class="res-type"><span class="res-type-dot paid"></span>Paid · Official training</div>
+        <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Cert prep</span></div>
+        <h3>Linux Foundation Training</h3>
+        <p>The official training platform from the Linux Foundation. Courses like LFS101 (Introduction to Linux) are free. Paid courses and bundles include the certification exam and often represent significant savings versus buying the exam separately. The LFS201 course paired with the LFCS exam is a popular combination.</p>
+        <a href="https://training.linuxfoundation.org" target="_blank" rel="noopener" class="res-link">training.linuxfoundation.org ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.06s">
+        <div class="res-type"><span class="res-type-dot paid"></span>Paid · Video + Labs</div>
+        <div class="res-tags"><span class="res-tag">Intermediate–Advanced</span><span class="res-tag">RHCSA/RHCE prep</span></div>
+        <h3>Red Hat Learning Subscription</h3>
+        <p>The official Red Hat learning platform with video courses, hands-on virtual labs, and practice exams for RHCSA and RHCE. The labs run actual RHEL systems in the browser. Expensive but extremely high quality the best preparation for Red Hat certification exams by far. Look for promotional pricing.</p>
+        <a href="https://www.redhat.com/en/services/training-and-certification" target="_blank" rel="noopener" class="res-link">redhat.com/training ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.12s">
+        <div class="res-type"><span class="res-type-dot mix"></span>Free · Community</div>
+        <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Q&amp;A</span></div>
+        <h3>Reddit: r/linux4noobs</h3>
+        <p>A welcoming, active subreddit specifically for Linux beginners. Post any question no matter how basic the community is patient, helpful, and knowledgeable. The subreddit wiki contains curated learning resources and a FAQ that answers the most common beginner questions. A genuinely kind corner of the internet.</p>
+        <a href="https://reddit.com/r/linux4noobs" target="_blank" rel="noopener" class="res-link">reddit.com/r/linux4noobs ↗</a>
+      </div>
+
+      <div class="res-card reveal">
+        <div class="res-type"><span class="res-type-dot mix"></span>Free · Video</div>
+        <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">CompTIA prep</span></div>
+        <h3>Professor Messer</h3>
+        <p>Free, high-quality video courses for CompTIA certifications including Linux+, A+, Security+, and Network+. Professor Messer is well-known for clear, accurate, well-structured video content. The videos are completely free paid study groups and practice exams are available as optional extras at reasonable prices.</p>
+        <a href="https://professormesser.com" target="_blank" rel="noopener" class="res-link">professormesser.com ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.06s">
+        <div class="res-type"><span class="res-type-dot free"></span>Free · Reference</div>
+        <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Official docs</span></div>
+        <h3>The Linux man Pages (man7.org)</h3>
+        <p>The official online version of Linux manual pages the same documentation you access with the man command in the terminal. Every command, system call, and configuration file format is documented here in authoritative detail. Bookmark this and get into the habit of reading it whenever you encounter something unfamiliar.</p>
+        <a href="https://man7.org/linux/man-pages" target="_blank" rel="noopener" class="res-link">man7.org ↗</a>
+      </div>
+
+      <div class="res-card reveal" style="transition-delay:0.12s">
+        <div class="res-type"><span class="res-type-dot mix"></span>Free + Paid · Practice</div>
+        <div class="res-tags"><span class="res-tag">Intermediate</span><span class="res-tag">Hands-on labs</span></div>
+        <h3>Killer.sh (LFCS / CKA Practice)</h3>
+        <p>Exam simulators specifically for Linux Foundation certifications (LFCS, CKA, CKAD, CKS). Provides harder-than-real-exam practice scenarios in an actual Linux terminal environment. Buying a Linux Foundation exam bundle typically includes two free Killer.sh simulator sessions, which are an excellent indicator of exam readiness.</p>
+        <a href="https://killer.sh" target="_blank" rel="noopener" class="res-link">killer.sh ↗</a>
+      </div>
+
+    </div>
+    <div class="callout reveal" style="margin-top:2rem">
+      <p><strong>Suggested learning sequence:</strong> Start with Linux Journey (linuxjourney.com) while running Ubuntu in WSL2 or VirtualBox. When you want a challenge, try OverTheWire Bandit. Read The Linux Command Line book alongside your practice. When you are ready to certify, follow the official Linux Foundation training for LFCA or LFCS, or purchase a Red Hat Learning Subscription for RHCSA. Use Killer.sh in the final two weeks before any Linux Foundation exam.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── TERMINAL DEMO ── -->
+<section id="terminal-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Interactive demo</div>
+      <h2>Watch real Linux commands run</h2>
+      <p class="lead" style="margin-top:0.5rem">Every command shown here is real and used in professional environments every day. Select a topic below and watch them animate live.</p>
+    </div>
+    <div class="terminal reveal" style="transition-delay:0.1s">
+      <div class="terminal-bar">
+        <span class="t-dot r"></span><span class="t-dot y"></span><span class="t-dot g"></span>
+        <div class="terminal-title">bash — ubuntu@linux-guide:~ — 80×24</div>
+      </div>
+      <div class="terminal-body" id="term-output"></div>
+    </div>
+    <div class="terminal-buttons reveal" style="transition-delay:0.16s">
+      <button class="term-btn active" onclick="runDemo('navigate',this)">Navigation</button>
+      <button class="term-btn" onclick="runDemo('files',this)">Files</button>
+      <button class="term-btn" onclick="runDemo('permissions',this)">Permissions</button>
+      <button class="term-btn" onclick="runDemo('network',this)">Networking</button>
+      <button class="term-btn" onclick="runDemo('process',this)">Processes</button>
+      <button class="term-btn" onclick="runDemo('scripting',this)">Scripting</button>
+      <button class="term-btn" onclick="runDemo('packages',this)">Packages</button>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="section-inner" style="text-align:center">
+    <div class="reveal">
+      <div class="section-label" style="justify-content:center">You have no excuses now</div>
+      <h2 style="font-family:var(--serif)">Open a terminal.<br>Type <span class="amber mono">ls</span>. Press Enter.<br>That is all it takes.</h2>
+      <p style="color:rgba(244,240,232,0.58);margin:1.2rem auto 2rem;max-width:520px">Every sysadmin, every cloud engineer, every security professional started exactly where you are. The difference is they kept going. The path is in front of you. The resources are free. The only thing left is to start.</p>
+      <div class="footer-actions">
+        <a href="https://linuxjourney.com" target="_blank" rel="noopener" class="btn-primary">Start Linux Journey ↗</a>
+        <a href="#roadmap" class="btn-ghost">Read the learning path</a>
+        <a href="#certs" class="btn-ghost">Browse certifications</a>
+      </div>
+    </div>
+    <hr class="footer-line">
+    <div class="footer-bottom">
+      <div>
+        <p>linux.guide for the reluctant, the curious, and the eventually obsessed</p>
+        <p style="margin-top:0.3rem">Salary data: Linux Foundation Jobs Report 2023 · Stack Overflow Dev Survey 2023 · Glassdoor 2023–2024</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://linuxjourney.com" target="_blank" rel="noopener">Linux Journey</a>
+        <a href="https://overthewire.org/wargames/bandit" target="_blank" rel="noopener">OverTheWire</a>
+        <a href="https://tryhackme.com" target="_blank" rel="noopener">TryHackMe</a>
+        <a href="https://linuxcommand.org/tlcl.php" target="_blank" rel="noopener">Linux Command Line Book</a>
+        <a href="https://training.linuxfoundation.org" target="_blank" rel="noopener">Linux Foundation</a>
+        <a href="https://reddit.com/r/linux4noobs" target="_blank" rel="noopener">r/linux4noobs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── COUNTER ANIMATION ──
+function animCounter(el, target, dur){
+  const isLarge = target >= 500;
+  const start = Date.now();
+  const tick = () => {
+    const p = Math.min((Date.now()-start)/dur, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    const current = Math.round(eased * target);
+    el.textContent = current;
+    if(p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(tick);
+}
+document.querySelectorAll('[data-target]').forEach(group => {
+  const counter = group.querySelector('.counter');
+  const target = parseInt(group.dataset.target);
+  const cio = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting && !group.dataset.done){
+      group.dataset.done = '1';
+      animCounter(counter, target, 1800);
+      cio.unobserve(group);
+    }
+  }, { threshold: 0.5 });
+  cio.observe(group);
+});
+
+// ── SALARY BARS ──
+const barIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.role-bar-fill').forEach((bar, i) => {
+        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 120);
+      });
+      barIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const salSection = document.getElementById('salary-bars');
+if(salSection) barIO.observe(salSection);
+
+// ── ROLE TABS ──
+function switchRole(id, btn){
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById('panel-' + id);
+  if(panel) panel.classList.add('active');
+}
+
+// ── ROADMAP TOGGLE ──
+function toggleStep(el){
+  const wasActive = el.classList.contains('active');
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  if(!wasActive) el.classList.add('active');
+}
+
+// ── TERMINAL DEMOS ──
+const demos = {
+  navigate:[
+    {t:'prompt',v:'pwd'},
+    {t:'out',v:'/home/ubuntu'},
+    {t:'prompt',v:'ls -la'},
+    {t:'out',v:'total 48'},
+    {t:'out',v:'drwxr-xr-x  6 ubuntu ubuntu 4096 Apr 13 09:12 .'},
+    {t:'out',v:'drwxr-xr-x 28 ubuntu ubuntu 4096 Apr 13 08:00 ..'},
+    {t:'green',v:'drwxr-xr-x  2 ubuntu ubuntu 4096 Apr 13 09:00 Documents'},
+    {t:'green',v:'drwxr-xr-x  3 ubuntu ubuntu 4096 Apr 12 16:44 Projects'},
+    {t:'out',v:'-rw-r--r--  1 ubuntu ubuntu  220 Mar 10 12:00 .bashrc'},
+    {t:'prompt',v:'cd Documents && ls'},
+    {t:'green',v:'notes.txt  setup-guide.md  todo.md'},
+    {t:'prompt',v:'cat todo.md'},
+    {t:'out',v:'# Things to learn'},
+    {t:'amber',v:'- Linux terminal basics  ✓'},
+    {t:'out',v:'- File permissions'},
+    {t:'out',v:'- Shell scripting'},
+    {t:'prompt',v:'history | tail -5'},
+    {t:'out',v:'  48  pwd'},
+    {t:'out',v:'  49  ls -la'},
+    {t:'out',v:'  50  cd Documents'},
+  ],
+  files:[
+    {t:'prompt',v:'touch server-report.txt'},
+    {t:'prompt',v:'echo "Server: web-01  Status: healthy" > server-report.txt'},
+    {t:'prompt',v:'cat server-report.txt'},
+    {t:'green',v:'Server: web-01  Status: healthy'},
+    {t:'prompt',v:'cp server-report.txt server-report.bak'},
+    {t:'prompt',v:'wc -w server-report.txt'},
+    {t:'out',v:'4 server-report.txt'},
+    {t:'prompt',v:'grep -i "status" server-report.txt'},
+    {t:'green',v:'Server: web-01  Status: healthy'},
+    {t:'prompt',v:'find . -name "*.txt" -newer server-report.bak'},
+    {t:'out',v:'./server-report.txt'},
+    {t:'prompt',v:'tail -f /var/log/syslog'},
+    {t:'out',v:'Apr 13 09:14:02 ubuntu systemd[1]: Starting Daily apt...'},
+    {t:'out',v:'Apr 13 09:14:03 ubuntu kernel: [12445.6] EXT4-fs: mounted'},
+    {t:'purple',v:'^C  (Ctrl+C to stop following)'},
+  ],
+  permissions:[
+    {t:'prompt',v:'ls -l deploy.sh'},
+    {t:'out',v:'-rw-r--r-- 1 ubuntu ubuntu 284 Apr 13 09:00 deploy.sh'},
+    {t:'prompt',v:'chmod +x deploy.sh'},
+    {t:'prompt',v:'ls -l deploy.sh'},
+    {t:'green',v:'-rwxr-xr-x 1 ubuntu ubuntu 284 Apr 13 09:00 deploy.sh'},
+    {t:'prompt',v:'chmod 600 .env'},
+    {t:'prompt',v:'ls -l .env'},
+    {t:'amber',v:'-rw------- 1 ubuntu ubuntu 128 Apr 13 08:55 .env'},
+    {t:'out',v:'# Owner can read+write only. Nobody else can touch it.'},
+    {t:'prompt',v:'sudo chown www-data:www-data /var/www/html'},
+    {t:'prompt',v:'ls -ld /var/www/html'},
+    {t:'green',v:'drwxr-xr-x 3 www-data www-data 4096 Apr 13 09:00 /var/www/html'},
+    {t:'prompt',v:'id'},
+    {t:'out',v:'uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),27(sudo)'},
+  ],
+  network:[
+    {t:'prompt',v:'ip addr show eth0'},
+    {t:'out',v:'2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500'},
+    {t:'blue',v:'    inet 192.168.1.42/24 brd 192.168.1.255 scope global eth0'},
+    {t:'prompt',v:'ping -c 3 google.com'},
+    {t:'out',v:'PING google.com (142.250.80.46): 56 data bytes'},
+    {t:'green',v:'64 bytes from 142.250.80.46: icmp_seq=0 ttl=118 time=11.3 ms'},
+    {t:'green',v:'64 bytes from 142.250.80.46: icmp_seq=1 ttl=118 time=10.9 ms'},
+    {t:'green',v:'64 bytes from 142.250.80.46: icmp_seq=2 ttl=118 time=12.1 ms'},
+    {t:'prompt',v:'ss -tuln | grep :80'},
+    {t:'out',v:'tcp  LISTEN 0  511  0.0.0.0:80   0.0.0.0:*'},
+    {t:'prompt',v:'curl -s -o /dev/null -w "%{http_code}" https://example.com'},
+    {t:'green',v:'200'},
+    {t:'prompt',v:'ssh-keygen -t ed25519 -C "work-server"'},
+    {t:'out',v:'Generating public/private ed25519 key pair.'},
+    {t:'out',v:'Enter file: /home/ubuntu/.ssh/id_ed25519'},
+    {t:'green',v:'Your public key has been saved in id_ed25519.pub'},
+  ],
+  process:[
+    {t:'prompt',v:'ps aux --sort=-%mem | head -6'},
+    {t:'out',v:'USER     PID %CPU %MEM    VSZ   RSS  COMMAND'},
+    {t:'amber',v:'ubuntu  1842  2.1  3.4 824512 140248 /usr/bin/python3 app.py'},
+    {t:'out',v:'root       1   0.0  0.2 168340   9124 /sbin/init'},
+    {t:'out',v:'ubuntu  1288  0.1  0.8 624512  33248 bash'},
+    {t:'prompt',v:'systemctl status nginx'},
+    {t:'green',v:'● nginx.service - A high performance web server'},
+    {t:'green',v:'   Loaded: loaded (/lib/systemd/system/nginx.service)'},
+    {t:'green',v:'   Active: active (running) since Mon 09:00:01 UTC; 2h 14min ago'},
+    {t:'out',v:'  Process: 812 ExecStart=/usr/sbin/nginx -g daemon on (code=exited)'},
+    {t:'prompt',v:'journalctl -u nginx --since "5 minutes ago"'},
+    {t:'out',v:'Apr 13 09:10:01 web-01 nginx[1234]: GET /api/health 200 in 2ms'},
+    {t:'green',v:'Apr 13 09:14:22 web-01 nginx[1234]: GET /index.html 200 in 4ms'},
+    {t:'prompt',v:'free -h'},
+    {t:'out',v:'               total   used   free   shared  buff'},
+    {t:'amber',v:'Mem:            7.8G   3.2G   4.1G     128M   512M'},
+  ],
+  scripting:[
+    {t:'prompt',v:'cat health-check.sh'},
+    {t:'amber',v:'#!/bin/bash'},
+    {t:'out',v:'# Server health check — runs every 5 minutes via cron'},
+    {t:'out',v:'THRESHOLD=85'},
+    {t:'out',v:"DISK_USAGE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')"},
+    {t:'out',v:'if [ "$DISK_USAGE" -gt "$THRESHOLD" ]; then'},
+    {t:'red',v:'  echo "WARNING: Disk at ${DISK_USAGE}% — clean up!" | mail -s "Alert" admin@co.com'},
+    {t:'out',v:'else'},
+    {t:'green',v:'  echo "Disk OK: ${DISK_USAGE}% used"'},
+    {t:'out',v:'fi'},
+    {t:'prompt',v:'chmod +x health-check.sh && ./health-check.sh'},
+    {t:'green',v:'Disk OK: 34% used'},
+    {t:'prompt',v:'crontab -l'},
+    {t:'amber',v:'*/5 * * * * /home/ubuntu/health-check.sh >> /var/log/health.log 2>&1'},
+  ],
+  packages:[
+    {t:'prompt',v:'sudo apt update'},
+    {t:'out',v:'Hit:1 https://archive.ubuntu.com/ubuntu jammy InRelease'},
+    {t:'out',v:'Get:2 https://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]'},
+    {t:'green',v:'Fetched 2,834 kB in 4s (780 kB/s)'},
+    {t:'green',v:'Reading package lists... Done'},
+    {t:'prompt',v:'sudo apt install nginx -y'},
+    {t:'out',v:'Reading state information... Done'},
+    {t:'out',v:'The following NEW packages will be installed: nginx nginx-common'},
+    {t:'green',v:'Setting up nginx (1.18.0-6ubuntu14.4) ...'},
+    {t:'green',v:'Processing triggers for systemd (249.11-0ubuntu3.12) ...'},
+    {t:'prompt',v:'systemctl enable --now nginx'},
+    {t:'green',v:'Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service'},
+    {t:'prompt',v:'curl localhost'},
+    {t:'green',v:'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Welcome to nginx!&lt;/title&gt;'},
+    {t:'out',v:'# Nginx installed, running, and serving in under 60 seconds.'},
+  ],
+};
+
+let demoTimer = null;
+function runDemo(key, btn){
+  document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(demoTimer) clearTimeout(demoTimer);
+  const out = document.getElementById('term-output');
+  if(!out) return;
+  out.innerHTML = '';
+  const lines = demos[key];
+  let delay = 0;
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      let html = '';
+      if(line.t==='prompt') html=`<div><span class="t-prompt">ubuntu@linux-guide:~$ </span><span class="t-cmd">${line.v}</span></div>`;
+      else if(line.t==='green') html=`<div class="t-green">${line.v}</div>`;
+      else if(line.t==='blue')  html=`<div class="t-blue">${line.v}</div>`;
+      else if(line.t==='red')   html=`<div class="t-red">${line.v}</div>`;
+      else if(line.t==='amber') html=`<div style="color:var(--amber)">${line.v}</div>`;
+      else if(line.t==='purple')html=`<div class="t-purple">${line.v}</div>`;
+      else html=`<div class="t-out">${line.v}</div>`;
+      out.innerHTML += html;
+      if(i === lines.length-1) out.innerHTML += `<div><span class="t-prompt">ubuntu@linux-guide:~$ </span><span class="t-cursor"></span></div>`;
+      out.scrollTop = out.scrollHeight;
+    }, delay);
+    delay += line.t==='prompt' ? 300 : 70;
+  });
+}
+
+window.addEventListener('load', () => {
+  const out = document.getElementById('term-output');
+  if(out){
+    out.innerHTML = `<div style="color:var(--amber)">Welcome to the Linux guide interactive terminal.</div><div class="t-out">Select a topic below to see real commands in action.</div><div style="height:8px"></div>`;
+    setTimeout(() => runDemo('navigate', document.querySelector('.term-btn')), 1000);
+  }
+});
+
+// ── FUN SECTION ANIMATIONS ──
+
+// Animated matrix rain
+(function(){
+  const el = document.getElementById('matrix-container');
+  if(!el) return;
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF';
+  const cols = 28, rows = 7;
+  let grid = Array.from({length:rows}, () => Array.from({length:cols}, () => ({c:' ',bright:false})));
+  const drops = Array.from({length:cols}, () => Math.floor(Math.random() * rows));
+  function tick(){
+    for(let c = 0; c < cols; c++){
+      const r = drops[c];
+      if(r < rows){
+        grid[r][c] = {c: chars[Math.floor(Math.random()*chars.length)], bright: true};
+        if(r > 0) grid[r-1][c] = {c: grid[r-1][c].c, bright: false};
+      }
+      if(Math.random() > 0.92) drops[c] = 0;
+      else drops[c] = (drops[c] + 1) % (rows + 3);
+    }
+    el.innerHTML = grid.map(row =>
+      row.map(cell => cell.c === ' ' ? ' ' :
+        `<span style="color:${cell.bright ? '#00ff44' : '#006622'}">${cell.c}</span>`
+      ).join('')
+    ).join('\n');
+  }
+  setInterval(tick, 120);
+})();
+
+// Animated aquarium
+(function(){
+  const el = document.getElementById('aquarium');
+  if(!el) return;
+  const W = 30, H = 6;
+  const fish = [
+    {x:2,  y:2, dir:1,  speed:0.4, shape:"><>",  color:"#5dade2"},
+    {x:20, y:4, dir:-1, speed:0.6, shape:"<><",  color:"#6cb86c"},
+    {x:10, y:1, dir:1,  speed:0.25,shape:"><))°>",color:"#E8B84B"},
+    {x:25, y:3, dir:-1, speed:0.5, shape:"<°((",  color:"#c39bd3"},
+  ];
+  const bubbles = [{x:5,y:5},{x:14,y:4},{x:22,y:5},{x:8,y:3}];
+  let frame = 0;
+  function render(){
+    frame++;
+    const grid = Array.from({length:H}, () => Array(W).fill(' '));
+    // sea floor
+    for(let x=0;x<W;x++) grid[H-1][x] = '~';
+    // bubbles
+    bubbles.forEach(b => {
+      b.y = b.y <= 0 ? H-2 : b.y - (frame % 8 === 0 ? 1 : 0);
+      const sym = frame % 6 < 3 ? 'o' : '.';
+      if(b.y >= 0 && b.y < H-1 && b.x < W) grid[b.y][b.x] = sym;
+    });
+    // fish
+    fish.forEach(f => {
+      f.x += f.dir * f.speed;
+      if(f.x > W + 5) { f.x = -f.shape.length - 1; f.dir = 1; }
+      if(f.x < -f.shape.length - 5) { f.x = W + 1; f.dir = -1; }
+      const sx = Math.round(f.x);
+      for(let i=0;i<f.shape.length;i++){
+        const cx = sx + (f.dir > 0 ? i : f.shape.length-1-i);
+        if(cx >= 0 && cx < W && f.y >= 0 && f.y < H-1)
+          grid[f.y][cx] = f.shape[i];
+      }
+    });
+    el.innerHTML = grid.map((row,r) =>
+      row.map((c,col) => {
+        const fish_match = fish.find(f => {
+          const sx = Math.round(f.x);
+          return col >= sx && col < sx + f.shape.length && r === f.y;
+        });
+        const color = fish_match ? fish_match.color : (c==='~' ? '#185FA5' : c==='o'||c==='.' ? '#85B7EB' : 'rgba(244,240,232,0.4)');
+        return `<span style="color:${color}">${c}</span>`;
+      }).join('')
+    ).join('\n');
+  }
+  setInterval(render, 200);
+})();
+</script>
+</body>
+</html>
