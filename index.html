@@ -290,6 +290,13 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
 .footer-links a{font-family:var(--mono);font-size:0.68rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .footer-links a:hover{color:var(--amber)}
 
+/* ── MOBILE LOAD MORE ── */
+.lm-wrap{display:none;text-align:center;margin-top:1.4rem}
+.lm-btn{font-family:var(--mono);font-size:0.72rem;padding:0.65rem 1.8rem;border:1px solid rgba(232,184,75,0.28);border-radius:2px;background:transparent;color:var(--amber);cursor:pointer;letter-spacing:0.09em;transition:all 0.2s}
+.lm-btn:hover{background:rgba(232,184,75,0.07);border-color:var(--amber)}
+.m-collapsed{display:none!important}
+@media(max-width:768px){.lm-wrap{display:block}}
+
 /* ── ANIMS ── */
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 /* ── RESPONSIVE ── */
@@ -339,7 +346,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
   </svg>
   <div class="hero-grid">
     <div>
-      <div class="hero-tag reveal">The Linux guide</div>
+      <div class="hero-tag reveal">The honest Linux guide</div>
       <h1 class="reveal" style="transition-delay:0.08s">You didn't choose <em>Linux.</em><br>Linux chose you.</h1>
       <p class="hero-sub reveal" style="transition-delay:0.16s">Your boss said learn it. Your professor assigned it. Your new job requires it. Fine. Because Linux already runs the internet, your phone, your cloud, and every serious server on earth. Time to understand what you have been using without knowing it.</p>
       <div class="hero-actions reveal" style="transition-delay:0.24s">
@@ -405,7 +412,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
 <div id="stats" class="reveal">
   <div class="stats-row">
     <div><div class="stat-num" data-target="96"><span class="counter">0</span><span class="stat-suffix">%</span></div><div class="stat-label">of top web servers run Linux</div></div>
-    <div><div class="stat-num" data-target="500"><span class="counter">0</span></div><div class="stat-label">top supercomputers all are Linux</div></div>
+    <div><div class="stat-num" data-target="500"><span class="counter">0</span></div><div class="stat-label">top supercomputers — all Linux</div></div>
     <div><div class="stat-num" data-target="91"><span class="counter">0</span><span class="stat-suffix">%</span></div><div class="stat-label">of hiring managers prioritise Linux skills</div></div>
     <div><div class="stat-num" data-target="3"><span class="counter">0</span><span class="stat-suffix">B+</span></div><div class="stat-label">Android devices (built on Linux)</div></div>
     <div><div class="stat-num" data-target="33"><span class="counter">0</span><span class="stat-suffix">+%</span></div><div class="stat-label">average salary premium with Linux skills</div></div>
@@ -424,7 +431,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
 
       <div class="myth-card reveal" style="min-height:220px" onclick="this.classList.toggle('flipped')">
         <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">Linux is only for hackers and programmers</h3><p>It is some underground system used by people in dark rooms. Totally irrelevant for regular IT work and has no graphical interface.</p><p class="flip-hint">Click to reveal the reality</p></div>
-        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Linux is the infrastructure of the modern world</h3><p>Google, Netflix, Facebook, Amazon all are Linux. Your router likely runs Linux. Android (3 billion devices) is built on Linux. It has full graphical desktops. This is not exotic, it is the foundation.</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Linux is the infrastructure of the modern world</h3><p>Google, Netflix, Facebook, Amazon — all Linux. Your router likely runs Linux. Android (3 billion devices) is built on Linux. It has full graphical desktops. This is not exotic, it is the foundation.</p></div>
       </div>
 
       <div class="myth-card reveal" style="min-height:220px;transition-delay:0.08s" onclick="this.classList.toggle('flipped')">
@@ -434,11 +441,11 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
 
       <div class="myth-card reveal" style="min-height:220px;transition-delay:0.08s" onclick="this.classList.toggle('flipped')">
         <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">Breaking things means starting over completely</h3><p>One wrong command and the whole system is gone forever. It is fragile, unstable, and nobody will help you when it dies.</p><p class="flip-hint">Click to reveal the reality</p></div>
-        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Practice on a VM break it, snapshot, restore</h3><p>Linux servers routinely run for years without rebooting. Set up VirtualBox with snapshots and you can experiment freely. Break something? Restore the snapshot in 30 seconds. The community on Ask Ubuntu and Reddit answers every question.</p></div>
+        <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">Practice on a VM — break it, snapshot, restore</h3><p>Linux servers routinely run for years without rebooting. Set up VirtualBox with snapshots and you can experiment freely. Break something? Restore the snapshot in 30 seconds. The community on Ask Ubuntu and Reddit answers every question.</p></div>
       </div>
 
       <div class="myth-card reveal" style="min-height:220px;transition-delay:0.16s" onclick="this.classList.toggle('flipped')">
-        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">This is just academic no real-world use</h3><p>My company uses managed services and cloud platforms with nice dashboards. Nobody actually types commands into servers anymore.</p><p class="flip-hint">Click to reveal the reality</p></div>
+        <div class="myth-face myth-front"><div class="myth-label wrong">[ myth ]</div><h3 style="margin-bottom:0.7rem">This is just academic — no real-world use</h3><p>My company uses managed services and cloud platforms with nice dashboards. Nobody actually types commands into servers anymore.</p><p class="flip-hint">Click to reveal the reality</p></div>
         <div class="myth-face myth-back"><div class="myth-label right">[ reality ]</div><h3 style="margin-bottom:0.7rem">The cloud is Linux with a dashboard over the top</h3><p>AWS, Azure, GCP are all built on Linux. Docker containers run on Linux. Kubernetes orchestrates Linux nodes. Every cloud VM you spin up is Linux. The dashboard is just a pretty face on the same OS you are learning right now.</p></div>
       </div>
 
@@ -472,7 +479,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
           <div class="big-stat-block reveal" style="transition-delay:0.1s">
             <div class="big-num">74%</div>
             <div class="big-label">Open source / Linux jobs went unfilled</div>
-            <div class="big-sub">Due to lack of skilled candidates, 2023</div>
+            <div class="big-sub">Due to lack of skilled candidates — 2023</div>
           </div>
           <div class="big-stat-block reveal" style="transition-delay:0.16s">
             <div class="big-num">47%</div>
@@ -481,12 +488,12 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
           </div>
         </div>
         <div class="callout reveal">
-          <p><strong>The skills gap is real and works in your favour.</strong> Demand for Linux-skilled professionals is consistently outpacing supply. Companies are not just paying more they are struggling to fill roles at all. Learning Linux right now puts you in a strong position in a market that rewards this knowledge generously.</p>
+          <p><strong>The skills gap is real and works in your favour.</strong> Demand for Linux-skilled professionals is consistently outpacing supply. Companies are not just paying more — they are struggling to fill roles at all. Learning Linux right now puts you in a strong position in a market that rewards this knowledge generously.</p>
         </div>
       </div>
       <div class="reveal" style="transition-delay:0.1s">
         <h3 style="margin-bottom:0.4rem;font-size:1.1rem">Salary by IT role with Linux skills</h3>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">Annual salary ranges (USD) mid to senior level, 2023 data</p>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem">Annual salary ranges (USD) — mid to senior level, 2023 data</p>
         <div class="salary-roles" id="salary-bars">
           <div class="role-bar-row"><span class="role-name">Cloud Engineer</span><div class="role-bar-track"><div class="role-bar-fill" data-width="95"></div></div><span class="role-sal">$130K–$185K</span></div>
           <div class="role-bar-row"><span class="role-name">DevOps / SRE</span><div class="role-bar-track"><div class="role-bar-fill" data-width="90"></div></div><span class="role-sal">$125K–$175K</span></div>
@@ -507,12 +514,12 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="hiring-grid">
         <div class="hiring-card reveal">
           <div class="hiring-pct">91%</div>
-          <div class="hiring-desc">of hiring managers say Linux skills influence their decision to hire a candidate more than any other technical credential</div>
+          <div class="hiring-desc">of hiring managers say Linux skills influence their decision to hire a candidate — more than any other technical credential</div>
           <div class="source-tag">Linux Foundation Jobs Report 2023</div>
         </div>
         <div class="hiring-card reveal" style="transition-delay:0.08s">
           <div class="hiring-pct">74%</div>
-          <div class="hiring-desc">of open source and Linux roles went unfilled in 2023 due to a shortage of qualified applicants demand is far exceeding supply</div>
+          <div class="hiring-desc">of open source and Linux roles went unfilled in 2023 due to a shortage of qualified applicants — demand is far exceeding supply</div>
           <div class="source-tag">Linux Foundation Jobs Report 2023</div>
         </div>
         <div class="hiring-card reveal" style="transition-delay:0.16s">
@@ -547,7 +554,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
     <div class="reveal">
       <div class="section-label">Role breakdown</div>
       <h2>What each IT role actually does with Linux</h2>
-      <p class="lead" style="margin-top:0.6rem">Not abstract theory, what you will spend your actual working day doing in each role, and how Linux is involved in every single one.</p>
+      <p class="lead" style="margin-top:0.6rem">Not abstract theory — what you will spend your actual working day doing in each role, and how Linux is involved in every single one.</p>
     </div>
     <div class="roles-tabs reveal" style="transition-delay:0.08s" id="role-tabs">
       <button class="role-tab active" onclick="switchRole('sysadmin',this)">Sysadmin</button>
@@ -569,8 +576,8 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
           <div class="use-item"><div class="use-dot"></div><span>Managing user accounts, groups, and sudo privileges across dozens of servers simultaneously using SSH and shell scripts</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Monitoring system health with tools like htop, sar, and iostat identifying bottlenecks before they become outages</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Configuring and managing services Apache, Nginx, PostgreSQL, SSH all controlled via systemctl and config files in /etc</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Monitoring system health with tools like htop, sar, and iostat — identifying bottlenecks before they become outages</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring and managing services — Apache, Nginx, PostgreSQL, SSH — all controlled via systemctl and config files in /etc</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing bash scripts to automate log rotation, disk cleanup, and scheduled backups with cron</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Applying security patches, configuring firewalls with iptables or ufw, and hardening server configurations</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Diagnosing failures by reading system logs in /var/log, tracing process errors, and reviewing kernel messages</span></div>
@@ -591,18 +598,18 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         <p class="role-desc">DevOps sits at the intersection of development and operations. You build the pipelines that take code from a developer's laptop to production automatically, safely, and reliably. Every CI/CD system, container, and deployment script runs on Linux. An SRE does the same but with a focus on system reliability, defining SLOs, writing runbooks, and building systems that heal themselves when things go wrong.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Building Docker containers that run on Linux writing Dockerfiles, building images, managing registries, debugging container failures</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Managing Kubernetes clusters every node is a Linux machine, every pod runs inside a Linux container, every log is a Linux process output</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Building Docker containers that run on Linux — writing Dockerfiles, building images, managing registries, debugging container failures</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing Kubernetes clusters — every node is a Linux machine, every pod runs inside a Linux container, every log is a Linux process output</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing Ansible playbooks and Terraform configs to provision and configure Linux infrastructure across hundreds of servers at once</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Configuring CI/CD pipelines in GitHub Actions, Jenkins, or GitLab CI all running on Linux build agents</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring CI/CD pipelines in GitHub Actions, Jenkins, or GitLab CI — all running on Linux build agents</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Debugging production incidents by SSH-ing into servers, reading logs, tracing network calls, and analysing memory dumps</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Configuring monitoring and alerting with Prometheus, Grafana, and ELK Stack all Linux-native tooling</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring monitoring and alerting with Prometheus, Grafana, and ELK Stack — all Linux-native tooling</span></div>
         </div>
       </div>
       <div class="role-right">
         <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$110K – $175K</div><div class="rsc-note">Staff SRE at major tech: $180K–$250K+</div></div>
         <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">Docker</span><span class="tool-tag">Kubernetes</span><span class="tool-tag">Ansible</span><span class="tool-tag">Terraform</span><span class="tool-tag">bash</span><span class="tool-tag">systemd</span><span class="tool-tag">nginx</span><span class="tool-tag">Prometheus</span><span class="tool-tag">Grafana</span><span class="tool-tag">strace</span><span class="tool-tag">tcpdump</span><span class="tool-tag">perf</span><span class="tool-tag">git</span><span class="tool-tag">Jenkins</span></div></div>
-        <div class="role-linux-note"><strong>Linux is the entire stack:</strong> Containers are a Linux kernel feature (cgroups + namespaces). Kubernetes is an orchestrator for Linux containers. Understanding Linux at a low level processes, networking, storage makes you dramatically better at this role than someone who only knows the YAML.</div>
+        <div class="role-linux-note"><strong>Linux is the entire stack:</strong> Containers are a Linux kernel feature (cgroups + namespaces). Kubernetes is an orchestrator for Linux containers. Understanding Linux at a low level — processes, networking, storage — makes you dramatically better at this role than someone who only knows the YAML.</div>
       </div>
     </div>
 
@@ -611,14 +618,14 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="role-left">
         <span class="cert-level cl-adv role-badge">Fastest growing segment</span>
         <h3>Cloud Engineer</h3>
-        <p class="role-desc">Cloud engineers design, build, and manage infrastructure on AWS, Azure, or GCP. The cloud is fundamentally Linux servers with API wrappers. When you spin up an EC2 instance, launch a GCP Compute VM, or deploy an Azure Virtual Machine you are almost always running Linux. Understanding the OS underneath the cloud platform transforms you from someone who clicks dashboards into someone who understands what is actually happening.</p>
+        <p class="role-desc">Cloud engineers design, build, and manage infrastructure on AWS, Azure, or GCP. The cloud is fundamentally Linux servers with API wrappers. When you spin up an EC2 instance, launch a GCP Compute VM, or deploy an Azure Virtual Machine — you are almost always running Linux. Understanding the OS underneath the cloud platform transforms you from someone who clicks dashboards into someone who understands what is actually happening.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Connecting to cloud VMs via SSH and managing them just like any Linux server installing software, configuring services, managing users</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Connecting to cloud VMs via SSH and managing them just like any Linux server — installing software, configuring services, managing users</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing cloud-init scripts and user data that run on Linux boot to configure new instances automatically at launch</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Configuring Linux-based networking VPC routing, security groups, firewall rules, which map directly to iptables and kernel networking</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Deploying and managing containerised workloads on ECS, GKE, or AKS all Linux containers under the hood</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Troubleshooting cloud resource issues that always trace back to Linux-level problems disk I/O, memory pressure, process limits, network latency</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Configuring Linux-based networking — VPC routing, security groups, firewall rules — which map directly to iptables and kernel networking</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Deploying and managing containerised workloads on ECS, GKE, or AKS — all Linux containers under the hood</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Troubleshooting cloud resource issues that always trace back to Linux-level problems — disk I/O, memory pressure, process limits, network latency</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Managing AWS Lambda and serverless runtimes, which run on Amazon Linux containers behind the scenes</span></div>
         </div>
       </div>
@@ -634,21 +641,21 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="role-left">
         <span class="cert-level cl-adv role-badge">Linux knowledge is mandatory</span>
         <h3>Cybersecurity Analyst / Penetration Tester</h3>
-        <p class="role-desc">Cybersecurity is built on Linux. The tools, the workflows, the certifications all assume Linux fluency. Whether you are on the defensive side (SOC analyst, incident responder, blue team) or the offensive side (penetration tester, red team), Linux is where you work. Kali Linux is the de facto standard for offensive security and contains over 600 pre-installed security tools.</p>
+        <p class="role-desc">Cybersecurity is built on Linux. The tools, the workflows, the certifications — all assume Linux fluency. Whether you are on the defensive side (SOC analyst, incident responder, blue team) or the offensive side (penetration tester, red team), Linux is where you work. Kali Linux is the de facto standard for offensive security and contains over 600 pre-installed security tools.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Running penetration tests from Kali Linux using Metasploit, Burp Suite, Nmap, and Wireshark, all Linux-native tools</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Analysing malware in Linux sandboxes examining process behaviour, file system changes, and network connections of suspicious binaries</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Running penetration tests from Kali Linux — using Metasploit, Burp Suite, Nmap, and Wireshark, all Linux-native tools</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Analysing malware in Linux sandboxes — examining process behaviour, file system changes, and network connections of suspicious binaries</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Reading and parsing Linux system logs (/var/log) to trace security incidents, identify compromised accounts, and reconstruct attacker timelines</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Hardening Linux servers closing unnecessary ports, configuring SELinux or AppArmor, managing sudo policies, auditing file permissions</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Hardening Linux servers — closing unnecessary ports, configuring SELinux or AppArmor, managing sudo policies, auditing file permissions</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing Python and bash scripts to automate threat hunting, log analysis, and vulnerability scanning across fleets of Linux servers</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Conducting forensic investigation of Linux file systems recovering deleted files, examining timestamps, analysing kernel logs</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Conducting forensic investigation of Linux file systems — recovering deleted files, examining timestamps, analysing kernel logs</span></div>
         </div>
       </div>
       <div class="role-right">
         <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$85K – $160K</div><div class="rsc-note">Lead Penetration Tester: $140K–$200K+</div></div>
         <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">Kali Linux</span><span class="tool-tag">Metasploit</span><span class="tool-tag">Nmap</span><span class="tool-tag">Wireshark</span><span class="tool-tag">Burp Suite</span><span class="tool-tag">netcat</span><span class="tool-tag">tcpdump</span><span class="tool-tag">hashcat</span><span class="tool-tag">John</span><span class="tool-tag">SELinux</span><span class="tool-tag">auditd</span><span class="tool-tag">iptables</span><span class="tool-tag">ss</span></div></div>
-        <div class="role-linux-note"><strong>You cannot do this job without Linux:</strong> Kali Linux ships with 600+ security tools. Offensive security certifications like OSCP are entirely Linux-based. Blue team work involves Linux log analysis and hardening. There is no alternative Linux knowledge is the baseline, not an optional extra.</div>
+        <div class="role-linux-note"><strong>You cannot do this job without Linux:</strong> Kali Linux ships with 600+ security tools. Offensive security certifications like OSCP are entirely Linux-based. Blue team work involves Linux log analysis and hardening. There is no alternative — Linux knowledge is the baseline, not an optional extra.</div>
       </div>
     </div>
 
@@ -657,20 +664,20 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Networking meets Linux</span>
         <h3>Network Engineer</h3>
-        <p class="role-desc">Network engineers manage the infrastructure that connects systems routers, switches, firewalls, load balancers, VPNs. Increasingly, these devices run Linux or Linux-derived operating systems. Cisco IOS has Linux under the hood. Most modern firewalls are Linux-based. SD-WAN platforms are Linux. Understanding Linux networking at a low level the kernel's networking stack, routing tables, and iptables makes you a significantly better network engineer.</p>
+        <p class="role-desc">Network engineers manage the infrastructure that connects systems — routers, switches, firewalls, load balancers, VPNs. Increasingly, these devices run Linux or Linux-derived operating systems. Cisco IOS has Linux under the hood. Most modern firewalls are Linux-based. SD-WAN platforms are Linux. Understanding Linux networking at a low level — the kernel's networking stack, routing tables, and iptables — makes you a significantly better network engineer.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Using Linux networking tools to diagnose connectivity issues ip, ss, traceroute, tcpdump, nmap the same tools used on both Linux servers and many network devices</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Managing Linux-based firewalls pfSense, OPNsense, and UFW are all Linux under the hood with iptables doing the actual filtering</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Using Linux networking tools to diagnose connectivity issues — ip, ss, traceroute, tcpdump, nmap — the same tools used on both Linux servers and many network devices</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing Linux-based firewalls — pfSense, OPNsense, and UFW are all Linux under the hood with iptables doing the actual filtering</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Configuring VPN tunnels (OpenVPN, WireGuard) which run as Linux daemons and require Linux administration knowledge to operate</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Using Python scripts running on Linux to automate network device configuration via SSH and NETCONF protocols</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Setting up network monitoring with tools like Nagios, Zabbix, or Prometheus all running on Linux servers</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Setting up network monitoring with tools like Nagios, Zabbix, or Prometheus — all running on Linux servers</span></div>
         </div>
       </div>
       <div class="role-right">
         <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$80K – $145K</div><div class="rsc-note">Network Architect / CCIE: $130K–$180K</div></div>
         <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">ip route</span><span class="tool-tag">tcpdump</span><span class="tool-tag">nmap</span><span class="tool-tag">iptables</span><span class="tool-tag">traceroute</span><span class="tool-tag">netstat</span><span class="tool-tag">ss</span><span class="tool-tag">curl</span><span class="tool-tag">dig</span><span class="tool-tag">WireGuard</span><span class="tool-tag">OpenVPN</span><span class="tool-tag">Wireshark</span></div></div>
-        <div class="role-linux-note"><strong>The network IS Linux networking:</strong> TCP/IP is implemented in the Linux kernel. iptables/nftables are how Linux controls packet flow the same concepts as firewall ACLs, just exposed directly. Understanding Linux networking is understanding networking, full stop.</div>
+        <div class="role-linux-note"><strong>The network IS Linux networking:</strong> TCP/IP is implemented in the Linux kernel. iptables/nftables are how Linux controls packet flow — the same concepts as firewall ACLs, just exposed directly. Understanding Linux networking is understanding networking, full stop.</div>
       </div>
     </div>
 
@@ -679,20 +686,20 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Production runs on Linux</span>
         <h3>Software Developer / Backend Engineer</h3>
-        <p class="role-desc">Most software developers work on macOS or Windows but deploy their code to Linux servers. When something breaks in production, you need to SSH into a Linux server, read logs, check running processes, inspect the file system, and diagnose what went wrong. The developers who can do this who understand the environment their code runs in are considerably more effective and are treated as senior contributors regardless of their title.</p>
+        <p class="role-desc">Most software developers work on macOS or Windows but deploy their code to Linux servers. When something breaks in production, you need to SSH into a Linux server, read logs, check running processes, inspect the file system, and diagnose what went wrong. The developers who can do this — who understand the environment their code runs in — are considerably more effective and are treated as senior contributors regardless of their title.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Using WSL2 or a Linux VM as the local development environment running databases, message queues, and local Kubernetes clusters that mirror production</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Using WSL2 or a Linux VM as the local development environment — running databases, message queues, and local Kubernetes clusters that mirror production</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Debugging production issues by reading application logs on Linux servers, checking process memory and CPU usage, and inspecting open file descriptors</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Writing Dockerfiles that build Linux-based container images understanding the base layer, layer caching, and runtime behaviour</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Understanding how your application's file permissions, environment variables, and network ports work on the Linux host avoiding the "works on my machine" problem</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Writing Dockerfiles that build Linux-based container images — understanding the base layer, layer caching, and runtime behaviour</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Understanding how your application's file permissions, environment variables, and network ports work on the Linux host — avoiding the "works on my machine" problem</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Configuring CI/CD pipelines that run tests and builds inside Linux containers on every git push</span></div>
         </div>
       </div>
       <div class="role-right">
         <div class="role-salary-card"><div class="rsc-label">Salary range (US)</div><div class="rsc-val">$95K – $185K</div><div class="rsc-note">Staff / Principal Engineer: $180K–$300K+</div></div>
         <div class="role-tools"><h4>Core Linux tools used</h4><div class="tools-wrap"><span class="tool-tag">bash</span><span class="tool-tag">git</span><span class="tool-tag">Docker</span><span class="tool-tag">ssh</span><span class="tool-tag">grep</span><span class="tool-tag">tail -f</span><span class="tool-tag">ps</span><span class="tool-tag">kill</span><span class="tool-tag">env</span><span class="tool-tag">curl</span><span class="tool-tag">vim</span><span class="tool-tag">tmux</span><span class="tool-tag">cron</span></div></div>
-        <div class="role-linux-note"><strong>Your code lives on Linux:</strong> AWS Lambda, Google Cloud Run, Heroku, Railway, Render virtually every hosting platform serves your application from a Linux container or VM. Understanding that environment at an OS level makes you a measurably better engineer.</div>
+        <div class="role-linux-note"><strong>Your code lives on Linux:</strong> AWS Lambda, Google Cloud Run, Heroku, Railway, Render — virtually every hosting platform serves your application from a Linux container or VM. Understanding that environment at an OS level makes you a measurably better engineer.</div>
       </div>
     </div>
 
@@ -701,13 +708,13 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Big data is Linux</span>
         <h3>Data Engineer</h3>
-        <p class="role-desc">Data engineers build the pipelines, warehouses, and infrastructure that power analytics and machine learning. Hadoop, Spark, Kafka, Airflow, dbt all run on Linux clusters. Data engineers SSH into nodes to debug Spark jobs, manage file permissions on HDFS, tune kernel parameters for high-throughput I/O, and write shell scripts to orchestrate data movement. The bigger the data, the more critical the Linux knowledge.</p>
+        <p class="role-desc">Data engineers build the pipelines, warehouses, and infrastructure that power analytics and machine learning. Hadoop, Spark, Kafka, Airflow, dbt — all run on Linux clusters. Data engineers SSH into nodes to debug Spark jobs, manage file permissions on HDFS, tune kernel parameters for high-throughput I/O, and write shell scripts to orchestrate data movement. The bigger the data, the more critical the Linux knowledge.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Managing distributed storage systems on Linux clusters Hadoop HDFS, object storage mounts, NFS shares  all controlled from the Linux command line</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Tuning Linux kernel parameters for high-throughput workloads adjusting tcp buffers, file descriptor limits, and I/O schedulers for Spark and Kafka performance</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing distributed storage systems on Linux clusters — Hadoop HDFS, object storage mounts, NFS shares — all controlled from the Linux command line</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Tuning Linux kernel parameters for high-throughput workloads — adjusting tcp buffers, file descriptor limits, and I/O schedulers for Spark and Kafka performance</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing bash scripts and cron jobs to orchestrate data ingestion pipelines, file transfers between systems, and pre-processing steps</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Monitoring cluster health using Linux tools top, iostat, vmstat identifying which nodes have resource contention during large jobs</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Monitoring cluster health using Linux tools — top, iostat, vmstat — identifying which nodes have resource contention during large jobs</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Managing Python environments, dependencies, and virtual environments on Linux for data processing and ML model serving</span></div>
         </div>
       </div>
@@ -726,11 +733,11 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         <p class="role-desc">IT support is where many Linux careers begin, and Linux knowledge separates L1 ticket closers from L2/L3 engineers who solve actual problems. At Level 2 and above, you are dealing with server-side issues, application logs, user management across Linux systems, and escalations that require actual OS-level investigation. Linux skills are the fastest way to get promoted out of the helpdesk.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Managing user accounts on Linux servers creating users, resetting passwords, managing group memberships and sudo privileges</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Reading application and system logs to diagnose user-reported issues Apache error logs, auth logs in /var/log, application-specific log directories</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Handling escalated tickets that require server-level access disk space alerts, failed services, certificate expiry, permission errors</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Maintaining internal Linux systems updating packages, running backups, checking disk health, applying security patches</span></div>
-          <div class="use-item"><div class="use-dot"></div><span>Supporting developers with local Linux environment issues WSL2 configuration, Docker problems, permission conflicts</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing user accounts on Linux servers — creating users, resetting passwords, managing group memberships and sudo privileges</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Reading application and system logs to diagnose user-reported issues — Apache error logs, auth logs in /var/log, application-specific log directories</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Handling escalated tickets that require server-level access — disk space alerts, failed services, certificate expiry, permission errors</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Maintaining internal Linux systems — updating packages, running backups, checking disk health, applying security patches</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Supporting developers with local Linux environment issues — WSL2 configuration, Docker problems, permission conflicts</span></div>
         </div>
       </div>
       <div class="role-right">
@@ -786,7 +793,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         </div>
       </div>
     </div>
-    <p style="font-family:var(--mono);font-size:0.68rem;color:var(--muted2);margin-top:0.6rem;text-align:center">^ That is what <span style="color:var(--amber)">neofetch</span> looks like it prints a stylish system info summary with ASCII art every time you open a terminal. Completely pointless. Universally beloved.</p>
+    <p style="font-family:var(--mono);font-size:0.68rem;color:var(--muted2);margin-top:0.6rem;text-align:center">^ That is what <span style="color:var(--amber)">neofetch</span> looks like — it prints a stylish system info summary with ASCII art every time you open a terminal. Completely pointless. Universally beloved.</p>
 
     <div class="fun-grid" style="margin-top:3rem">
 
@@ -905,8 +912,8 @@ I love Linux
         <div class="fun-card-top">
           <div class="fun-cmd">cat /dev/urandom | hexdump</div>
           <div class="fun-title">The infinite random stream</div>
-          <div class="fun-desc"><span style="color:var(--amber)">/dev/urandom</span> is a special file that generates cryptographically random bytes forever. It is not a real file on disk the kernel creates the data on demand. Read it and watch infinity scroll by. Useful for generating passwords and encryption keys.</div>
-          <div class="fun-install"><span>$</span> pre-installed it is part of the kernel</div>
+          <div class="fun-desc"><span style="color:var(--amber)">/dev/urandom</span> is a special file that generates cryptographically random bytes forever. It is not a real file on disk — the kernel creates the data on demand. Read it and watch infinity scroll by. Useful for generating passwords and encryption keys.</div>
+          <div class="fun-install"><span>$</span> pre-installed — it is part of the kernel</div>
         </div>
         <div class="fun-ascii" style="color:#c39bd3;font-size:0.62rem">0000000 3f8a 9c12 7b44 e201 f839 44ac 2b17 9f03
 0000010 a82c 3d91 0fe5 7712 8b4a c390 1d6e 5527
@@ -919,7 +926,7 @@ I love Linux
         <div class="fun-card-top">
           <div class="fun-cmd">sudo rm -rf /</div>
           <div class="fun-title">The command you must never run</div>
-          <div class="fun-desc">This deletes every single file on your system recursively, starting from root. It is the legendary forbidden command. Modern Linux actually stops you it requires a <span style="color:var(--amber)">--no-preserve-root</span> flag to proceed. The existence of that flag is its own form of comedy.</div>
+          <div class="fun-desc">This deletes every single file on your system recursively, starting from root. It is the legendary forbidden command. Modern Linux actually stops you — it requires a <span style="color:var(--amber)">--no-preserve-root</span> flag to proceed. The existence of that flag is its own form of comedy.</div>
           <div class="fun-install"><span style="color:#e06060">warning:</span> do not run this. ever. on anything real.</div>
         </div>
         <div class="fun-ascii" style="color:#e06060">rm: it is dangerous to operate recursively on '/'
@@ -932,10 +939,13 @@ rm: use --no-preserve-root to override this failsafe
       </div>
 
     </div>
+    <div class="lm-wrap" id="lm-fun-wrap">
+      <button class="lm-btn" onclick="loadMore('fun')">Load more fun commands</button>
+    </div>
 
     <div class="fun-easter reveal" style="margin-top:2rem">
       <h3>More hidden gems worth knowing about</h3>
-      <p><span style="color:var(--amber)">toilet</span> like figlet but with colour and more fonts. <span style="color:var(--amber)">lolcat</span>  pipes any command output through a rainbow colour gradient. <span style="color:var(--amber)">oneko</span> a cat chases your cursor around the screen. <span style="color:var(--amber)">bb</span> a full ASCII art demo reel that is technically impressive and completely baffling. <span style="color:var(--amber)">aafire</span> an animated ASCII campfire. <span style="color:var(--amber)">rev</span> reverses every line of text you give it. <span style="color:var(--amber)">factor</span> gives you the prime factors of any number. <span style="color:var(--amber)">telnet towel.blinkenlights.nl</span> watch Star Wars Episode IV played entirely in ASCII art over the internet, a server that has been running continuously since 1997.</p>
+      <p><span style="color:var(--amber)">toilet</span> — like figlet but with colour and more fonts. <span style="color:var(--amber)">lolcat</span> — pipes any command output through a rainbow colour gradient. <span style="color:var(--amber)">oneko</span> — a cat chases your cursor around the screen. <span style="color:var(--amber)">bb</span> — a full ASCII art demo reel that is technically impressive and completely baffling. <span style="color:var(--amber)">aafire</span> — an animated ASCII campfire. <span style="color:var(--amber)">rev</span> — reverses every line of text you give it. <span style="color:var(--amber)">factor</span> — gives you the prime factors of any number. <span style="color:var(--amber)">telnet towel.blinkenlights.nl</span> — watch Star Wars Episode IV played entirely in ASCII art over the internet, a server that has been running continuously since 1997.</p>
     </div>
   </div>
 </section>
@@ -946,7 +956,7 @@ rm: use --no-preserve-root to override this failsafe
     <div class="reveal">
       <div class="section-label">Choosing your distribution</div>
       <h2>Which Linux should you start with?</h2>
-      <p class="lead" style="margin-top:0.6rem">Linux comes in many versions called distributions or distros. They all use the same Linux kernel but differ in tooling, package management, and intended use. Pick one and commit to it switching later is painless once you know the fundamentals.</p>
+      <p class="lead" style="margin-top:0.6rem">Linux comes in many versions called distributions or distros. They all use the same Linux kernel but differ in tooling, package management, and intended use. Pick one and commit to it — switching later is painless once you know the fundamentals.</p>
     </div>
     <div class="distro-grid" style="margin-top:2.5rem">
       <div class="distro-card reveal">
@@ -970,19 +980,19 @@ rm: use --no-preserve-root to override this failsafe
       <div class="distro-card reveal" style="transition-delay:0.08s">
         <div class="distro-name">AlmaLinux / Rocky Linux</div>
         <div class="distro-for">Best for: Free RHEL alternative</div>
-        <div class="distro-desc">Free, community-maintained clones of RHEL that are binary compatible packages built for RHEL run unchanged. AlmaLinux and Rocky Linux emerged when CentOS was discontinued and are now the default free RHEL alternatives for learning and production use.</div>
+        <div class="distro-desc">Free, community-maintained clones of RHEL that are binary compatible — packages built for RHEL run unchanged. AlmaLinux and Rocky Linux emerged when CentOS was discontinued and are now the default free RHEL alternatives for learning and production use.</div>
         <div class="distro-based">Package manager: dnf &nbsp;|&nbsp; Based on: RHEL source</div>
       </div>
       <div class="distro-card reveal" style="transition-delay:0.16s">
         <div class="distro-name">Kali Linux</div>
         <div class="distro-for">Best for: Cybersecurity, ethical hacking</div>
-        <div class="distro-desc">Purpose-built for penetration testing and security research. Ships with 600+ pre-installed security tools including Metasploit, Wireshark, Nmap, Burp Suite, and hashcat. Not recommended as a daily driver for beginners use it specifically for security practice after learning Linux basics.</div>
+        <div class="distro-desc">Purpose-built for penetration testing and security research. Ships with 600+ pre-installed security tools including Metasploit, Wireshark, Nmap, Burp Suite, and hashcat. Not recommended as a daily driver for beginners — use it specifically for security practice after learning Linux basics.</div>
         <div class="distro-based">Package manager: apt &nbsp;|&nbsp; Based on: Debian</div>
       </div>
       <div class="distro-card reveal" style="transition-delay:0.24s">
         <div class="distro-name">Arch Linux</div>
         <div class="distro-for">Best for: Advanced users who want full control</div>
-        <div class="distro-desc">A minimalist distro where you build everything from scratch. No installer that makes decisions for you you partition the disk, install the bootloader, configure the network, and choose every package. Technically demanding but produces deeply knowledgeable Linux users. Not for beginners.</div>
+        <div class="distro-desc">A minimalist distro where you build everything from scratch. No installer that makes decisions for you — you partition the disk, install the bootloader, configure the network, and choose every package. Technically demanding but produces deeply knowledgeable Linux users. Not for beginners.</div>
         <div class="distro-based">Package manager: pacman &nbsp;|&nbsp; Based on: Independent</div>
       </div>
     </div>
@@ -999,7 +1009,7 @@ rm: use --no-preserve-root to override this failsafe
     <div class="reveal">
       <div class="section-label">Learning path</div>
       <h2>Eight steps from zero to confident</h2>
-      <p class="lead" style="margin-top:0.6rem">Each step builds directly on the one before it. Do not skip ahead the gaps will show up later. Click any step to expand it and see the specific commands to learn and why they matter.</p>
+      <p class="lead" style="margin-top:0.6rem">Each step builds directly on the one before it. Do not skip ahead — the gaps will show up later. Click any step to expand it and see the specific commands to learn and why they matter.</p>
     </div>
     <div class="roadmap-steps">
 
@@ -1009,7 +1019,7 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 1–2 &nbsp;·&nbsp; Foundation</div>
           <h3>Set up your Linux environment</h3>
           <div class="step-body">
-            <p>Before anything else, you need a Linux environment you can freely experiment in. The best option for Windows users is WSL2 Windows Subsystem for Linux. Open PowerShell as administrator and run <span class="mono amber">wsl --install</span>, then restart. Ubuntu installs automatically. Mac users already have a Unix terminal open Terminal and you are 80% there. Alternatively, download VirtualBox for free and install an Ubuntu ISO as a VM. This is the safest learning environment because you can take snapshots and restore them when things go wrong.</p>
+            <p>Before anything else, you need a Linux environment you can freely experiment in. The best option for Windows users is WSL2 — Windows Subsystem for Linux. Open PowerShell as administrator and run <span class="mono amber">wsl --install</span>, then restart. Ubuntu installs automatically. Mac users already have a Unix terminal — open Terminal and you are 80% there. Alternatively, download VirtualBox for free and install an Ubuntu ISO as a VM. This is the safest learning environment because you can take snapshots and restore them when things go wrong.</p>
             <div class="step-commands">
               <div class="cmd-row"><span class="cmd-name">wsl --install</span><span class="cmd-desc">Install WSL2 with Ubuntu on Windows (run in PowerShell as Admin)</span></div>
               <div class="cmd-row"><span class="cmd-name">wsl -l -v</span><span class="cmd-desc">List installed Linux distributions and their WSL version</span></div>
@@ -1029,15 +1039,15 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 2–4 &nbsp;·&nbsp; Navigation</div>
           <h3>Master terminal navigation and basic commands</h3>
           <div class="step-body">
-            <p>The terminal is the core skill. Every other thing you learn happens in here. Start by getting comfortable navigating the filesystem. Understand that in Linux, your current location (called the working directory) matters for every command you type. Learn to move around, list contents, and examine files. The man command is your teacher type man followed by any command name and get the full manual for that command, right inside the terminal.</p>
+            <p>The terminal is the core skill. Every other thing you learn happens in here. Start by getting comfortable navigating the filesystem. Understand that in Linux, your current location (called the working directory) matters for every command you type. Learn to move around, list contents, and examine files. The man command is your teacher — type man followed by any command name and get the full manual for that command, right inside the terminal.</p>
             <div class="step-commands">
-              <div class="cmd-row"><span class="cmd-name">pwd</span><span class="cmd-desc">Print working directory shows where you currently are</span></div>
+              <div class="cmd-row"><span class="cmd-name">pwd</span><span class="cmd-desc">Print working directory — shows where you currently are</span></div>
               <div class="cmd-row"><span class="cmd-name">ls -la</span><span class="cmd-desc">List all files including hidden ones, with permissions and sizes</span></div>
               <div class="cmd-row"><span class="cmd-name">cd /path/name</span><span class="cmd-desc">Change to a specific directory; cd ~ goes home; cd .. goes up one level</span></div>
               <div class="cmd-row"><span class="cmd-name">cat filename</span><span class="cmd-desc">Display the full contents of a file in the terminal</span></div>
-              <div class="cmd-row"><span class="cmd-name">less filename</span><span class="cmd-desc">Page through a large file use space to advance, q to quit</span></div>
-              <div class="cmd-row"><span class="cmd-name">grep "word" file</span><span class="cmd-desc">Search for a pattern inside a file one of the most used commands ever</span></div>
-              <div class="cmd-row"><span class="cmd-name">man ls</span><span class="cmd-desc">Read the full manual for any command replace ls with any command name</span></div>
+              <div class="cmd-row"><span class="cmd-name">less filename</span><span class="cmd-desc">Page through a large file — use space to advance, q to quit</span></div>
+              <div class="cmd-row"><span class="cmd-name">grep "word" file</span><span class="cmd-desc">Search for a pattern inside a file — one of the most used commands ever</span></div>
+              <div class="cmd-row"><span class="cmd-name">man ls</span><span class="cmd-desc">Read the full manual for any command — replace ls with any command name</span></div>
               <div class="cmd-row"><span class="cmd-name">history</span><span class="cmd-desc">Show previously typed commands; use up arrow to cycle through them</span></div>
             </div>
             <div class="step-tip"><strong>Tip:</strong> Press Tab to autocomplete file and directory names. Press Ctrl+R to search your command history. These two shortcuts alone will save you hundreds of keystrokes every day.</div>
@@ -1052,14 +1062,14 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 3–5 &nbsp;·&nbsp; File system</div>
           <h3>Understand the Linux file system hierarchy</h3>
           <div class="step-body">
-            <p>Linux organises everything in a single directory tree that starts at / (pronounced "root"). Unlike Windows, which has separate drive letters (C:, D:), everything in Linux is under this one tree including physical drives, USB sticks, network shares, and even hardware devices. Knowing what lives where is essential for configuration, troubleshooting, and system administration. The phrase "everything is a file" in Linux is literally true even hardware devices like hard drives (/dev/sda) are represented as files.</p>
+            <p>Linux organises everything in a single directory tree that starts at / (pronounced "root"). Unlike Windows, which has separate drive letters (C:, D:), everything in Linux is under this one tree — including physical drives, USB sticks, network shares, and even hardware devices. Knowing what lives where is essential for configuration, troubleshooting, and system administration. The phrase "everything is a file" in Linux is literally true — even hardware devices like hard drives (/dev/sda) are represented as files.</p>
             <div class="step-commands">
-              <div class="cmd-row"><span class="cmd-name">/etc</span><span class="cmd-desc">System-wide configuration files, every service stores its config here</span></div>
-              <div class="cmd-row"><span class="cmd-name">/home/username</span><span class="cmd-desc">Personal files for each user, equivalent to C:\Users\Name on Windows</span></div>
-              <div class="cmd-row"><span class="cmd-name">/var/log</span><span class="cmd-desc">System and application logs, first place to look when something breaks</span></div>
-              <div class="cmd-row"><span class="cmd-name">/tmp</span><span class="cmd-desc">Temporary files, automatically cleared on reboot</span></div>
+              <div class="cmd-row"><span class="cmd-name">/etc</span><span class="cmd-desc">System-wide configuration files — every service stores its config here</span></div>
+              <div class="cmd-row"><span class="cmd-name">/home/username</span><span class="cmd-desc">Personal files for each user — equivalent to C:\Users\Name on Windows</span></div>
+              <div class="cmd-row"><span class="cmd-name">/var/log</span><span class="cmd-desc">System and application logs — first place to look when something breaks</span></div>
+              <div class="cmd-row"><span class="cmd-name">/tmp</span><span class="cmd-desc">Temporary files — automatically cleared on reboot</span></div>
               <div class="cmd-row"><span class="cmd-name">/proc</span><span class="cmd-desc">Virtual filesystem showing live kernel and process information</span></div>
-              <div class="cmd-row"><span class="cmd-name">/dev</span><span class="cmd-desc">Device files, /dev/sda is your first hard disk, /dev/null discards everything</span></div>
+              <div class="cmd-row"><span class="cmd-name">/dev</span><span class="cmd-desc">Device files — /dev/sda is your first hard disk, /dev/null discards everything</span></div>
               <div class="cmd-row"><span class="cmd-name">df -h</span><span class="cmd-desc">Show disk space usage for all mounted filesystems in human-readable format</span></div>
               <div class="cmd-row"><span class="cmd-name">find / -name "*.log"</span><span class="cmd-desc">Search for all files with .log extension starting from root directory</span></div>
             </div>
@@ -1075,13 +1085,13 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 4–6 &nbsp;·&nbsp; Security model</div>
           <h3>Users, groups, and permissions</h3>
           <div class="step-body">
-            <p>Linux was designed from the ground up as a multi-user system with security built into every file and directory. Every single file and directory has three permission groups the owner (u), the group (g), and everyone else (o) and each group can have read (r), write (w), and execute (x) permissions. This system is how Linux enforces security, and understanding it is fundamental to both administration and cybersecurity. The root user is the superuser with unrestricted access to everything do not run as root unless absolutely necessary.</p>
+            <p>Linux was designed from the ground up as a multi-user system with security built into every file and directory. Every single file and directory has three permission groups — the owner (u), the group (g), and everyone else (o) — and each group can have read (r), write (w), and execute (x) permissions. This system is how Linux enforces security, and understanding it is fundamental to both administration and cybersecurity. The root user is the superuser with unrestricted access to everything — do not run as root unless absolutely necessary.</p>
             <div class="step-commands">
               <div class="cmd-row"><span class="cmd-name">ls -l file</span><span class="cmd-desc">Show permissions — e.g. -rwxr-xr-- means owner can rwx, group can rx, others r only</span></div>
               <div class="cmd-row"><span class="cmd-name">chmod 755 file</span><span class="cmd-desc">Set permissions numerically: 7=rwx, 5=rx, 4=r — 755 is common for executables</span></div>
               <div class="cmd-row"><span class="cmd-name">chmod +x script.sh</span><span class="cmd-desc">Add execute permission to a file — makes it runnable as a program</span></div>
               <div class="cmd-row"><span class="cmd-name">chown user:group file</span><span class="cmd-desc">Change the owner and group of a file</span></div>
-              <div class="cmd-row"><span class="cmd-name">sudo command</span><span class="cmd-desc">Run a single command as root the safe way to do admin tasks</span></div>
+              <div class="cmd-row"><span class="cmd-name">sudo command</span><span class="cmd-desc">Run a single command as root — the safe way to do admin tasks</span></div>
               <div class="cmd-row"><span class="cmd-name">useradd -m username</span><span class="cmd-desc">Create a new user with a home directory (-m flag)</span></div>
               <div class="cmd-row"><span class="cmd-name">passwd username</span><span class="cmd-desc">Set or change a user's password</span></div>
               <div class="cmd-row"><span class="cmd-name">groups username</span><span class="cmd-desc">Show which groups a user belongs to</span></div>
@@ -1098,7 +1108,7 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 5–7 &nbsp;·&nbsp; Software management</div>
           <h3>Package management and software installation</h3>
           <div class="step-body">
-            <p>Linux uses package managers to install, update, and remove software safely and cleanly, with no hunting for .exe files or fighting with installers. The package manager knows about dependencies software that other software needs and handles everything automatically. On Ubuntu and Debian, the tool is apt. On Red Hat, RHEL, AlmaLinux, and Rocky Linux, it is dnf. Snap and Flatpak are newer universal package formats that work across distributions.</p>
+            <p>Linux uses package managers to install, update, and remove software safely and cleanly, with no hunting for .exe files or fighting with installers. The package manager knows about dependencies — software that other software needs — and handles everything automatically. On Ubuntu and Debian, the tool is apt. On Red Hat, RHEL, AlmaLinux, and Rocky Linux, it is dnf. Snap and Flatpak are newer universal package formats that work across distributions.</p>
             <div class="step-commands">
               <div class="cmd-row"><span class="cmd-name">sudo apt update</span><span class="cmd-desc">Refresh the list of available packages and their versions</span></div>
               <div class="cmd-row"><span class="cmd-name">sudo apt upgrade</span><span class="cmd-desc">Install all available updates for installed packages</span></div>
@@ -1121,17 +1131,17 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 6–9 &nbsp;·&nbsp; System management</div>
           <h3>Processes, services, and system monitoring</h3>
           <div class="step-body">
-            <p>Every program running on Linux is a process with a unique process ID (PID). As an administrator you need to see what is running, how much CPU and memory it is consuming, and be able to start, stop, or kill processes as needed. Modern Linux systems use systemd to manage long-running services the daemon processes that start on boot and keep running in the background, like web servers, databases, and SSH. Understanding systemctl is essential for any server administration work.</p>
+            <p>Every program running on Linux is a process with a unique process ID (PID). As an administrator you need to see what is running, how much CPU and memory it is consuming, and be able to start, stop, or kill processes as needed. Modern Linux systems use systemd to manage long-running services — the daemon processes that start on boot and keep running in the background, like web servers, databases, and SSH. Understanding systemctl is essential for any server administration work.</p>
             <div class="step-commands">
-              <div class="cmd-row"><span class="cmd-name">top</span><span class="cmd-desc">Interactive real-time view of running processes and resource usage press q to quit</span></div>
-              <div class="cmd-row"><span class="cmd-name">htop</span><span class="cmd-desc">Better version of top with colours and easier controls install with apt install htop</span></div>
+              <div class="cmd-row"><span class="cmd-name">top</span><span class="cmd-desc">Interactive real-time view of running processes and resource usage — press q to quit</span></div>
+              <div class="cmd-row"><span class="cmd-name">htop</span><span class="cmd-desc">Better version of top with colours and easier controls — install with apt install htop</span></div>
               <div class="cmd-row"><span class="cmd-name">ps aux</span><span class="cmd-desc">Snapshot list of all running processes with their PID, CPU, and memory usage</span></div>
               <div class="cmd-row"><span class="cmd-name">kill 1234</span><span class="cmd-desc">Terminate process with PID 1234 (use ps or top to find the PID first)</span></div>
               <div class="cmd-row"><span class="cmd-name">kill -9 1234</span><span class="cmd-desc">Force-kill a process that is not responding to the normal kill signal</span></div>
               <div class="cmd-row"><span class="cmd-name">systemctl status nginx</span><span class="cmd-desc">Check if the nginx service is running and see recent log output</span></div>
               <div class="cmd-row"><span class="cmd-name">systemctl start nginx</span><span class="cmd-desc">Start a service (also: stop, restart, reload)</span></div>
               <div class="cmd-row"><span class="cmd-name">systemctl enable nginx</span><span class="cmd-desc">Make a service start automatically on every boot</span></div>
-              <div class="cmd-row"><span class="cmd-name">journalctl -u nginx</span><span class="cmd-desc">View all log output for the nginx service add -f to follow live</span></div>
+              <div class="cmd-row"><span class="cmd-name">journalctl -u nginx</span><span class="cmd-desc">View all log output for the nginx service — add -f to follow live</span></div>
               <div class="cmd-row"><span class="cmd-name">free -h</span><span class="cmd-desc">Display available and used memory in human-readable format</span></div>
             </div>
             <div class="step-tip"><strong>Tip:</strong> When a service fails, the first command to run is always journalctl -u servicename --since "10 minutes ago". This shows you what the service was doing right before it failed, which is where the actual error message lives.</div>
@@ -1146,16 +1156,16 @@ rm: use --no-preserve-root to override this failsafe
           <div class="step-meta">Week 8–12 &nbsp;·&nbsp; Networking</div>
           <h3>Networking fundamentals from the command line</h3>
           <div class="step-body">
-            <p>Linux provides a complete suite of networking tools that are used professionally to diagnose connectivity, inspect traffic, manage firewall rules, and connect to remote systems. These tools map directly to real networking concepts IP addresses, routing, ports, protocols making Linux networking practice one of the best ways to understand how networks actually work, not just in theory. SSH is the universal tool for connecting to remote Linux servers and is used by every IT professional who manages infrastructure.</p>
+            <p>Linux provides a complete suite of networking tools that are used professionally to diagnose connectivity, inspect traffic, manage firewall rules, and connect to remote systems. These tools map directly to real networking concepts — IP addresses, routing, ports, protocols — making Linux networking practice one of the best ways to understand how networks actually work, not just in theory. SSH is the universal tool for connecting to remote Linux servers and is used by every IT professional who manages infrastructure.</p>
             <div class="step-commands">
               <div class="cmd-row"><span class="cmd-name">ip addr show</span><span class="cmd-desc">Display all network interfaces and their IP addresses (replaces ifconfig)</span></div>
-              <div class="cmd-row"><span class="cmd-name">ip route show</span><span class="cmd-desc">Show the routing table where network traffic is being directed</span></div>
-              <div class="cmd-row"><span class="cmd-name">ping -c 4 google.com</span><span class="cmd-desc">Test connectivity to a host sends 4 ICMP packets and reports response times</span></div>
+              <div class="cmd-row"><span class="cmd-name">ip route show</span><span class="cmd-desc">Show the routing table — where network traffic is being directed</span></div>
+              <div class="cmd-row"><span class="cmd-name">ping -c 4 google.com</span><span class="cmd-desc">Test connectivity to a host — sends 4 ICMP packets and reports response times</span></div>
               <div class="cmd-row"><span class="cmd-name">traceroute google.com</span><span class="cmd-desc">Trace the network path and every hop between you and a destination</span></div>
               <div class="cmd-row"><span class="cmd-name">ss -tuln</span><span class="cmd-desc">Show all listening ports and their services (TCP/UDP listening, numeric output)</span></div>
               <div class="cmd-row"><span class="cmd-name">nmap -sV 192.168.1.1</span><span class="cmd-desc">Scan a host's open ports and identify which service is running on each</span></div>
               <div class="cmd-row"><span class="cmd-name">curl -I https://site.com</span><span class="cmd-desc">Make an HTTP request and show only the response headers — great for testing</span></div>
-              <div class="cmd-row"><span class="cmd-name">ssh user@server</span><span class="cmd-desc">Connect securely to a remote server the fundamental tool of server administration</span></div>
+              <div class="cmd-row"><span class="cmd-name">ssh user@server</span><span class="cmd-desc">Connect securely to a remote server — the fundamental tool of server administration</span></div>
               <div class="cmd-row"><span class="cmd-name">ssh-keygen -t ed25519</span><span class="cmd-desc">Generate a cryptographic key pair for passwordless SSH authentication</span></div>
               <div class="cmd-row"><span class="cmd-name">scp file.txt user@host:~</span><span class="cmd-desc">Securely copy a file to a remote server over SSH</span></div>
             </div>
@@ -1169,18 +1179,18 @@ rm: use --no-preserve-root to override this failsafe
         <div class="step-num">08</div>
         <div class="step-content">
           <div class="step-meta">Week 10–16 &nbsp;·&nbsp; Automation</div>
-          <h3>Shell scripting - automate everything</h3>
+          <h3>Shell scripting — automate everything</h3>
           <div class="step-body">
-            <p>Shell scripting is where Linux fluency becomes a career superpower. If you do something manually more than twice, you should write a script. Scripts can run automatically on a schedule using cron, respond to system events, process log files, back up data, check server health, and deploy applications. Bash scripting is not programming in a traditional sense it is the art of combining the Linux commands you already know into automated workflows. The learning curve is gentle and the career return is extraordinary.</p>
+            <p>Shell scripting is where Linux fluency becomes a career superpower. If you do something manually more than twice, you should write a script. Scripts can run automatically on a schedule using cron, respond to system events, process log files, back up data, check server health, and deploy applications. Bash scripting is not programming in a traditional sense — it is the art of combining the Linux commands you already know into automated workflows. The learning curve is gentle and the career return is extraordinary.</p>
             <div class="step-commands">
-              <div class="cmd-row"><span class="cmd-name">#!/bin/bash</span><span class="cmd-desc">The shebang line always the first line of a bash script, tells Linux which interpreter to use</span></div>
+              <div class="cmd-row"><span class="cmd-name">#!/bin/bash</span><span class="cmd-desc">The shebang line — always the first line of a bash script, tells Linux which interpreter to use</span></div>
               <div class="cmd-row"><span class="cmd-name">chmod +x script.sh</span><span class="cmd-desc">Make the script executable before running it</span></div>
               <div class="cmd-row"><span class="cmd-name">./script.sh</span><span class="cmd-desc">Run a script from the current directory</span></div>
-              <div class="cmd-row"><span class="cmd-name">name="Linux"</span><span class="cmd-desc">Declare a variable no spaces around the equals sign</span></div>
-              <div class="cmd-row"><span class="cmd-name">echo "Hello $name"</span><span class="cmd-desc">Print text use double quotes to allow variable expansion</span></div>
-              <div class="cmd-row"><span class="cmd-name">if [ condition ]</span><span class="cmd-desc">Conditional logic check if a file exists, a number is greater, a string matches</span></div>
+              <div class="cmd-row"><span class="cmd-name">name="Linux"</span><span class="cmd-desc">Declare a variable — no spaces around the equals sign</span></div>
+              <div class="cmd-row"><span class="cmd-name">echo "Hello $name"</span><span class="cmd-desc">Print text — use double quotes to allow variable expansion</span></div>
+              <div class="cmd-row"><span class="cmd-name">if [ condition ]</span><span class="cmd-desc">Conditional logic — check if a file exists, a number is greater, a string matches</span></div>
               <div class="cmd-row"><span class="cmd-name">for f in *.log</span><span class="cmd-desc">Loop over all .log files in the current directory</span></div>
-              <div class="cmd-row"><span class="cmd-name">crontab -e</span><span class="cmd-desc">Edit your cron schedule automate scripts to run at any time interval</span></div>
+              <div class="cmd-row"><span class="cmd-name">crontab -e</span><span class="cmd-desc">Edit your cron schedule — automate scripts to run at any time interval</span></div>
               <div class="cmd-row"><span class="cmd-name">command | tee log.txt</span><span class="cmd-desc">Run a command and save its output to a file while also displaying it in the terminal</span></div>
             </div>
             <div class="step-tip"><strong>Tip:</strong> Your first real script project should solve an actual problem you have. Back up a directory you care about, check disk space and email you when it gets low, or rename 500 files according to a pattern. Solving a real problem is 10 times more memorable than running through exercises.</div>
@@ -1200,7 +1210,7 @@ rm: use --no-preserve-root to override this failsafe
     <div class="reveal">
       <div class="section-label">Formal credentials</div>
       <h2>Certifications that employers recognise and respect</h2>
-      <p class="lead" style="margin-top:0.6rem">These are not participation trophies. Red Hat exams in particular are entirely hands-on performance tests no multiple choice, no memorising answers. You prove you can do the work. The salary data shows these credentials pay for themselves quickly.</p>
+      <p class="lead" style="margin-top:0.6rem">These are not participation trophies. Red Hat exams in particular are entirely hands-on performance tests — no multiple choice, no memorising answers. You prove you can do the work. The salary data shows these credentials pay for themselves quickly.</p>
     </div>
     <div class="certs-path reveal" style="margin-top:2.5rem">
 
@@ -1233,7 +1243,7 @@ rm: use --no-preserve-root to override this failsafe
           <div class="cert-card">
             <div class="cert-header"><span class="cert-org">Linux Foundation</span><span class="cert-level cl-mid">Intermediate</span><span class="cert-price">~$395 USD</span></div>
             <h3>LFCS — Linux Foundation Certified System Administrator</h3>
-            <p>A performance-based exam where you work in a real live Linux terminal for 2 hours. No multiple choice you are given tasks to complete and graded on the result. Covers essential sysadmin skills: user management, storage configuration, service management, networking, and security. The hands-on format means it genuinely tests whether you can do the job.</p>
+            <p>A performance-based exam where you work in a real live Linux terminal for 2 hours. No multiple choice — you are given tasks to complete and graded on the result. Covers essential sysadmin skills: user management, storage configuration, service management, networking, and security. The hands-on format means it genuinely tests whether you can do the job.</p>
             <div class="cert-exam-note">Live performance exam · 2 hours · Real Linux terminal · Graded by task completion</div>
           </div>
         </div>
@@ -1243,7 +1253,7 @@ rm: use --no-preserve-root to override this failsafe
           <div class="cert-card">
             <div class="cert-header"><span class="cert-org">Red Hat</span><span class="cert-level cl-mid">Intermediate</span><span class="cert-price">~$450 USD</span></div>
             <h3>RHCSA — Red Hat Certified System Administrator</h3>
-            <p>One of the most respected Linux certifications in the enterprise world. 100% hands-on performance exam on a real Red Hat Enterprise Linux system 3.5 hours, no multiple choice, no notes, no internet. You receive a set of tasks and must complete them correctly. The rigour of the format means the credential carries significant weight. RHCSA holders consistently earn 20–30% more than uncertified peers in equivalent roles.</p>
+            <p>One of the most respected Linux certifications in the enterprise world. 100% hands-on performance exam on a real Red Hat Enterprise Linux system — 3.5 hours, no multiple choice, no notes, no internet. You receive a set of tasks and must complete them correctly. The rigour of the format means the credential carries significant weight. RHCSA holders consistently earn 20–30% more than uncertified peers in equivalent roles.</p>
             <div class="cert-exam-note">Performance exam · 3.5 hours · Real RHEL system · Tasks must work on reboot</div>
           </div>
         </div>
@@ -1279,18 +1289,18 @@ rm: use --no-preserve-root to override this failsafe
         </div>
 
       </div>
+      <div class="lm-wrap" id="lm-certs-wrap">
+        <button class="lm-btn" onclick="loadMore('certs')">Load more certifications</button>
+      </div>
     </div>
   </div>
 </section>
-<div class="divider"></div>
-
-<!-- ── RESOURCES ── -->
 <section id="resources">
   <div class="section-inner">
     <div class="reveal">
       <div class="section-label">Learning resources</div>
-      <h2>Where to start? free and paid resources reviewed</h2>
-      <p class="lead" style="margin-top:0.6rem">Curated and organised by type. Start with the free resources they are genuinely excellent and enough to get you to an intermediate level before spending any money on paid material.</p>
+      <h2>Where to start — free and paid resources reviewed</h2>
+      <p class="lead" style="margin-top:0.6rem">Curated and organised by type. Start with the free resources — they are genuinely excellent and enough to get you to an intermediate level before spending any money on paid material.</p>
     </div>
     <div class="resources-grid" style="margin-top:2.5rem">
 
@@ -1314,7 +1324,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot mix"></span>Free + Paid · Labs</div>
         <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">Browser-based VMs</span></div>
         <h3>TryHackMe</h3>
-        <p>Guided learning paths with browser-based Linux virtual machines no local setup required. The Pre-Security path and Linux Fundamentals rooms are outstanding for beginners. The free tier is generous. Excellent for learning Linux with a security and DevOps focus simultaneously.</p>
+        <p>Guided learning paths with browser-based Linux virtual machines — no local setup required. The Pre-Security path and Linux Fundamentals rooms are outstanding for beginners. The free tier is generous. Excellent for learning Linux with a security and DevOps focus simultaneously.</p>
         <a href="https://tryhackme.com" target="_blank" rel="noopener" class="res-link">tryhackme.com ↗</a>
       </div>
 
@@ -1322,7 +1332,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot free"></span>Free · Book</div>
         <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">Comprehensive</span></div>
         <h3>The Linux Command Line</h3>
-        <p>By William Shotts freely available in full online. Possibly the best written introduction to the Linux command line in existence. Covers navigation, text manipulation, shell scripting, and system administration with exceptional clarity and depth. The paid paperback version is a worthy purchase if you prefer reading from a book.</p>
+        <p>By William Shotts — freely available in full online. Possibly the best written introduction to the Linux command line in existence. Covers navigation, text manipulation, shell scripting, and system administration with exceptional clarity and depth. The paid paperback version is a worthy purchase if you prefer reading from a book.</p>
         <a href="https://linuxcommand.org/tlcl.php" target="_blank" rel="noopener" class="res-link">linuxcommand.org ↗</a>
       </div>
 
@@ -1330,7 +1340,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot mix"></span>Free · Reference</div>
         <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Command explainer</span></div>
         <h3>Explainshell</h3>
-        <p>Paste any Linux command and see a visual breakdown of exactly what each part does flags, arguments, pipes, everything. An invaluable tool when you encounter a complex command you do not understand. Particularly useful when following tutorials that use advanced command combinations.</p>
+        <p>Paste any Linux command and see a visual breakdown of exactly what each part does — flags, arguments, pipes, everything. An invaluable tool when you encounter a complex command you do not understand. Particularly useful when following tutorials that use advanced command combinations.</p>
         <a href="https://explainshell.com" target="_blank" rel="noopener" class="res-link">explainshell.com ↗</a>
       </div>
 
@@ -1354,7 +1364,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot paid"></span>Paid · Video + Labs</div>
         <div class="res-tags"><span class="res-tag">Intermediate–Advanced</span><span class="res-tag">RHCSA/RHCE prep</span></div>
         <h3>Red Hat Learning Subscription</h3>
-        <p>The official Red Hat learning platform with video courses, hands-on virtual labs, and practice exams for RHCSA and RHCE. The labs run actual RHEL systems in the browser. Expensive but extremely high quality the best preparation for Red Hat certification exams by far. Look for promotional pricing.</p>
+        <p>The official Red Hat learning platform with video courses, hands-on virtual labs, and practice exams for RHCSA and RHCE. The labs run actual RHEL systems in the browser. Expensive but extremely high quality — the best preparation for Red Hat certification exams by far. Look for promotional pricing.</p>
         <a href="https://www.redhat.com/en/services/training-and-certification" target="_blank" rel="noopener" class="res-link">redhat.com/training ↗</a>
       </div>
 
@@ -1362,7 +1372,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot mix"></span>Free · Community</div>
         <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Q&amp;A</span></div>
         <h3>Reddit: r/linux4noobs</h3>
-        <p>A welcoming, active subreddit specifically for Linux beginners. Post any question no matter how basic the community is patient, helpful, and knowledgeable. The subreddit wiki contains curated learning resources and a FAQ that answers the most common beginner questions. A genuinely kind corner of the internet.</p>
+        <p>A welcoming, active subreddit specifically for Linux beginners. Post any question no matter how basic — the community is patient, helpful, and knowledgeable. The subreddit wiki contains curated learning resources and a FAQ that answers the most common beginner questions. A genuinely kind corner of the internet.</p>
         <a href="https://reddit.com/r/linux4noobs" target="_blank" rel="noopener" class="res-link">reddit.com/r/linux4noobs ↗</a>
       </div>
 
@@ -1370,7 +1380,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot mix"></span>Free · Video</div>
         <div class="res-tags"><span class="res-tag">Beginner–Intermediate</span><span class="res-tag">CompTIA prep</span></div>
         <h3>Professor Messer</h3>
-        <p>Free, high-quality video courses for CompTIA certifications including Linux+, A+, Security+, and Network+. Professor Messer is well-known for clear, accurate, well-structured video content. The videos are completely free paid study groups and practice exams are available as optional extras at reasonable prices.</p>
+        <p>Free, high-quality video courses for CompTIA certifications including Linux+, A+, Security+, and Network+. Professor Messer is well-known for clear, accurate, well-structured video content. The videos are completely free — paid study groups and practice exams are available as optional extras at reasonable prices.</p>
         <a href="https://professormesser.com" target="_blank" rel="noopener" class="res-link">professormesser.com ↗</a>
       </div>
 
@@ -1378,7 +1388,7 @@ rm: use --no-preserve-root to override this failsafe
         <div class="res-type"><span class="res-type-dot free"></span>Free · Reference</div>
         <div class="res-tags"><span class="res-tag">All levels</span><span class="res-tag">Official docs</span></div>
         <h3>The Linux man Pages (man7.org)</h3>
-        <p>The official online version of Linux manual pages the same documentation you access with the man command in the terminal. Every command, system call, and configuration file format is documented here in authoritative detail. Bookmark this and get into the habit of reading it whenever you encounter something unfamiliar.</p>
+        <p>The official online version of Linux manual pages — the same documentation you access with the man command in the terminal. Every command, system call, and configuration file format is documented here in authoritative detail. Bookmark this and get into the habit of reading it whenever you encounter something unfamiliar.</p>
         <a href="https://man7.org/linux/man-pages" target="_blank" rel="noopener" class="res-link">man7.org ↗</a>
       </div>
 
@@ -1391,8 +1401,10 @@ rm: use --no-preserve-root to override this failsafe
       </div>
 
     </div>
-    <div class="callout reveal" style="margin-top:2rem">
-      <p><strong>Suggested learning sequence:</strong> Start with Linux Journey (linuxjourney.com) while running Ubuntu in WSL2 or VirtualBox. When you want a challenge, try OverTheWire Bandit. Read The Linux Command Line book alongside your practice. When you are ready to certify, follow the official Linux Foundation training for LFCA or LFCS, or purchase a Red Hat Learning Subscription for RHCSA. Use Killer.sh in the final two weeks before any Linux Foundation exam.</p>
+    <div class="lm-wrap" id="lm-res-wrap">
+      <button class="lm-btn" onclick="loadMore('res')">Load more resources</button>
+    </div>
+    <div class="callout reveal" style="margin-top:2rem"> Start with Linux Journey (linuxjourney.com) while running Ubuntu in WSL2 or VirtualBox. When you want a challenge, try OverTheWire Bandit. Read The Linux Command Line book alongside your practice. When you are ready to certify, follow the official Linux Foundation training for LFCA or LFCS, or purchase a Red Hat Learning Subscription for RHCSA. Use Killer.sh in the final two weeks before any Linux Foundation exam.</p>
     </div>
   </div>
 </section>
@@ -1442,7 +1454,7 @@ rm: use --no-preserve-root to override this failsafe
     <hr class="footer-line">
     <div class="footer-bottom">
       <div>
-        <p>linux.guide for the reluctant, the curious, and the eventually obsessed</p>
+        <p>linux.guide — for the reluctant, the curious, and the eventually obsessed</p>
         <p style="margin-top:0.3rem">Salary data: Linux Foundation Jobs Report 2023 · Stack Overflow Dev Survey 2023 · Glassdoor 2023–2024</p>
       </div>
       <div class="footer-links">
@@ -1682,6 +1694,45 @@ window.addEventListener('load', () => {
   if(out){
     out.innerHTML = `<div style="color:var(--amber)">Welcome to the Linux guide interactive terminal.</div><div class="t-out">Select a topic below to see real commands in action.</div><div style="height:8px"></div>`;
     setTimeout(() => runDemo('navigate', document.querySelector('.term-btn')), 1000);
+  }
+});
+
+// ── MOBILE LOAD MORE ──
+function isMobile(){ return window.innerWidth <= 768; }
+
+function initLoadMore(gridSel, wrapId, itemSel, keep){
+  if(!isMobile()) return;
+  const items = document.querySelectorAll(gridSel + ' ' + itemSel);
+  if(items.length <= keep) return;
+  items.forEach((el, i) => { if(i >= keep) el.classList.add('m-collapsed'); });
+  const wrap = document.getElementById(wrapId);
+  if(wrap) wrap.style.display = 'block';
+}
+
+function loadMore(section){
+  const map = {
+    fun:   { grid:'.fun-grid',      item:'.fun-card',   wrap:'lm-fun-wrap'   },
+    certs: { grid:'.certs-path > div', item:'.cert-entry', wrap:'lm-certs-wrap' },
+    res:   { grid:'.resources-grid', item:'.res-card',   wrap:'lm-res-wrap'   },
+  };
+  const cfg = map[section];
+  if(!cfg) return;
+  document.querySelectorAll(cfg.grid + ' ' + cfg.item).forEach(el => el.classList.remove('m-collapsed'));
+  const wrap = document.getElementById(cfg.wrap);
+  if(wrap){ wrap.style.opacity='0'; setTimeout(()=>wrap.style.display='none', 300); }
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  initLoadMore('.fun-grid',       'lm-fun-wrap',   '.fun-card',   3);
+  initLoadMore('.certs-path > div','lm-certs-wrap', '.cert-entry', 3);
+  initLoadMore('.resources-grid', 'lm-res-wrap',   '.res-card',   3);
+});
+window.addEventListener('resize', ()=>{
+  if(!isMobile()){
+    document.querySelectorAll('.m-collapsed').forEach(el=>el.classList.remove('m-collapsed'));
+    ['lm-fun-wrap','lm-certs-wrap','lm-res-wrap'].forEach(id=>{
+      const el=document.getElementById(id); if(el) el.style.display='none';
+    });
   }
 });
 
