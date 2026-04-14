@@ -290,6 +290,16 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
 .footer-links a{font-family:var(--mono);font-size:0.68rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .footer-links a:hover{color:var(--amber)}
 
+/* ── MOBILE LOAD MORE ── */
+.hidden-on-mobile{display:block}
+.load-more-btn{display:none;width:100%;margin-top:1.2rem;padding:0.75rem;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.1em;color:var(--amber);background:transparent;border:1px solid rgba(232,184,75,0.3);border-radius:2px;cursor:pointer;transition:all 0.2s}
+.load-more-btn:hover{background:rgba(232,184,75,0.07);border-color:var(--amber)}
+@media(max-width:768px){
+  .hidden-on-mobile{display:none!important}
+  .load-more-btn{display:block}
+  .fun-grid,.resources-grid{grid-template-columns:1fr!important}
+}
+
 /* ── ANIMS ── */
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 /* ── RESPONSIVE ── */
@@ -305,7 +315,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
   .role-bar-row{grid-template-columns:150px 1fr 100px}
 }
 @media(max-width:640px){
-  .hiring-grid,.certs-grid,.resources-grid,.distro-grid,.stats-row{grid-template-columns:1fr}
+  .hiring-grid,.certs-grid,.resources-grid,.distro-grid,.fun-grid{grid-template-columns:1fr 1fr}
   .step{grid-template-columns:46px 1fr;gap:1rem}
   .salary-roles .role-bar-row{grid-template-columns:120px 1fr 80px}
 }
@@ -350,9 +360,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
     <div class="tux-wrap reveal" style="transition-delay:0.16s">
       <div class="tux-ring"></div><div class="tux-ring"></div>
       <svg viewBox="0 0 340 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shadow -->
         <ellipse cx="170" cy="430" rx="80" ry="8" fill="#1a1a1a" opacity="0.5"/>
-        <!-- Feet -->
         <ellipse cx="118" cy="405" rx="38" ry="11" fill="#C49832" transform="rotate(-10 118 405)"/>
         <ellipse cx="222" cy="405" rx="38" ry="11" fill="#C49832" transform="rotate(10 222 405)"/>
         <ellipse cx="118" cy="399" rx="30" ry="9" fill="#E8B84B" transform="rotate(-10 118 399)"/>
@@ -363,38 +371,25 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         <ellipse cx="193" cy="407" rx="13" ry="8" fill="#E8B84B" transform="rotate(-14 193 407)"/>
         <ellipse cx="216" cy="411" rx="13" ry="8" fill="#E8B84B"/>
         <ellipse cx="238" cy="404" rx="13" ry="8" fill="#E8B84B" transform="rotate(18 238 404)"/>
-        <!-- Body -->
         <ellipse cx="170" cy="275" rx="102" ry="118" fill="#1A1A1A"/>
-        <!-- Belly -->
         <ellipse cx="170" cy="290" rx="64" ry="88" fill="#F0EDE4"/>
-        <!-- Wing left -->
         <path d="M68 200 Q26 248 40 310 Q56 348 76 338 Q64 298 76 252 Z" fill="#111"/>
-        <!-- Wing left highlight -->
         <path d="M72 212 Q44 256 52 304" stroke="#222" stroke-width="3" stroke-linecap="round"/>
-        <!-- Wing right -->
         <path d="M272 200 Q314 248 300 310 Q284 348 264 338 Q276 298 264 252 Z" fill="#111"/>
         <path d="M268 212 Q296 256 288 304" stroke="#222" stroke-width="3" stroke-linecap="round"/>
-        <!-- Head -->
         <ellipse cx="170" cy="142" rx="82" ry="84" fill="#1A1A1A"/>
-        <!-- Head sheen -->
         <ellipse cx="144" cy="108" rx="24" ry="20" fill="#1e1e1e" transform="rotate(-20 144 108)"/>
-        <!-- Face -->
         <ellipse cx="170" cy="155" rx="48" ry="37" fill="#F0EDE4"/>
-        <!-- Eye whites -->
         <ellipse cx="144" cy="128" rx="21" ry="23" fill="#F0EDE4"/>
         <ellipse cx="196" cy="128" rx="21" ry="23" fill="#F0EDE4"/>
-        <!-- Pupils -->
         <circle cx="148" cy="130" r="13" fill="#111"/>
         <circle cx="192" cy="130" r="13" fill="#111"/>
-        <!-- Eye shine -->
         <circle cx="154" cy="125" r="4.5" fill="#F0EDE4"/>
         <circle cx="198" cy="125" r="4.5" fill="#F0EDE4"/>
         <circle cx="144" cy="134" r="2" fill="#F0EDE4"/>
         <circle cx="188" cy="134" r="2" fill="#F0EDE4"/>
-        <!-- Beak -->
         <path d="M153 162 Q170 180 187 162 Q180 172 170 177 Q160 172 153 162Z" fill="#E8B84B"/>
         <path d="M157 166 Q170 170 183 166" stroke="#C49832" stroke-width="1.5"/>
-        <!-- Amber terminal glow line -->
         <line x1="170" y1="320" x2="170" y2="395" stroke="#E8B84B" stroke-width="1" stroke-dasharray="4 7" opacity="0.3"/>
       </svg>
     </div>
@@ -560,7 +555,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <button class="role-tab" onclick="switchRole('support',this)">IT Support</button>
     </div>
 
-    <!-- SYSADMIN -->
     <div class="role-panel active" id="panel-sysadmin">
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Most common Linux entry role</span>
@@ -583,7 +577,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- DEVOPS -->
     <div class="role-panel" id="panel-devops">
       <div class="role-left">
         <span class="cert-level cl-adv role-badge">High demand, high salary</span>
@@ -606,7 +599,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- CLOUD -->
     <div class="role-panel" id="panel-cloud">
       <div class="role-left">
         <span class="cert-level cl-adv role-badge">Fastest growing segment</span>
@@ -629,7 +621,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- SECURITY -->
     <div class="role-panel" id="panel-security">
       <div class="role-left">
         <span class="cert-level cl-adv role-badge">Linux knowledge is mandatory</span>
@@ -652,7 +643,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- NETWORK -->
     <div class="role-panel" id="panel-network">
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Networking meets Linux</span>
@@ -674,7 +664,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- DEVELOPER -->
     <div class="role-panel" id="panel-developer">
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Production runs on Linux</span>
@@ -696,7 +685,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- DATA -->
     <div class="role-panel" id="panel-data">
       <div class="role-left">
         <span class="cert-level cl-mid role-badge">Big data is Linux</span>
@@ -704,7 +692,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
         <p class="role-desc">Data engineers build the pipelines, warehouses, and infrastructure that power analytics and machine learning. Hadoop, Spark, Kafka, Airflow, dbt all run on Linux clusters. Data engineers SSH into nodes to debug Spark jobs, manage file permissions on HDFS, tune kernel parameters for high-throughput I/O, and write shell scripts to orchestrate data movement. The bigger the data, the more critical the Linux knowledge.</p>
         <div class="role-uses">
           <h4>How Linux is used day to day</h4>
-          <div class="use-item"><div class="use-dot"></div><span>Managing distributed storage systems on Linux clusters Hadoop HDFS, object storage mounts, NFS shares  all controlled from the Linux command line</span></div>
+          <div class="use-item"><div class="use-dot"></div><span>Managing distributed storage systems on Linux clusters Hadoop HDFS, object storage mounts, NFS shares all controlled from the Linux command line</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Tuning Linux kernel parameters for high-throughput workloads adjusting tcp buffers, file descriptor limits, and I/O schedulers for Spark and Kafka performance</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Writing bash scripts and cron jobs to orchestrate data ingestion pipelines, file transfers between systems, and pre-processing steps</span></div>
           <div class="use-item"><div class="use-dot"></div><span>Monitoring cluster health using Linux tools top, iostat, vmstat identifying which nodes have resource contention during large jobs</span></div>
@@ -718,7 +706,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       </div>
     </div>
 
-    <!-- SUPPORT -->
     <div class="role-panel" id="panel-support">
       <div class="role-left">
         <span class="cert-level cl-beg role-badge">Best entry point</span>
@@ -753,7 +740,6 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
       <p class="lead" style="margin-top:0.6rem">Tucked away in every Linux system are dozens of completely useless, deeply beloved commands that have been maintained for 30 years purely because the community refuses to delete them. These are real commands you can install and run right now.</p>
     </div>
 
-    <!-- neofetch mockup -->
     <div class="neofetch-block reveal" style="transition-delay:0.08s">
       <div class="neo-tux" id="neo-tux-art">   .--.
   |o_o |
@@ -814,7 +800,7 @@ h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:0.5r
           <div class="fun-desc">Mistype <span style="color:var(--amber)">ls</span> as <span style="color:var(--amber)">sl</span> and a full ASCII steam train roars across your terminal. Created in 1993 to punish people who type too fast. You cannot stop it with Ctrl+C.</div>
           <div class="fun-install"><span>$</span> sudo apt install sl</div>
         </div>
-        <div class="fun-ascii" style="color:rgba(244,240,232,0.7);animation:scroll-train 8s linear infinite" id="sl-anim">      ====        ________  ___________
+        <div class="fun-ascii" style="color:rgba(244,240,232,0.7)" id="sl-anim">      ====        ________  ___________
   _D _|  |_______/        \__I_I_____===__|_________|
    |(_)---  |   H\________/ |   |        =|___ ___|
    /     |  |   H  |  |     |   |         ||_| |_||
@@ -847,6 +833,9 @@ __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|
     /'\_   _/`\
     \___)=(___/</div>
       </div>
+
+      <!-- LOAD MORE BUTTON — shows after 3rd card on mobile only -->
+      <button class="load-more-btn" onclick="toggleMore('fun',this)">See more fun commands</button>
 
       <div class="fun-card reveal" style="transition-delay:0.06s">
         <div class="fun-card-top">
@@ -935,7 +924,7 @@ rm: use --no-preserve-root to override this failsafe
 
     <div class="fun-easter reveal" style="margin-top:2rem">
       <h3>More hidden gems worth knowing about</h3>
-      <p><span style="color:var(--amber)">toilet</span> like figlet but with colour and more fonts. <span style="color:var(--amber)">lolcat</span>  pipes any command output through a rainbow colour gradient. <span style="color:var(--amber)">oneko</span> a cat chases your cursor around the screen. <span style="color:var(--amber)">bb</span> a full ASCII art demo reel that is technically impressive and completely baffling. <span style="color:var(--amber)">aafire</span> an animated ASCII campfire. <span style="color:var(--amber)">rev</span> reverses every line of text you give it. <span style="color:var(--amber)">factor</span> gives you the prime factors of any number. <span style="color:var(--amber)">telnet towel.blinkenlights.nl</span> watch Star Wars Episode IV played entirely in ASCII art over the internet, a server that has been running continuously since 1997.</p>
+      <p><span style="color:var(--amber)">toilet</span> like figlet but with colour and more fonts. <span style="color:var(--amber)">lolcat</span> pipes any command output through a rainbow colour gradient. <span style="color:var(--amber)">oneko</span> a cat chases your cursor around the screen. <span style="color:var(--amber)">bb</span> a full ASCII art demo reel that is technically impressive and completely baffling. <span style="color:var(--amber)">aafire</span> an animated ASCII campfire. <span style="color:var(--amber)">rev</span> reverses every line of text you give it. <span style="color:var(--amber)">factor</span> gives you the prime factors of any number. <span style="color:var(--amber)">telnet towel.blinkenlights.nl</span> watch Star Wars Episode IV played entirely in ASCII art over the internet, a server that has been running continuously since 1997.</p>
     </div>
   </div>
 </section>
@@ -1238,6 +1227,9 @@ rm: use --no-preserve-root to override this failsafe
           </div>
         </div>
 
+        <!-- LOAD MORE BUTTON — shows after 3rd cert on mobile only -->
+        <button class="load-more-btn" onclick="toggleMore('certs',this)">See more certifications</button>
+
         <div class="cert-entry">
           <div class="cert-dot-col"><div class="cert-dot filled"></div></div>
           <div class="cert-card">
@@ -1317,6 +1309,9 @@ rm: use --no-preserve-root to override this failsafe
         <p>Guided learning paths with browser-based Linux virtual machines no local setup required. The Pre-Security path and Linux Fundamentals rooms are outstanding for beginners. The free tier is generous. Excellent for learning Linux with a security and DevOps focus simultaneously.</p>
         <a href="https://tryhackme.com" target="_blank" rel="noopener" class="res-link">tryhackme.com ↗</a>
       </div>
+
+      <!-- LOAD MORE BUTTON — shows after 3rd resource on mobile only -->
+      <button class="load-more-btn" onclick="toggleMore('res',this)">See more resources</button>
 
       <div class="res-card reveal" style="transition-delay:0.06s">
         <div class="res-type"><span class="res-type-dot free"></span>Free · Book</div>
@@ -1466,7 +1461,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── COUNTER ANIMATION ──
 function animCounter(el, target, dur){
-  const isLarge = target >= 500;
   const start = Date.now();
   const tick = () => {
     const p = Math.min((Date.now()-start)/dur, 1);
@@ -1685,9 +1679,28 @@ window.addEventListener('load', () => {
   }
 });
 
-// ── FUN SECTION ANIMATIONS ──
+// ── MOBILE LOAD MORE ──
+function toggleMore(section, btn){
+  if(window.innerWidth > 768) return;
+  const targets = {
+    fun:   '.fun-grid .fun-card:nth-child(n+5)',
+    certs: '.certs-path > div .cert-entry:nth-child(n+5)',
+    res:   '.resources-grid .res-card:nth-child(n+4)'
+  };
+  const items = document.querySelectorAll(targets[section]);
+  const showing = btn.dataset.open === '1';
+  items.forEach(el => el.classList.toggle('hidden-on-mobile', showing));
+  btn.textContent = showing ? 'See more' : 'Show less';
+  btn.dataset.open = showing ? '0' : '1';
+}
+window.addEventListener('DOMContentLoaded', () => {
+  if(window.innerWidth > 768) return;
+  document.querySelectorAll('.fun-grid .fun-card:nth-child(n+5)').forEach(el => el.classList.add('hidden-on-mobile'));
+  document.querySelectorAll('.certs-path > div .cert-entry:nth-child(n+5)').forEach(el => el.classList.add('hidden-on-mobile'));
+  document.querySelectorAll('.resources-grid .res-card:nth-child(n+4)').forEach(el => el.classList.add('hidden-on-mobile'));
+});
 
-// Animated matrix rain
+// ── FUN SECTION ANIMATIONS ──
 (function(){
   const el = document.getElementById('matrix-container');
   if(!el) return;
@@ -1714,7 +1727,6 @@ window.addEventListener('load', () => {
   setInterval(tick, 120);
 })();
 
-// Animated aquarium
 (function(){
   const el = document.getElementById('aquarium');
   if(!el) return;
@@ -1730,15 +1742,12 @@ window.addEventListener('load', () => {
   function render(){
     frame++;
     const grid = Array.from({length:H}, () => Array(W).fill(' '));
-    // sea floor
     for(let x=0;x<W;x++) grid[H-1][x] = '~';
-    // bubbles
     bubbles.forEach(b => {
       b.y = b.y <= 0 ? H-2 : b.y - (frame % 8 === 0 ? 1 : 0);
       const sym = frame % 6 < 3 ? 'o' : '.';
       if(b.y >= 0 && b.y < H-1 && b.x < W) grid[b.y][b.x] = sym;
     });
-    // fish
     fish.forEach(f => {
       f.x += f.dir * f.speed;
       if(f.x > W + 5) { f.x = -f.shape.length - 1; f.dir = 1; }
